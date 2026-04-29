@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Sprint 1</title>
+    <title>Présentation ERP Crystal - Itération 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -60,7 +60,6 @@
              SECTION BLANC (Intro)
         =============================== -->
 
-        <!-- Page Intro : Blanc -->
         <div class="slide bg-gray-200 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
                 
@@ -73,7 +72,7 @@
                 </h1>
 
                 <p class="text-2xl text-gray-600 mb-8">
-                    Revue du Sprint 1
+                    Revue de l'Itération 2
                 </p>
 
                 <div class="text-xl text-gray-700 space-y-2">
@@ -84,71 +83,77 @@
                 </div>
             </div>
         </div>
+
         <!-- ==============================
-             SECTION ORANGE (Membre 2)
+             SECTION ORANGE (Focus)
         =============================== -->
         
-        <!-- Page 4 : Orange -->
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2</div>
                 <h1 class="text-6xl font-bold mb-4 text-white">Billy Hallé</h1>
-                <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Lead Tech & Ingénieur DevOps</h2>
+                <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Développeur Backend & Lead Tech</h2>
                 
                 <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-orange-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de ce sprint :</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
                     <p class="text-xl text-orange-50">
-                        Mon objectif principal pour ce sprint était de couler des fondations techniques solides. <br>J'ai mis en place l'infrastructure de déploiement continu, j'ai mis des normes de qualité strictes pour le code. <br>Et j'ai developpé développé la porte d'entrée sécurisée de l'ERP pour que l'équipe puisse bâtir les modules métiers en toute sérénité.
+                        Mon objectif exclusif pour ce sprint était le développement de l'<strong>API C#</strong> pour tout le module Utilisateurs/RH. <br>J'ai implémenté la logique d'affaires, appliqué une politique de sécurité stricte (RBAC) et préparé la totalité des points d'accès de données dont le Frontend avait besoin pour construire les interfaces.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Nouvelle Page : Démonstration (GIF) -->
+        <!-- ==============================
+             SECTION DÉMO (Swagger)
+        =============================== -->
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center justify-center gap-4">
                     <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎬</span>
-                    Le Déploiement en Action
+                    L'API en Action (Swagger)
                 </h2>
                 
                 <div class="bg-black/30 p-4 rounded-2xl border border-white/10 mx-auto inline-block shadow-inner">
-                    <!-- ⚠️ Remplace le 'src' par le chemin de ton propre GIF. Ex: src="./demo-argo.gif" -->
-                    <img src="assets/Recording 2026-04-14 165809.gif" alt="Démonstration GIF" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
+                    <!-- ⚠️ Ajoute ton GIF Swagger ici et ajuste le nom du fichier ! -->
+                    <img src="assets/swagger.gif" alt="Démonstration Swagger API" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
                 </div>
             </div>
         </div>
 
-        <!-- Page 5 : Orange -->
+        <!-- ==============================
+             SECTION RÉALISATIONS (Les US)
+        =============================== -->
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
                     <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
-                    Réalisations Techniques
+                    Réalisations Techniques (Backend)
                 </h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Infrastructure GitOps & Conteneurisation</h3>
-                        <p class="text-orange-100">- Mise en place d'un cluster local propulsé par Kubernetes (K3s).<br> - Création des scripts de build automatisés. <br> - Intégration d'ArgoCD pour un déploiement continu de nos images Docker.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Opérations CRUD Utilisateurs</h3>
+                        <p class="text-orange-100">- API pour <strong>Ajouter</strong>, <strong>Modifier</strong>, <strong>Supprimer</strong> et <strong>Lister</strong> les utilisateurs.<br> - Préparation des données spécifiques pour la page RH et le Dashboard.</p>
                     </div>
                     <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Authentification Sécurisée (JWT)</h3>
-                        <p class="text-orange-100">- Création de l'API de génération de jetons JWT côté backend C#, <br> - Configuration d'un intercepteur Axios côté frontend React pour automatiser la sécurité des requêtes.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Sécurité & Rôles (RBAC)</h3>
+                        <p class="text-orange-100">- Implémentation stricte des rôles : restriction des actions critiques aux Admins/Gérants.<br> - Validation des droits (401/403) et endpoints pour modifier/consulter son propre profil.</p>
                     </div>
                     <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Migrations BD & Seeding Automatisé</h3>
-                        <p class="text-orange-100">- Automatisation de la création de la base de données PostgreSQL au démarrage de l'API.<br>- Injection automatique des comptes.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Fondations pour le Frontend</h3>
+                        <p class="text-orange-100">- Création des services nécessaires pour alimenter le Layout principal et le Header (informations de l'utilisateur connecté).</p>
                     </div>
                     <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Contrôle Qualité (DX)</h3>
-                        <p class="text-orange-100">- Installation de barrières de qualité avec Husky et Biome. <br>- Mise en place de scripts "Pre-commit" stricts garantissant un code formaté et fonctionnel avant le push.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">Documentation & Fiabilité</h3>
+                        <p class="text-orange-100">- Exposition de Swagger pour faciliter l'intégration frontend. <br>- Couverture massive de tests d'intégration (plus de 50 tests) validant chaque règle d'affaires.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Page 6 : Orange -->
+        <!-- ==============================
+             SECTION RÉSULTATS & PROCHAINE ÉTAPE
+        =============================== -->
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
@@ -158,53 +163,50 @@
                 
                 <div class="space-y-6">
                     <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold mb-2 text-white">Résultat Final (Sprint 1)</h3>
-                        <p class="text-lg text-orange-100">L'infrastructure de production est 100% opérationnelle et automatisée.<br> Le système de connexion protège désormais l'ensemble de l'ERP de bout en bout.</p>
+                        <h3 class="text-2xl font-semibold mb-2 text-white">Résultat Final (Itération 2)</h3>
+                        <p class="text-lg text-orange-100">Le backend du module RH/Utilisateurs est 100% opérationnel, documenté et testé rigoureusement. La plomberie est prête pour brancher l'interface utilisateur.</p>
                     </div>
                     <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold mb-2 text-white">À améliorer pour le Sprint 2</h3>
+                        <h3 class="text-2xl font-semibold mb-2 text-white">À attaquer pour l'Itération 3</h3>
                         <ul class="list-disc list-inside text-lg text-orange-100 ml-4">
-                            <li>Implémenter le contrôle d'accès basé sur les rôles (RBAC) dans notre système JWT pour sécuriser le futur module RH.</li>
-                            <li>Optimiser la gestion de la mémoire de notre serveur de production et accélérer la vitesse de nos builds Docker.</li>
+                            <li>Développer les points de terminaison (API) pour le module complet de l'Inventaire.</li>
+                            <li>Assister l'équipe sur la connexion du Frontend React avec nos routes sécurisées.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- ==============================
              SECTION BLANCHE (Conclusion)
         =============================== -->
         
-        <!-- Page 13 : Blanc -->
         <div class="slide bg-gray-50 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
                 <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 1</h1>
+                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan de l'Itération 2</h1>
                 <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est prête pour le développement intensif des modules métiers au Sprint 2.
+                    Une itération très technique qui a prouvé la robustesse de notre architecture. Le backend est devenu une forteresse sécurisée.
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Bon flow de travail global (malgré des difficultés en fin de sprint)</li>
-                            <li>Bonne compartimentation des tâches</li>
-                            <li>Mise en place d’une base technique solide</li>
-                            <li>Utilisation d’outils pertinents pour la suite du projet</li>
-                            <li>Satisfaction du client vis-à-vis du travail réalisé</li>
+                            <li>Application extrêmement stricte de nos normes de code.</li>
+                            <li>Couverture de tests automatisés exhaustive (401, 403, etc.).</li>
+                            <li>Création d'une documentation API claire avec Swagger.</li>
+                            <li>Excellente séparation de la logique d'affaires.</li>
                         </ul>
                     </div>
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Avoir une meilleure vision globale du projet</li>
-                            <li>Définir une politique de travail claire (rôles, méthodes, organisation)</li>
-                            <li>Prendre davantage de recul sur les choix d’architecture</li>
-                            <li>Mieux valider les besoins avec le client avant d’implémenter</li>
-                            <li>Trouver un équilibre entre autonomie et validation client</li>
+                            <li>Optimiser la synchronisation Frontend/Backend pendant le développement.</li>
+                            <li>Accélérer la prise en main de l'API par le reste de l'équipe.</li>
+                            <li>Peaufiner les messages d'erreur renvoyés par l'API pour faciliter le débogage Frontend.</li>
                         </ul>
                     </div>
                 </div>
@@ -222,7 +224,7 @@
         </button>
         
         <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator">4</span>
+            <span id="slideIndicator">1</span> / <span id="totalIndicator">6</span>
         </div>
         
         <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
@@ -230,12 +232,10 @@
         </button>
     </div>
 
-
     <!-- Modal zoom image -->
     <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
         <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
     </div>
-
 
     <!-- Script de logique de présentation -->
     <script>
