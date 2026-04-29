@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +8,92 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
-        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #111827;
+        }
+
         /* Slide transitions */
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease; 
-            opacity: 0; pointer-events: none;
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
         }
-        .slide.active { 
-            transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto;
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+            pointer-events: auto;
         }
-        .slide.prev { 
-            transform: translateX(-100%); opacity: 0; z-index: 1; 
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 1;
         }
-        .slide.next { 
-            transform: translateX(100%); opacity: 0; z-index: 1; 
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
         }
 
         /* Content Animations */
-        .slide-content > * { 
-            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+        .slide-content>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .slide.active .slide-content > * { 
-            opacity: 1; transform: translateY(0); 
+
+        .slide.active .slide-content>* {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
+
         /* Staggered animation delays for elements */
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
-        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
+        .slide.active .slide-content>*:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active .slide-content>*:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .slide-content>*:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .slide.active .slide-content>*:nth-child(4) {
+            transition-delay: 0.4s;
+        }
 
         /* Custom scrollbar for content if it overflows */
-        .custom-scroll::-webkit-scrollbar { width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
 
-        .placeholder { color: inherit; opacity: 0.7; font-style: italic; }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .placeholder {
+            color: inherit;
+            opacity: 0.7;
+            font-style: italic;
+        }
 
         img {
             display: block;
@@ -53,6 +102,7 @@
         }
     </style>
 </head>
+
 <body class="text-gray-100">
 
     <div id="presentation" class="relative w-screen h-screen">
@@ -62,9 +112,11 @@
 
         <!-- Page Intro : Blanc -->
         <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
+            <div
+                class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
+
+                <div
+                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
 
@@ -84,7 +136,7 @@
                 </div>
             </div>
         </div>
- 
+
         <!-- ==============================
              SECTION VERTE (Membre 3)
         =============================== -->
@@ -121,36 +173,156 @@
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Initialisation du projet
-                                    frontend</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder">React Typescript avec Vite</span></p>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Restructuration /
+                                    cleanup du projet</span></h3>
+                            <p class="text-emerald-100">Routes, pages, types<span class="placeholder"></span></p>
                         </div>
                     </div>
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Création de stubs pour
-                                    les pages principales</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder">PageCatalog, PageProductDetails,
-                                    PageListOfEmployees, etc.</span></p>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Gestion du Role Based
+                                    Access Control (RBAC)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
                         </div>
                     </div>
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Création des routes
-                                    préliminaires</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder">[Détails sur la protection des
-                                    données]</span></p>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Intégration API</span>
+                            </h3>
+                            <p class="text-emerald-100"><span class="placeholder">Tests avec API mock, maintenant en
+                                    cours d'intégrer le vrai système</span></p>
                         </div>
                     </div>
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Définition des types
-                                    principaux</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder">Livres, Produits, Factures,
-                                    etc.</span></p>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Utilisation de librairies, dont Material UI</span>
+                            </h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
+                    User stories
+                </h2>
+
+                <div class="flex flex-col gap-4">
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Accéder au Sidebar
+                                    (Utilisateurs)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter mon profil
+                                    (Utilisateurs)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la page RH
+                                    (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la liste des
+                                    utilisateurs (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter le profil d'un
+                                    utilisateur (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
+                    User stories (suite)
+                </h2>
+
+                <div class="flex flex-col gap-4">
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Ajouter un utilisateur
+                                    (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Modifier un utilisateur
+                                    (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Supprimer un utilisateur
+                                    (Admin/Gérant)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
+                    User stories (suite)
+                </h2>
+
+                <div class="flex flex-col gap-4">
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter l'inventaire
+                                    (Utilisateurs)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
+                        </div>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la page de
+                                    détails d'un item (Utilisateurs)</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder"></span></p>
                         </div>
                     </div>
                 </div>
@@ -170,13 +342,46 @@
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Version
-                                    préliminaire de la page catalogue</span></h3>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Sidebar en mode
+                                    desktop</span></h3>
                             <p class="text-emerald-100"><span class="placeholder"></span></p>
                         </div>
                     </div>
-                    <img
-                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1493625560847351959/image.png?ex=69dfa6b3&is=69de5533&hm=67846575ee9e86ae4e749a3fd3eb7cdcc4f7281b0b80b9cd6cf3cfed99fc2dd5"></img>
+                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1499072089183748146/image.png?ex=69f3772d&is=69f225ad&hm=680039eab9a60e835b02bfd88f54035821472e8e473155c6817f528be668ffa4&"></img>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8 min-h-screen">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
+                    Travail accompli
+                </h2>
+
+                <div class="flex flex-col gap-6">
+                    <div class="bg-black/20 p-6 rounded-xl flex flex-col gap-2">
+                        <h3 class="text-2xl font-bold text-white">Sidebar en mode mobile</h3>
+                        <p class="text-emerald-100"></p>
+                    </div>
+
+                    <div class="flex flex-row gap-6 items-start">
+                        <div class="flex-1">
+                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                                src="https://cdn.discordapp.com/attachments/1136726130565595186/1499083355218772101/image.png?ex=69f381ab&is=69f2302b&hm=0fbbe6ccdbb90c5d6190a03305ba3a146c0a3294a6ec881946b0892b0fc73079&"
+                                alt="Screenshot 1">
+                        </div>
+                        <div class="flex-1">
+                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                                src="https://cdn.discordapp.com/attachments/1136726130565595186/1499081854425497640/image.png?ex=69f38045&is=69f22ec5&hm=55bb829cc42ed7895f629a9483c16186de873d9e94ac37a7bb0370eccbde5543&"
+                                alt="Screenshot 2">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -194,13 +399,12 @@
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Version préliminaire de
-                                    la page détails d'un produit</span></h3>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Requête API GET la liste des utilisateurs</span></h3>
                             <p class="text-emerald-100"><span class="placeholder"></span></p>
                         </div>
                     </div>
-                    <img
-                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1493629020124876835/image.png?ex=69dfa9ec&is=69de586c&hm=8e7b70da723854f145b688676cf2ca45d0d651f99390e9dd8a7d2c9330d37018"></img>
+                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                        src="https://media.discordapp.net/attachments/1136726130565595186/1499085264516288602/image.png?ex=69f38372&is=69f231f2&hm=a89e002e4b96070e8496f2bded2e884fd02906caf1d2e0203d8df83408da360c&=&format=webp&quality=lossless&width=953&height=456"></img>
                 </div>
             </div>
         </div>
@@ -218,14 +422,35 @@
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Intégration de la
-                                    librairie MUI X Data Grid</span></h3>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Requête API GET un utilisateur par son id</span></h3>
                             <p class="text-emerald-100"><span class="placeholder"></span></p>
                         </div>
                     </div>
+                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1499086237040906430/image.png?ex=69f3845a&is=69f232da&hm=d7a36fc6e189039b9badd54ce6f27ed9d5308699416d89e4ee50f2a9ba481ce0&"></img>
+                </div>
+            </div>
+        </div>
 
-                    <img
-                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1493626915070939248/image.png?ex=69dfa7f6&is=69de5676&hm=c3d6b1fbb88e0f41c645b3a240ec6188d1f52d16cd7bd642e0c92f3c2a02dd71"></img>
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
+                    Travail accompli
+                </h2>
+
+                <div class="flex flex-col gap-4">
+                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
+                        <div class="text-4xl"></div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Spinner pendant chargement</span></h3>
+                            <p class="text-emerald-100"><span class="placeholder">Librairie React Spinners</span></p>
+                        </div>
+                    </div>
+                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
+                        src="https://media.discordapp.net/attachments/1136726130565595186/1499088063396319284/image.png?ex=69f3860e&is=69f2348e&hm=da3fe055d146a6b8184e711caadc98f8bccef2fdd1d37a0855f74b311bdd6c42&=&format=webp&quality=lossless&width=953&height=315"></img>
                 </div>
             </div>
         </div>
@@ -240,37 +465,18 @@
                     Objectifs pour le futur
                 </h2>
 
-                <!-- <div class="grid grid-cols-3 gap-6 text-center">
-                    <div class="bg-white/10 p-8 rounded-2xl">
-                        <div class="text-5xl font-bold text-emerald-300 mb-2"><span class="placeholder">[Ex: 15]</span>
-                        </div>
-                        <div class="text-lg text-emerald-50"><span class="placeholder">[Tables créées]</span></div>
-                    </div>
-                    <div class="bg-white/10 p-8 rounded-2xl">
-                        <div class="text-5xl font-bold text-emerald-300 mb-2"><span class="placeholder">[Ex: 24]</span>
-                        </div>
-                        <div class="text-lg text-emerald-50"><span class="placeholder">[Endpoints API]</span></div>
-                    </div>
-                    <div class="bg-white/10 p-8 rounded-2xl">
-                        <div class="text-5xl font-bold text-emerald-300 mb-2"><span class="placeholder">[Ex: 0]</span>
-                        </div>
-                        <div class="text-lg text-emerald-50"><span class="placeholder">[Bugs critiques]</span></div>
-                    </div>
-                </div> -->
                 <div class="flex flex-col gap-4">
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Intégrer le frontend au
-                                    REST API et au backend</span></h3>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Continuer à bâtir les fonctionnalités</span></h3>
 
                         </div>
                     </div>
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
                         <div class="text-4xl"></div>
                         <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Bâtir les
-                                    fonctionnalités</span></h3>
+                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Écrire des tests unitaires</span></h3>
                         </div>
                     </div>
                     <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
@@ -283,22 +489,25 @@
                 </div>
             </div>
         </div>
- 
+
         <!-- ==============================
              SECTION BLANCHE (Conclusion)
         =============================== -->
-        
+
         <!-- Page 13 : Blanc -->
         <div class="slide bg-gray-50 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
+            <div
+                class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
+                <div
+                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
                 <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 1</h1>
                 <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est prête pour le développement intensif des modules métiers au Sprint 2.
+                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est
+                    prête pour le développement intensif des modules métiers au Sprint 2.
                 </p>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
@@ -330,15 +539,18 @@
 
     <!-- Interface de Navigation -->
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+        <button onclick="prevSlide()" id="btnPrev"
+            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             <span>&larr;</span> Précédent
         </button>
-        
-        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
+
+        <div
+            class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
             <span id="slideIndicator">1</span> / <span id="totalIndicator">4</span>
         </div>
-        
-        <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+
+        <button onclick="nextSlide()" id="btnNext"
+            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             Suivant <span>&rarr;</span>
         </button>
     </div>
@@ -360,7 +572,7 @@
         const btnPrev = document.getElementById('btnPrev');
         const btnNext = document.getElementById('btnNext');
 
-        if(totalIndicator) {
+        if (totalIndicator) {
             totalIndicator.textContent = totalSlides;
         }
 
@@ -378,9 +590,9 @@
 
             // Update UI
             indicator.textContent = currentSlide + 1;
-            
+
             // Handle buttons opacity
-            if(currentSlide === 0) {
+            if (currentSlide === 0) {
                 btnPrev.style.opacity = '0.3';
                 btnPrev.style.cursor = 'not-allowed';
             } else {
@@ -388,7 +600,7 @@
                 btnPrev.style.cursor = 'pointer';
             }
 
-            if(currentSlide === totalSlides - 1) {
+            if (currentSlide === totalSlides - 1) {
                 btnNext.style.opacity = '0.3';
                 btnNext.style.cursor = 'not-allowed';
             } else {
@@ -437,4 +649,5 @@
         updateSlides();
     </script>
 </body>
+
 </html>
