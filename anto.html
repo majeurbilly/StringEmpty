@@ -73,7 +73,7 @@
                 </h1>
 
                 <p class="text-2xl text-gray-600 mb-8">
-                    Revue du Sprint 1
+                    Revue du Sprint 2
                 </p>
 
                 <div class="text-xl text-gray-700 space-y-2">
@@ -91,36 +91,50 @@
                 
                 <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
                     <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
-                    Contexte du projet
+                    Objectifs du sprint
                 </h2>
 
                 <div class="space-y-6 text-xl text-gray-700">
                     <p>
-                        Développement d’un ERP pour une librairie permettant de centraliser :
+                        Bien commencer
                     </p>
 
                     <ul class="list-disc list-inside space-y-2">
-                        <li>Gestion des employés</li>
-                        <li>Gestion des produits et inventaires</li>
-                        <li>Gestion des ventes</li>
-                        <li>Gestion des horaires</li>
-                        <li>⚠️ Gestion de la vente des produits</li>
+                        <li>Définir une manière de travailler pour l'équipe</li>
+                        <li>Appliquer cette manière de travailler</li>
+                        <li>Bien concevoir les récits utilisateurs</li>
+                        <li>Prioriser les récits utilisateurs</li>
                     </ul>
 
                     <p class="mt-6">
-                        Objectif du Sprint 1 :
+                        Rendre notre application utilisable :
                     </p>
 
                     <ul class="list-disc list-inside space-y-2">
-                        <li>Mettre en place l’architecture backend</li>
-                        <li>Préparer l’architecture frontend</li>
-                        <li>Analyser et comprendre les besoins du client</li>
-                        <li>Structurer l’architecture globale du projet</li>
+                        <li>Avoir une page d'acceuill pour l'utilisateur</li>
+                        <li>Mettre en place les fonctionnalités de gestion d'utilisateurs</li>
+                        <li>Mettre en place la fonctionnalité d'inventaire</li>
                     </ul>
                 </div>
 
             </div>
         </div>
+
+        <!-- Page Intro 3 -->
+        <div class="slide bg-gray-200 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-6xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
+                
+                <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
+                    Burndown
+                </h2>
+
+                <img src="assets/Burndown.png" 
+                    class="rounded-xl shadow-lg mx-auto w-full max-h-[480px] object-contain cursor-pointer"
+                    onclick="openModal(this.src)">
+            </div>
+        </div>
+
         <!-- ==============================
              SECTION BLEUE (Membre 1)
         =============================== -->
@@ -129,13 +143,13 @@
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <div class="text-blue-300 font-semibold tracking-wider uppercase mb-2">Membre 1</div>
                 <h1 class="text-6xl font-bold mb-4 text-white">ERP Crystal</h1>
-                <h2 class="text-4xl font-light mb-10 text-blue-100">Revue du Sprint 1</h2>
+                <h2 class="text-4xl font-light mb-10 text-blue-100">Revue du Sprint 2</h2>
                 
                 <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-blue-400">
                     <h3 class="text-2xl font-semibold mb-2">Présentateur : <span class="">Antony Burlet</span></h3>
                     <p class="text-xl text-blue-200">Rôle : <span class="">Dev Backend</span></p>
                     <p class="mt-4 text-gray-200">
-                        <span class="">Mise en place du backend</span>
+                        <span class="">Rendre la gestion des items fonctionnelle via l’API</span>
                     </p>
                 </div>
             </div>
@@ -146,26 +160,26 @@
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
                     <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
-                    Tâches accomplies
+                    Récits utilisateurs
                 </h2>
                 
                 <ul class="space-y-6 text-xl">
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Mise en place de l'architecture backend</span></strong>
+                            <strong class="text-white"><span class="">Consulter les items</span></strong>
                         </div>
                     </li>
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Mise en placement et développement de la base de données</span></strong>
+                            <strong class="text-white"><span class="">Ajouter un item</span></strong>
                         </div>
                     </li>
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Mise en place de Swagger et des routes API de base</span></strong>
+                            <strong class="text-white"><span class="">Modifier/Supprimer un item</span></strong>
                         </div>
                     </li>
                 </ul>
@@ -182,29 +196,21 @@
                 </h2>
 
                 <div class="grid grid-cols-2 gap-8">
-
-                    <!-- Screenshot BD -->
                     <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                        <h3 class="text-xl font-semibold text-white mb-4">Schéma de la base de données</h3>
-                        <img src="assets/schema-db.png" 
-                            class="rounded-xl shadow-lg mx-auto w-full max-h-[500px] object-contain cursor-pointer"
+                        <h3 class="text-xl font-semibold text-white mb-4">Liste des items</h3>
+                        <img src="assets/Items.png" 
+                            class="rounded-xl shadow-lg mx-auto w-full max-h-[430px] object-contain cursor-pointer"
                             onclick="openModal(this.src)">
-                        <p class="text-blue-200 mt-4">
-                            Structure des entités principales et leurs relations
-                        </p>
+                        <p class="text-blue-200 mt-4">Consultation des produits disponibles.</p>
                     </div>
 
-                    <!-- Screenshot Swagger -->
                     <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                        <h3 class="text-xl font-semibold text-white mb-4">Tests avec Swagger</h3>
-                        <img src="assets/swagger.png" 
-                            class="rounded-xl shadow-lg mx-auto w-full max-h-[500px] object-contain cursor-pointer"
+                        <h3 class="text-xl font-semibold text-white mb-4">Inventaire</h3>
+                        <img src="assets/Inventaire.png" 
+                            class="rounded-xl shadow-lg mx-auto w-full max-h-[430px] object-contain cursor-pointer"
                             onclick="openModal(this.src)">
-                        <p class="text-blue-200 mt-4">
-                            Validation des routes API et communication avec la base de données
-                        </p>
+                        <p class="text-blue-200 mt-4">Gestion des quantités et des données d’inventaire.</p>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -224,9 +230,9 @@
                         <h3 class="text-2xl font-semibold mb-4 text-red-300">Défis rencontrés</h3>
                         
                         <ul class="space-y-3 text-lg text-white">
-                            <li>• Problèmes d’architecture réintroduits lors des merges</li>
-                            <li>• Conflits Git entre les branches (retour à une ancienne structure)</li>
-                            <li>• Difficulté à définir une architecture claire dès le début</li>
+                            <li>• Problèmes de migrations</li>
+                            <li>• Architecture complexe</li>
+                            <li>• Gestions de livres/items pas claires</li>
                         </ul>
                     </div>
 
@@ -235,9 +241,9 @@
                         <h3 class="text-2xl font-semibold mb-4 text-green-300">Solutions appliquées</h3>
                         
                         <ul class="space-y-3 text-lg text-white">
-                            <li>• Intégration plus fréquente des branches</li>
-                            <li>• Meilleure planification de l’architecture</li>
-                            <li>• Amélioration de la communication dans l’équipe</li>
+                            <li>• Mise en place d'outils pour aider avec les migrations</li>
+                            <li>• Prendre son temps pour bien comprendre</li>
+                            <li>• Ne pas essayer de tout prévoir</li>
                         </ul>
                     </div>
 
@@ -255,30 +261,29 @@
                 <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 1</h1>
+                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 2</h1>
                 <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est prête pour le développement intensif des modules métiers au Sprint 2.
+                    Une grande amélioration par rapport au Sprint 1.
+                    Une itération très technique qui a prouvé la robustesse de notre architecture.
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Bon flow de travail global (malgré des difficultés en fin de sprint)</li>
-                            <li>Bonne compartimentation des tâches</li>
-                            <li>Mise en place d’une base technique solide</li>
-                            <li>Utilisation d’outils pertinents pour la suite du projet</li>
-                            <li>Satisfaction du client vis-à-vis du travail réalisé</li>
+                            <li>Application stricte de nos normes</li>
+                            <li>Bonne séparation des tâches</li>
+                            <li>Grosses améliorations générales</li>
+                            <li>MVP les outils mis en place</li>
                         </ul>
                     </div>
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Avoir une meilleure vision globale du projet</li>
-                            <li>Définir une politique de travail claire (rôles, méthodes, organisation)</li>
-                            <li>Prendre davantage de recul sur les choix d’architecture</li>
-                            <li>Mieux valider les besoins avec le client avant d’implémenter</li>
-                            <li>Trouver un équilibre entre autonomie et validation client</li>
+                            <li>Efficacité</li>
+                            <li>Rendre le processus plus ''agile''</li>
+                            <li>Respecter la priorisation des récits</li>
+                            <li>Synchroniser le développement backend et frontend</li>
                         </ul>
                     </div>
                 </div>
@@ -296,7 +301,7 @@
         </button>
         
         <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator">4</span>
+            <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
         </div>
         
         <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
