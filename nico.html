@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,44 +8,92 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
-        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #111827;
+        }
+
         /* Slide transitions */
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease; 
-            opacity: 0; pointer-events: none;
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
         }
-        .slide.active { 
-            transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto;
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+            pointer-events: auto;
         }
-        .slide.prev { 
-            transform: translateX(-100%); opacity: 0; z-index: 1; 
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 1;
         }
-        .slide.next { 
-            transform: translateX(100%); opacity: 0; z-index: 1; 
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
         }
 
         /* Content Animations */
-        .slide-content > * { 
-            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+        .slide-content>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .slide.active .slide-content > * { 
-            opacity: 1; transform: translateY(0); 
+
+        .slide.active .slide-content>* {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
+
         /* Staggered animation delays for elements */
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
-        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
+        .slide.active .slide-content>*:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active .slide-content>*:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .slide-content>*:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .slide.active .slide-content>*:nth-child(4) {
+            transition-delay: 0.4s;
+        }
 
         /* Custom scrollbar for content if it overflows */
-        .custom-scroll::-webkit-scrollbar { width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
 
-        .placeholder { color: inherit; opacity: 0.7; font-style: italic; }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .placeholder {
+            color: inherit;
+            opacity: 0.7;
+            font-style: italic;
+        }
 
         img {
             display: block;
@@ -53,6 +102,7 @@
         }
     </style>
 </head>
+
 <body class="text-gray-100">
 
     <div id="presentation" class="relative w-screen h-screen">
@@ -62,9 +112,11 @@
 
         <!-- Page Intro : Blanc -->
         <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
+            <div
+                class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
+
+                <div
+                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
 
@@ -94,12 +146,14 @@
                 class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <div class="text-purple-300 font-semibold tracking-wider uppercase mb-2">Membre 4</div>
                 <h1 class="text-6xl font-bold mb-4 text-white"><span class="placeholder">Nicolas Michaud</span></h1>
-                <h2 class="text-3xl font-light mb-10 text-purple-200">Rôle : <span class="placeholder">Je travail sur le frontend du site Web.</span></h2>
+                <h2 class="text-3xl font-light mb-10 text-purple-200">Rôle : <span class="placeholder">Je travail sur le
+                        frontend du site Web.</span></h2>
 
                 <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-purple-400">
                     <h3 class="text-2xl font-semibold mb-4 text-white">Mon mandat :</h3>
                     <p class="text-xl text-purple-100">
-                        <span class="placeholder">Durant cette itération, j'ai crée le Header ainsi que le formulaire d'ajout d'utilisateur.</span>
+                        <span class="placeholder">Durant cette itération, j'ai toute la portion des catégories d'un
+                            livre.</span>
                     </p>
                 </div>
             </div>
@@ -117,14 +171,13 @@
 
                 <ul class="space-y-6 text-xl">
                     <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <strong class="text-purple-300"><span class="placeholder">Le header.</span></strong>
-                        <p class="text-gray-200 mt-2"><span class="placeholder">Voici donc le header qui est aussi compatible avec un affichage de téléphone cellullaire.
-                        </span></p>
+                        <strong class="text-purple-300"><span class="placeholder">La page principale</span></strong>
+                        <p class="text-gray-200 mt-2"><span class="placeholder">Pour commencer, voici la page principale
+                                des catégories.
+                            </span></p>
                     </li>
                     <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <img src="assets/Capture1.png" width="500" height="500" class="">
-                        <br>
-                        <img src="assets/Capture2.png" width="500" height="500" class="">
+                        <img src="assets/n1.png">
                     </li>
                 </ul>
             </div>
@@ -141,11 +194,56 @@
                 <ul class="space-y-6 text-xl">
                     <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
                         <strong class="text-purple-300"><span class="placeholder">Le forumulaire</span></strong>
-                        <p class="text-gray-200 mt-2"><span class="placeholder">Et voici le formulaire d'ajout d'utilisateur seulement disponible pour les administrateurs et gérants. Le prochain point sur lequel je vais travailler sera sur la modification d'un utilisateur.
-                        </span></p>
+                        <p class="text-gray-200 mt-2"><span class="placeholder">Et voici le formulaire d'ajout et de
+                                modification de catégories seulement disponible pour les administrateurs et gérants.
+                            </span></p>
                     </li>
                     <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <img src="assets/Capture3.png" width="500" height="500" class="">
+                        <img src="assets/n2.png">
+                        <br>
+                        <img src="assets/n3.png">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
+                    Tâches et Validations
+                </h2>
+
+                <ul class="space-y-6 text-xl">
+                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
+                        <strong class="text-purple-300"><span class="placeholder">Suppression</span></strong>
+                        <p class="text-gray-200 mt-2"><span class="placeholder">Bien sûr, il est aussi possible de supprimer une catégorie.
+                            </span></p>
+                    </li>
+                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
+                        <img src="assets/n4.png">
+                    </li>
+                </ul>
+            </div>
+        </div>
+                <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
+                    Tâches et Validations
+                </h2>
+
+                <ul class="space-y-6 text-xl">
+                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
+                        <strong class="text-purple-300"><span class="placeholder">Exemple</span></strong>
+                        <p class="text-gray-200 mt-2"><span class="placeholder">L'objectif est donc vraiment de catégoriser les produits. 
+                            </span></p>
+                    </li>
+                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
+                        <img src="assets/n5.png">
                     </li>
                 </ul>
             </div>
@@ -164,19 +262,22 @@
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="flex-1 bg-black/20 p-8 rounded-2xl">
                         <h3 class="text-2xl font-bold text-white mb-4">État de santé (Sprint 2)</h3>
-                        <p class="text-purple-100 text-lg mb-4"><span class="placeholder">Ce que j'ai programmé sur le frontend fonctionne correctement, ceci dit je n'ai pas suffisement avancé par rapport à nos objectif sur l'itération.</span></p>
+                        <p class="text-purple-100 text-lg mb-4"><span class="placeholder">Je suis fier du travail que j’ai accompli sur cette itération, j’ai été rapide et efficace.
+                            J’ai éprouvé des difficultés techniques avec mon ordinateur, que j’ai résolues en basculant de Windows à Linux.
+                        </span></p>
 
                         <div class="w-full bg-black/40 rounded-full h-4 mt-6">
-                            <div class="bg-purple-500 h-4 rounded-full" style="width: 40%"></div>
+                            <div class="bg-purple-500 h-4 rounded-full" style="width: 90%"></div>
                         </div>
                         <p class="text-right text-sm text-purple-300 mt-1"><span class="placeholder">Couverture:
-                                40%</span></p>
+                                90%</span></p>
                     </div>
 
                     <div class="flex-1 bg-purple-900/50 p-8 rounded-2xl border border-purple-400/30">
                         <h3 class="text-2xl font-bold text-white mb-4">Recommandations</h3>
                         <ul class="list-disc list-inside space-y-2 text-purple-100">
-                            <li><span class="placeholder">Mettre davantage de temps dans le travail.</span></li>
+                            <li><span class="placeholder">Me familiariser avec Arch Linux</span></li>
+                            <li><span class="placeholder">Programmer la possibilité de voir la liste des produits d'une même catégorie.</span></li>
                         </ul>
                     </div>
                 </div>
@@ -185,18 +286,21 @@
         <!-- ==============================
              SECTION BLANCHE (Conclusion)
         =============================== -->
-        
+
         <!-- Page 13 : Blanc -->
         <div class="slide bg-gray-50 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
+            <div
+                class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
+                <div
+                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
                     💎
                 </div>
                 <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 1</h1>
                 <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est prête pour le développement intensif des modules métiers au Sprint 2.
+                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est
+                    prête pour le développement intensif des modules métiers au Sprint 2.
                 </p>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
@@ -228,15 +332,18 @@
 
     <!-- Interface de Navigation -->
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+        <button onclick="prevSlide()" id="btnPrev"
+            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             <span>&larr;</span> Précédent
         </button>
-        
-        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
+
+        <div
+            class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
             <span id="slideIndicator">1</span> / <span id="totalIndicator">4</span>
         </div>
-        
-        <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+
+        <button onclick="nextSlide()" id="btnNext"
+            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             Suivant <span>&rarr;</span>
         </button>
     </div>
@@ -258,7 +365,7 @@
         const btnPrev = document.getElementById('btnPrev');
         const btnNext = document.getElementById('btnNext');
 
-        if(totalIndicator) {
+        if (totalIndicator) {
             totalIndicator.textContent = totalSlides;
         }
 
@@ -276,9 +383,9 @@
 
             // Update UI
             indicator.textContent = currentSlide + 1;
-            
+
             // Handle buttons opacity
-            if(currentSlide === 0) {
+            if (currentSlide === 0) {
                 btnPrev.style.opacity = '0.3';
                 btnPrev.style.cursor = 'not-allowed';
             } else {
@@ -286,7 +393,7 @@
                 btnPrev.style.cursor = 'pointer';
             }
 
-            if(currentSlide === totalSlides - 1) {
+            if (currentSlide === totalSlides - 1) {
                 btnNext.style.opacity = '0.3';
                 btnNext.style.cursor = 'not-allowed';
             } else {
@@ -335,4 +442,5 @@
         updateSlides();
     </script>
 </body>
+
 </html>
