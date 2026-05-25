@@ -3,15 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Sprint 1</title>
+    <title>Présentation ERP Crystal - Itération 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2563eb, #1e3a8a);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        #presentation {
+            width: 100vw !important;
+            height: 100vh !important;
+            min-height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2563eb, #1e3a8a);
+        }
         
         /* Slide transitions */
         .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100vh; 
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease; 
             opacity: 0; pointer-events: none;
         }
@@ -51,90 +65,316 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        /* Styles locaux de secours si Tailwind ne charge pas */
+        .slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 2rem !important;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #2563eb, #1e3a8a) !important;
+            color: #f9fafb;
+        }
+        .slide.bg-gray-50 {
+            background: #f9fafb;
+            color: #1f2937;
+        }
+        .slide-content {
+            width: 100%;
+            max-width: 72rem;
+            padding: 2rem !important;
+            box-sizing: border-box;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+        }
+        .bg-gray-50 .slide-content {
+            background: #ffffff;
+            border-color: #e5e7eb;
+            color: #1f2937;
+        }
+        .grid {
+            display: grid;
+        }
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .grid-cols-1 {
+            grid-template-columns: minmax(0, 1fr);
+        }
+        .gap-8 {
+            gap: 2rem;
+        }
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-left {
+            text-align: left;
+        }
+        .text-white {
+            color: #ffffff;
+        }
+        .text-blue-100 {
+            color: #dbeafe;
+        }
+        .text-blue-200 {
+            color: #bfdbfe;
+        }
+        .text-blue-300 {
+            color: #93c5fd;
+        }
+        .text-blue-400 {
+            color: #60a5fa;
+        }
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        .text-gray-700 {
+            color: #374151;
+        }
+        .text-gray-800 {
+            color: #1f2937;
+        }
+        .text-gray-900 {
+            color: #111827;
+        }
+        .text-red-300 {
+            color: #fca5a5;
+        }
+        .text-green-300 {
+            color: #86efac;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+        .text-5xl {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .text-6xl {
+            font-size: 3.75rem;
+            line-height: 1;
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .font-light {
+            font-weight: 300;
+        }
+        .uppercase {
+            text-transform: uppercase;
+        }
+        .tracking-wider {
+            letter-spacing: 0.05em;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .mb-10 {
+            margin-bottom: 2.5rem;
+        }
+        .mb-12 {
+            margin-bottom: 3rem;
+        }
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        .mt-4 {
+            margin-top: 1rem;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .p-5 {
+            padding: 1.25rem;
+        }
+        .p-6 {
+            padding: 1.5rem;
+        }
+        .p-8 {
+            padding: 2rem;
+        }
+        .p-10 {
+            padding: 2.5rem;
+        }
+        .p-12 {
+            padding: 3rem;
+        }
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+        .rounded-2xl {
+            border-radius: 1rem;
+        }
+        .rounded-3xl {
+            border-radius: 1.5rem;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .border {
+            border-width: 1px;
+            border-style: solid;
+        }
+        .border-l-4 {
+            border-left-width: 4px;
+            border-left-style: solid;
+        }
+        .border-white\/10 {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .border-white\/20 {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .border-blue-400 {
+            border-color: #60a5fa;
+        }
+        .border-red-500\/30 {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .border-green-500\/30 {
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        .border-gray-200 {
+            border-color: #e5e7eb;
+        }
+        .bg-black\/10 {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .bg-black\/20 {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .bg-red-900\/30 {
+            background: rgba(127, 29, 29, 0.3);
+        }
+        .bg-green-900\/30 {
+            background: rgba(20, 83, 45, 0.3);
+        }
+        .bg-gray-100 {
+            background: #f3f4f6;
+        }
+        .flex {
+            display: flex;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .gap-4 {
+            gap: 1rem;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .w-12 {
+            width: 3rem;
+        }
+        .h-12 {
+            height: 3rem;
+        }
+        .w-24 {
+            width: 6rem;
+        }
+        .h-24 {
+            height: 6rem;
+        }
+        .max-w-3xl {
+            max-width: 48rem;
+        }
+        .max-w-4xl {
+            max-width: 56rem;
+        }
+        .max-w-5xl {
+            max-width: 64rem;
+        }
+        .max-w-6xl {
+            max-width: 72rem;
+        }
+        .max-h-\[360px\] {
+            max-height: 300px !important;
+        }
+        .max-h-\[430px\] {
+            max-height: 320px !important;
+        }
+        .max-h-\[500px\] {
+            max-height: 390px !important;
+        }
+        .object-contain {
+            object-fit: contain;
+        }
+        .shadow-lg {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        .shadow-2xl {
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .grid-cols-2 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            .slide-content {
+                padding: 1.5rem;
+            }
+            .text-6xl {
+                font-size: 2.75rem;
+            }
+            .text-5xl {
+                font-size: 2.25rem;
+            }
+            .text-4xl {
+                font-size: 1.875rem;
+            }
+        }
     </style>
 </head>
 <body class="text-gray-100">
 
     <div id="presentation" class="relative w-screen h-screen">
-        <!-- ==============================
-             SECTION BLANC (Intro)
-        =============================== -->
-
-        <!-- Page Intro : Blanc -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
-                </div>
-
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">
-                    ERP Crystal
-                </h1>
-
-                <p class="text-2xl text-gray-600 mb-8">
-                    Revue du Sprint 2
-                </p>
-
-                <div class="text-xl text-gray-700 space-y-2">
-                    <p><strong>Antony Burlet</strong></p>
-                    <p><strong>Billy Hallé</strong></p>
-                    <p><strong>William Peck</strong></p>
-                    <p><strong>Nicolas Michaud</strong></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Page Intro 2 -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                
-                <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
-                    Objectifs du sprint
-                </h2>
-
-                <div class="space-y-6 text-xl text-gray-700">
-                    <p>
-                        Bien commencer
-                    </p>
-
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Définir une manière de travailler pour l'équipe</li>
-                        <li>Appliquer cette manière de travailler</li>
-                        <li>Bien concevoir les récits utilisateurs</li>
-                        <li>Prioriser les récits utilisateurs</li>
-                    </ul>
-
-                    <p class="mt-6">
-                        Rendre notre application utilisable :
-                    </p>
-
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Avoir une page d'acceuill pour l'utilisateur</li>
-                        <li>Mettre en place les fonctionnalités de gestion d'utilisateurs</li>
-                        <li>Mettre en place la fonctionnalité d'inventaire</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Page Intro 3 -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                
-                <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
-                    Burndown
-                </h2>
-
-                <img src="assets/Burndown.png" 
-                    class="rounded-xl shadow-lg mx-auto w-full max-h-[480px] object-contain cursor-pointer"
-                    onclick="openModal(this.src)">
-            </div>
-        </div>
-
         <!-- ==============================
              SECTION BLEUE (Membre 1)
         =============================== -->
@@ -142,14 +382,15 @@
         <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <div class="text-blue-300 font-semibold tracking-wider uppercase mb-2">Membre 1</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">ERP Crystal</h1>
-                <h2 class="text-4xl font-light mb-10 text-blue-100">Revue du Sprint 2</h2>
+                <h1 class="text-6xl font-bold mb-4 text-white">Antony Burlet</h1>
+                <h2 class="text-3xl font-light mb-10 text-blue-100">Rôle : Développeur Frontend</h2>
                 
                 <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-blue-400">
-                    <h3 class="text-2xl font-semibold mb-2">Présentateur : <span class="">Antony Burlet</span></h3>
-                    <p class="text-xl text-blue-200">Rôle : <span class="">Dev Backend</span></p>
-                    <p class="mt-4 text-gray-200">
-                        <span class="">Rendre la gestion des items fonctionnelle via l’API</span>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
+                    <p class="text-xl text-blue-100">
+                        Cette itération marque mon passage du backend vers le frontend. Mon travail s'est concentré
+                        sur le CRUD frontend des succursales, le ménage de la sidebar et les finitions du CRUD des items
+                        pour les produits et les livres.
                     </p>
                 </div>
             </div>
@@ -160,26 +401,29 @@
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
                     <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
-                    Récits utilisateurs
+                    Réalisations principales
                 </h2>
                 
                 <ul class="space-y-6 text-xl">
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Consulter les items</span></strong>
+                            <strong class="text-white">CRUD frontend des succursales</strong>
+                            <p class="text-blue-100 mt-2">Création et ajustement des écrans pour consulter, ajouter, modifier et supprimer des succursales.</p>
                         </div>
                     </li>
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Ajouter un item</span></strong>
+                            <strong class="text-white">Ménage dans la sidebar</strong>
+                            <p class="text-blue-100 mt-2">Nettoyage de la navigation pour rendre l'application plus claire et mieux organisée.</p>
                         </div>
                     </li>
                     <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
                         <div class="text-blue-400 mt-1">✓</div>
                         <div>
-                            <strong class="text-white"><span class="">Modifier/Supprimer un item</span></strong>
+                            <strong class="text-white">Finitions du CRUD frontend des items</strong>
+                            <p class="text-blue-100 mt-2">Ajustements des fonctionnalités de gestion des produits et des livres.</p>
                         </div>
                     </li>
                 </ul>
@@ -192,24 +436,24 @@
                 
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
                     <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">💻</span>
-                    Démonstration visuelle
+                    CRUD frontend
                 </h2>
 
                 <div class="grid grid-cols-2 gap-8">
                     <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                        <h3 class="text-xl font-semibold text-white mb-4">Liste des items</h3>
-                        <img src="assets/Items.png" 
+                        <h3 class="text-xl font-semibold text-white mb-4">Succursales</h3>
+                        <img src="assets/Succursale.png" 
                             class="rounded-xl shadow-lg mx-auto w-full max-h-[430px] object-contain cursor-pointer"
                             onclick="openModal(this.src)">
-                        <p class="text-blue-200 mt-4">Consultation des produits disponibles.</p>
+                        <p class="text-blue-200 mt-4">Écran de gestion frontend des succursales.</p>
                     </div>
 
                     <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
                         <h3 class="text-xl font-semibold text-white mb-4">Inventaire</h3>
-                        <img src="assets/Inventaire.png" 
+                        <img src="assets/GestionInventaire.png" 
                             class="rounded-xl shadow-lg mx-auto w-full max-h-[430px] object-contain cursor-pointer"
                             onclick="openModal(this.src)">
-                        <p class="text-blue-200 mt-4">Gestion des quantités et des données d’inventaire.</p>
+                        <p class="text-blue-200 mt-4">Finitions de la gestion frontend des items.</p>
                     </div>
                 </div>
             </div>
@@ -217,33 +461,86 @@
 
         <!-- Page 4 : Bleu -->
         <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🚀</span>
-                    Défis
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🔎</span>
+                    Détails d'un item
                 </h2>
-                
+
+                <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
+                    <img src="assets/DetailsItem.png"
+                        class="rounded-xl shadow-lg mx-auto w-full max-h-[500px] object-contain cursor-pointer"
+                        onclick="openModal(this.src)">
+                    <p class="text-blue-200 mt-4">Ajustements de la page de détails pour les items.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 5 : Bleu -->
+        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🧭</span>
+                    Ménage dans la sidebar
+                </h2>
+
                 <div class="grid grid-cols-2 gap-8">
+                    <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
+                        <h3 class="text-xl font-semibold text-white mb-4">Sidebar desktop</h3>
+                        <img src="assets/SideBarre.png"
+                            class="rounded-xl shadow-lg mx-auto w-full max-h-[360px] object-contain cursor-pointer"
+                            onclick="openModal(this.src)">
+                    </div>
+
+                    <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
+                        <h3 class="text-xl font-semibold text-white mb-4">Sidebar mobile</h3>
+                        <img src="assets/SideBar2.png"
+                            class="rounded-xl shadow-lg mx-auto w-full max-h-[360px] object-contain cursor-pointer"
+                            onclick="openModal(this.src)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 6 : Bleu -->
+        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-3xl font-bold mb-6 text-white flex items-center gap-4">
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🚀</span>
+                    Méthode et défis
+                </h2>
+
+                <div class="bg-black/10 p-5 rounded-xl border border-white/10 mb-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">Transition vers le frontend</h3>
+                    <p class="text-blue-100 text-base leading-relaxed">
+                        Après avoir travaillé davantage côté backend, j'ai basculé vers le frontend pour contribuer aux
+                        interfaces. L'IA m'a aidé à structurer mes idées et à débloquer plus vite certains problèmes.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
                     
                     <!-- Défis -->
-                    <div class="bg-red-900/30 p-8 rounded-2xl border border-red-500/30">
-                        <h3 class="text-2xl font-semibold mb-4 text-red-300">Défis rencontrés</h3>
+                    <div class="bg-red-900/30 p-6 rounded-2xl border border-red-500/30">
+                        <h3 class="text-xl font-semibold mb-4 text-red-300">Défis rencontrés</h3>
                         
-                        <ul class="space-y-3 text-lg text-white">
-                            <li>• Problèmes de migrations</li>
-                            <li>• Architecture complexe</li>
-                            <li>• Gestions de livres/items pas claires</li>
+                        <ul class="space-y-3 text-base leading-relaxed text-white">
+                            <li>• Garder une logique CRUD cohérente</li>
+                            <li>• Nettoyer la sidebar sans casser la navigation</li>
+                            <li>• Harmoniser les écrans avec le reste de l'application</li>
+                            <li>• Changer de contexte : backend vers frontend</li>
                         </ul>
                     </div>
 
                     <!-- Solutions -->
-                    <div class="bg-green-900/30 p-8 rounded-2xl border border-green-500/30">
-                        <h3 class="text-2xl font-semibold mb-4 text-green-300">Solutions appliquées</h3>
+                    <div class="bg-green-900/30 p-6 rounded-2xl border border-green-500/30">
+                        <h3 class="text-xl font-semibold mb-4 text-green-300">Solutions appliquées</h3>
                         
-                        <ul class="space-y-3 text-lg text-white">
-                            <li>• Mise en place d'outils pour aider avec les migrations</li>
-                            <li>• Prendre son temps pour bien comprendre</li>
-                            <li>• Ne pas essayer de tout prévoir</li>
+                        <ul class="space-y-3 text-base leading-relaxed text-white">
+                            <li>• Réutiliser les patrons frontend existants</li>
+                            <li>• Clarifier les entrées de navigation</li>
+                            <li>• Faire des ajustements ciblés sur les CRUD</li>
+                            <li>• Utiliser l'IA pour comparer et valider mes pistes</li>
                         </ul>
                     </div>
 
@@ -257,39 +554,39 @@
         
         <!-- Page 13 : Blanc -->
         <div class="slide bg-gray-50 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
+            <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-8 text-gray-800 text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-3xl shadow-lg">
                     💎
                 </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 2</h1>
-                <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Une grande amélioration par rapport au Sprint 1.
-                    Une itération très technique qui a prouvé la robustesse de notre architecture.
+                <h1 class="text-4xl font-bold mb-4 text-gray-900">Bilan de l'Itération 3</h1>
+                <p class="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
+                    Une itération avec un bon gain en efficacité.
+                    On est allé plus vite que prévu, mais la planification n'a pas toujours suivi le rythme.
                 </p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Application stricte de nos normes</li>
-                            <li>Bonne séparation des tâches</li>
-                            <li>Grosses améliorations générales</li>
-                            <li>MVP les outils mis en place</li>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-6 text-left">
+                    <div class="bg-gray-100 p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-gray-800 mb-3 border-b pb-2">Ce qui s'est bien passé</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>Frontend plus beau et plus agréable à utiliser</li>
+                            <li>Ajout de beaucoup de nouvelles fonctionnalités</li>
+                            <li>Meilleure efficacité dans l'exécution des tâches</li>
+                            <li>Avancement plus rapide que prévu</li>
                         </ul>
                     </div>
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Efficacité</li>
-                            <li>Rendre le processus plus ''agile''</li>
-                            <li>Respecter la priorisation des récits</li>
-                            <li>Synchroniser le développement backend et frontend</li>
+                    <div class="bg-gray-100 p-6 rounded-2xl">
+                        <h3 class="text-lg font-bold text-gray-800 mb-3 border-b pb-2">À améliorer</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-700">
+                            <li>Ajuster la planification quand l'équipe avance plus vite que prévu</li>
+                            <li>Mieux découper les tâches pour garder une vision claire de l'avancement</li>
+                            <li>Reprioriser plus souvent pendant l'itération</li>
+                            <li>Continuer à uniformiser les écrans CRUD</li>
                         </ul>
                     </div>
                 </div>
 
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Merci !</h2>
-                <p class="text-xl text-gray-500">Période de questions ?</p>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Merci !</h2>
+                <p class="text-lg text-gray-500">Période de questions ?</p>
             </div>
         </div>
     </div>
