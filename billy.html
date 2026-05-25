@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Itération 2</title>
+    <title>Présentation ERP Crystal - Itération 3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -56,10 +56,6 @@
 <body class="text-gray-100">
 
     <div id="presentation" class="relative w-screen h-screen">
-        <!-- ==============================
-             SECTION BLANC (Intro)
-        =============================== -->
-
         <div class="slide bg-gray-200 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
                 
@@ -72,7 +68,7 @@
                 </h1>
 
                 <p class="text-2xl text-gray-600 mb-8">
-                    Revue de l'Itération 2
+                    Revue de l'Itération 3
                 </p>
 
                 <div class="text-xl text-gray-700 space-y-2">
@@ -84,129 +80,158 @@
             </div>
         </div>
 
-        <!-- ==============================
-             SECTION ORANGE (Focus)
-        =============================== -->
-        
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">Billy Hallé</h1>
-                <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Développeur Backend & Lead Tech</h2>
+        <div class="slide bg-gray-200 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
                 
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-orange-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
-                    <p class="text-xl text-orange-50">
-                        Mon objectif exclusif pour ce sprint était le développement de l'<strong>API C#</strong> pour tout le module Utilisateurs/RH. <br>J'ai implémenté la logique d'affaires, appliqué une politique de sécurité stricte (RBAC) et préparé la totalité des points d'accès de données dont le Frontend avait besoin pour construire les interfaces.
+                <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
+                    Contexte du projet
+                </h2>
+
+                <div class="space-y-6 text-xl text-gray-700">
+                    <p>
+                        Développement d’un ERP pour une librairie permettant de centraliser :
                     </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-semibold mb-2">L'inventaire :</p>
+                            <ul class="list-disc list-inside space-y-1 text-lg">
+                                <li>Gestion des inventaires</li>
+                                <li>Gestion du catalogue</li>
+                                <li>Gestion des catégories</li>
+                                <li>Gestion des succursales</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-semibold mb-2">Ressources Humaines :</p>
+                            <ul class="list-disc list-inside space-y-1 text-lg">
+                                <li>Profils employés et contrats de travail</li>
+                                <li>Quarts de travail et pointages</li>
+                                <li>Feuilles de temps (approbation)</li>
+                                <li>Absences et calcul de la paie</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="mt-6 font-semibold">
+                        Objectifs de l'Itération 3 :
+                    </p>
+
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Développement Full-Stack (C# + React) complet du module RH de A à Z.</li>
+                        <li>Intégration d'une assurance qualité stricte (Tests d'intégration + Vitest).</li>
+                        <li>Résolution des conflits de sécurité RBAC sur le module d'inventaire.</li>
+                    </ul>
                 </div>
+
             </div>
         </div>
 
-        <!-- ==============================
-             SECTION DÉMO (Swagger)
-        =============================== -->
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center justify-center gap-4">
-                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎬</span>
-                    L'API en Action (Swagger)
+        
+        <div class="slide bg-gray-200 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 flex items-center gap-4">
+                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📉</span>
+                    Suivi de progression : Burndown Trend
                 </h2>
-                
-                <div class="bg-black/30 p-4 rounded-2xl border border-white/10 mx-auto inline-block shadow-inner">
-                    <!-- ⚠️ Ajoute ton GIF Swagger ici et ajuste le nom du fichier ! -->
-                    <img src="assets/swagger.gif" alt="Démonstration Swagger API" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
-                </div>
-            </div>
-        </div>
-
-        <!-- ==============================
-             SECTION RÉALISATIONS (Les US)
-        =============================== -->
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
-                    Réalisations Techniques (Backend)
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Opérations CRUD Utilisateurs</h3>
-                        <p class="text-orange-100">- API pour <strong>Ajouter</strong>, <strong>Modifier</strong>, <strong>Supprimer</strong> et <strong>Lister</strong> les utilisateurs.<br> - Préparation des données spécifiques pour la page RH et le Dashboard.</p>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-3/5">
+                        <div class="bg-white p-2 rounded-xl shadow-inner border border-gray-200">
+                            <img src="assets/burndown.png" alt="Burndown Trend Graph" class="rounded-lg w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+                        </div>
                     </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Sécurité & Rôles (RBAC)</h3>
-                        <p class="text-orange-100">- Implémentation stricte des rôles : restriction des actions critiques aux Admins/Gérants.<br> - Validation des droits (401/403) et endpoints pour modifier/consulter son propre profil.</p>
-                    </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Fondations pour le Frontend</h3>
-                        <p class="text-orange-100">- Création des services nécessaires pour alimenter le Layout principal et le Header (informations de l'utilisateur connecté).</p>
-                    </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Documentation & Fiabilité</h3>
-                        <p class="text-orange-100">- Exposition de Swagger pour faciliter l'intégration frontend. <br>- Couverture massive de tests d'intégration (plus de 50 tests) validant chaque règle d'affaires.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==============================
-             SECTION RÉSULTATS & PROCHAINE ÉTAPE
-        =============================== -->
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎯</span>
-                    Résultats & Prochaines étapes
-                </h2>
-                
-                <div class="space-y-6">
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold mb-2 text-white">Résultat Final (Itération 2)</h3>
-                        <p class="text-lg text-orange-100">Le backend du module RH/Utilisateurs est 100% opérationnel, documenté et testé rigoureusement. La plomberie est prête pour brancher l'interface utilisateur.</p>
-                    </div>
-                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold mb-2 text-white">À attaquer pour l'Itération 3</h3>
-                        <ul class="list-disc list-inside text-lg text-orange-100 ml-4">
-                            <li>Développer les points de terminaison (API) pour le module complet de l'Inventaire.</li>
-                            <li>Assister l'équipe sur la connexion du Frontend React avec nos routes sécurisées.</li>
+                    <div class="w-full md:w-2/5 space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500">
+                            <h3 class="text-xl font-bold text-blue-900 mb-2">Avancement des US</h3>
+                            <p class="text-gray-700 text-lg">
+                                <strong>100% des User Stories</strong> planifiées pour ce sprint ont été complétées et livrées.
+                            </p>
+                        </div>
+                        <ul class="space-y-3 text-lg text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✔</span> <strong>Inventaire </strong> Gestion avancée du catalogue et des stocks par succursale.
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✔</span> <strong>Sécurité </strong> Nouveau système de permissions contextuelles (RBAC/ABAC).
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-600">✔</span> <strong>RH </strong> Cycle complet (pointages, contrats, feuilles de temps, paie brute).
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==============================
-             SECTION BLANCHE (Conclusion)
-        =============================== -->
-        
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2</div>
+                <h1 class="text-6xl font-bold mb-4 text-white">Billy Hallé</h1>
+                <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Développeur Full-Stack</h2>
+                
+                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-orange-400">
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
+                    <p class="text-xl text-orange-50">
+                        Mon objectif a été de concevoir et livrer la totalité du <strong>module Ressources Humaines</strong> en mode de bout en bout (End-to-End).<br><br>
+                        Du modèle de données Entity Framework jusqu'aux formulaires React interactifs, j'ai implémenté la logique métier complexe (chevauchements de dates, paie) tout en sécurisant l'application avec plus de 230 tests automatisés au total et un ajustement rigoureux des permissions d'accès.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
+                    Réalisations Techniques (Full-Stack)
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
+                        <h3 class="text-xl font-bold text-white mb-2">Machine à États & Logique Métier</h3>
+                        <p class="text-orange-100">- Flux d'approbation strict pour les feuilles de temps et les absences.<br> - Validation algorithmique des chevauchements temporels (contrats, congés) avec messages 409 localisés.</p>
+                    </div>
+                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
+                        <h3 class="text-xl font-bold text-white mb-2">Interfaces React Dynamiques</h3>
+                        <p class="text-orange-100">- Création de 8 pages métier (Annuaire, Paie, Dashboard KPI, etc.).<br> - Utilisation de <code>useQuery</code> pour des formulaires à dépendances croisées (ex: Assigner un rôle à un employé).</p>
+                    </div>
+                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
+                        <h3 class="text-xl font-bold text-white mb-2">Assurance Qualité Totale</h3>
+                        <p class="text-orange-100">- Cap des 200 tests d'intégration backend dépassé.<br>- Mise en place de <strong>Vitest</strong> et <em>React Testing Library</em> sur le frontend pour garantir la stabilité des formulaires.</p>
+                    </div>
+                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
+                        <h3 class="text-xl font-bold text-white mb-2">Refonte RBAC Frontend/Backend</h3>
+                        <p class="text-orange-100">- Correction du mur "403 Forbidden" sur l'inventaire. <br>- Alignement des droits côté React via des requêtes allégées (<code>getDropdown</code>) respectant le principe du moindre privilège.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="slide bg-gray-50 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
                 <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
+                    ✅
                 </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan de l'Itération 2</h1>
+                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan de l'Itération 3</h1>
                 <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Une itération très technique qui a prouvé la robustesse de notre architecture. Le backend est devenu une forteresse sécurisée.
+                    Une itération déterminante. Le produit est passé d'une API isolée à une application d'entreprise complète, interactive et hautement testée.
                 </p>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
                     <div class="bg-gray-100 p-8 rounded-2xl">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Application extrêmement stricte de nos normes de code.</li>
-                            <li>Couverture de tests automatisés exhaustive (401, 403, etc.).</li>
-                            <li>Création d'une documentation API claire avec Swagger.</li>
-                            <li>Excellente séparation de la logique d'affaires.</li>
+                            <li>Développement Full-Stack d'une traite (de la base de données jusqu'à l'UI).</li>
+                            <li>Anticipation de la dette technique en intégrant les tests React très tôt.</li>
+                            <li>Collaboration efficace pour débloquer les problèmes de permissions RBAC.</li>
                         </ul>
                     </div>
                     <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Défis & Prochaines Étapes</h3>
                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Optimiser la synchronisation Frontend/Backend pendant le développement.</li>
-                            <li>Accélérer la prise en main de l'API par le reste de l'équipe.</li>
-                            <li>Peaufiner les messages d'erreur renvoyés par l'API pour faciliter le débogage Frontend.</li>
+                            <li><strong>Défi :</strong> Gestion complexe de la sérialisation des formats de temps (DateOnly/TimeOnly vs inputs HTML5).</li>
+                            <li><strong>Étape 4 :</strong> Conteneurisation (Docker Compose) pour déploiement.</li>
+                            <li><strong>Étape 4 :</strong> Déploiement et intégration finale des autres modules.</li>
                         </ul>
                     </div>
                 </div>
@@ -217,7 +242,6 @@
         </div>
     </div>
 
-    <!-- Interface de Navigation -->
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
         <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             <span>&larr;</span> Précédent
@@ -232,12 +256,10 @@
         </button>
     </div>
 
-    <!-- Modal zoom image -->
     <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
         <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
     </div>
 
-    <!-- Script de logique de présentation -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
