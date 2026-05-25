@@ -137,7 +137,7 @@
                 <div class="flex flex-col md:flex-row gap-8 items-center">
                     <div class="w-full md:w-3/5">
                         <div class="bg-white p-2 rounded-xl shadow-inner border border-gray-200">
-                            <img src="assets/burndown.png" alt="Burndown Trend Graph" class="rounded-lg w-full h-auto cursor-pointer" onclick="openModal(this.src)">
+                            <img src="assets/Burndown2.png" alt="Burndown Trend Graph" class="rounded-lg w-full h-auto cursor-pointer" onclick="openModal(this.src)">
                         </div>
                     </div>
                     <div class="w-full md:w-2/5 space-y-6">
@@ -180,6 +180,18 @@
         </div>
 
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center justify-center gap-4">
+                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎬</span>
+                    Le Module RH & Inventaire en Action
+                </h2>
+                <div class="bg-black/30 p-4 rounded-2xl border border-white/10 mx-auto inline-block shadow-inner">
+                    <img src="assets/billy_rh.gif" alt="Démonstration Interface React" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
                 <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
                     <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
@@ -206,41 +218,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="slide bg-gray-50 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    ✅
-                </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan de l'Itération 3</h1>
-                <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Une itération déterminante. Le produit est passé d'une API isolée à une application d'entreprise complète, interactive et hautement testée.
-                </p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Développement Full-Stack d'une traite (de la base de données jusqu'à l'UI).</li>
-                            <li>Anticipation de la dette technique en intégrant les tests React très tôt.</li>
-                            <li>Collaboration efficace pour débloquer les problèmes de permissions RBAC.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Défis & Prochaines Étapes</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li><strong>Défi :</strong> Gestion complexe de la sérialisation des formats de temps (DateOnly/TimeOnly vs inputs HTML5).</li>
-                            <li><strong>Étape 4 :</strong> Conteneurisation (Docker Compose) pour déploiement.</li>
-                            <li><strong>Étape 4 :</strong> Déploiement et intégration finale des autres modules.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Merci !</h2>
-                <p class="text-xl text-gray-500">Période de questions ?</p>
-            </div>
-        </div>
-    </div>
 
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
         <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
