@@ -1,1098 +1,1373 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Itération 3</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
-        
-        /* Slide transitions */
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease; 
-            opacity: 0; pointer-events: none;
-        }
-        .slide.active { 
-            transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto;
-        }
-        .slide.prev { 
-            transform: translateX(-100%); opacity: 0; z-index: 1; 
-        }
-        .slide.next { 
-            transform: translateX(100%); opacity: 0; z-index: 1; 
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystal ERP — Sprint 4 · Présentation</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --bg-card: #1a2332;
+      --bg-code: #0d1117;
+      --border: #2d3a4f;
+      --text: #e6edf3;
+      --text-muted: #8b9cb3;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --green: #22c55e;
+      --green-soft: rgba(34, 197, 94, 0.12);
+      --amber: #f59e0b;
+      --amber-soft: rgba(245, 158, 11, 0.12);
+      --purple: #a855f7;
+      --purple-soft: rgba(168, 85, 247, 0.12);
+      --cyan: #06b6d4;
+      --cyan-soft: rgba(6, 182, 212, 0.12);
+      --radius: 12px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      --nav-width: 260px;
+    }
 
-        /* Content Animations */
-        .slide-content > * { 
-            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-        .slide.active .slide-content > * { 
-            opacity: 1; transform: translateY(0); 
-        }
-        
-        /* Staggered animation delays for elements */
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
-        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Custom scrollbar for content if it overflows */
-        .custom-scroll::-webkit-scrollbar { width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+    html { scroll-behavior: smooth; }
 
-        .placeholder { color: inherit; opacity: 0.7; font-style: italic; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
 
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+    /* Sidebar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--nav-width);
+      height: 100vh;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    nav .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    nav .subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav ul { list-style: none; }
+
+    nav li { margin-bottom: 0.15rem; }
+
+    nav a {
+      display: block;
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    nav .phase-link::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    nav .p1::before { background: var(--accent); }
+    nav .p2::before { background: var(--purple); }
+    nav .p3::before { background: var(--green); }
+    nav .p4::before { background: var(--cyan); }
+
+    /* Main */
+    main {
+      margin-left: var(--nav-width);
+      padding: 2.5rem 3rem 4rem;
+      max-width: 960px;
+    }
+
+    section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 2rem;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text);
+    }
+
+    p { margin-bottom: 1rem; color: var(--text-muted); }
+
+    .lead {
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    .badge.done { background: var(--green-soft); color: var(--green); border-color: rgba(34,197,94,0.3); }
+    .badge.stack { background: var(--accent-soft); color: var(--accent); }
+    .badge.warn { background: var(--amber-soft); color: var(--amber); }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card.phase {
+      border-left: 4px solid var(--accent);
+    }
+
+    .card.phase.p1 { border-left-color: var(--accent); }
+    .card.phase.p2 { border-left-color: var(--purple); }
+    .card.phase.p3 { border-left-color: var(--green); }
+    .card.phase.p4 { border-left-color: var(--cyan); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-header h3 { margin: 0; }
+
+    .phase-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    code, .cmd {
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+      font-size: 0.85em;
+    }
+
+    code {
+      background: var(--bg-code);
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      color: #79c0ff;
+    }
+
+    pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: #c9d1d9;
+    }
+
+    .comment { color: #6a737d; }
+    .cmd-line { color: #7ee787; }
+    .flag { color: #ffa657; }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    .flow-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .flow-arrow { color: var(--text-muted); font-size: 1.2rem; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .url-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg-code);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+
+    .url-box a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .url-box a:hover { text-decoration: underline; }
+
+    .url-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      min-width: 70px;
+    }
+
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .alert.warn {
+      background: var(--amber-soft);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+    }
+
+    .alert.info {
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #93c5fd;
+    }
+
+    .alert.success {
+      background: var(--green-soft);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: #86efac;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 1rem 1.25rem;
+      color: var(--text-muted);
+    }
+
+    li { margin-bottom: 0.35rem; }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+      padding: 0;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer {
+      margin-left: var(--nav-width);
+      padding: 1.5rem 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      main, footer { margin-left: 0; padding: 1.5rem; }
+      nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+    }
+
+    /* Rôles & accès */
+    .role-card {
+      border-left: 4px solid var(--border);
+    }
+    .role-card.admin { border-left-color: #ef4444; }
+    .role-card.gerant { border-left-color: var(--accent); }
+    .role-card.assistant { border-left-color: var(--purple); }
+    .role-card.employee { border-left-color: var(--green); }
+
+    .role-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .role-desc { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+
+    .access-yes { color: var(--green); font-weight: 700; }
+    .access-no { color: #f87171; font-weight: 700; }
+    .access-partial { color: var(--amber); font-weight: 700; }
+    .access-muted { color: var(--text-muted); }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .table-wrap table { margin: 0; font-size: 0.82rem; }
+    .table-wrap th { white-space: nowrap; }
+    .table-wrap td:first-child { font-weight: 500; color: var(--text); min-width: 180px; }
+
+    .archi {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+
+    .archi-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .archi-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      padding-top: 0.5rem;
+    }
+
+    .archi-box {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .module-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .module-card ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.85rem;
+    }
+
+    main { max-width: 1060px; }
+
+    @media print {
+      nav { display: none; }
+      main, footer { margin-left: 0; }
+      body { background: #fff; color: #111; }
+      .card { break-inside: avoid; }
+    }
+  </style>
 </head>
-<body class="text-gray-100">
+<body>
 
-    <div id="presentation" class="relative w-screen h-screen">
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                        
-                        <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                            💎
-                        </div>
-        
-                        <h1 class="text-5xl font-bold mb-6 text-gray-900">
-                            ERP Crystal
-                        </h1>
-        
-                        <p class="text-2xl text-gray-600 mb-8">
-                            Revue de l'Itération 3
-                        </p>
-        
-                        <div class="text-xl text-gray-700 space-y-2">
-                            <p><strong>Antony Burlet</strong></p>
-                            <p><strong>Billy Hallé</strong></p>
-                            <p><strong>William Peck</strong></p>
-                            <p><strong>Nicolas Michaud</strong></p>
-                        </div>
-                    </div>
-                </div>
+<nav>
+  <div class="logo">Crystal ERP</div>
+  <div class="subtitle">Itération 4 — Sprint finale</div>
+  <ul>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#erp">L'ERP Crystal</a></li>
+    <li><a href="#fonctionnement">Fonctionnement</a></li>
+    <li><a href="#modules">Modules métier</a></li>
+    <li><a href="#roles">Les 4 rôles</a></li>
+    <li><a href="#acces-menu">Menu &amp; routes</a></li>
+    <li><a href="#acces-permissions">Permissions</a></li>
+    <li><a href="#dashboard-roles">Dashboard par rôle</a></li>
+    <li><a href="#vision" class="phase-link">Vision &amp; ordre</a></li>
+    <li><a href="#phase1" class="phase-link p1">Phase 1 — Alignement</a></li>
+    <li><a href="#phase2" class="phase-link p2">Phase 2 — Permissions</a></li>
+    <li><a href="#phase3" class="phase-link p3">Phase 3 — Mon espace</a></li>
+    <li><a href="#phase4" class="phase-link p4">Phase 4 — E2E</a></li>
+    <li><a href="#demarrage">Démarrer le projet</a></li>
+    <li><a href="#nix-wsl">Nix + WSL</a></li>
+    <li><a href="#e2e">Tests E2E</a></li>
+    <li><a href="#comptes">Comptes test</a></li>
+    <li><a href="#docs">Documentation</a></li>
+  </ul>
+</nav>
 
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                        
-                        <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
-                            Contexte du projet
-                        </h2>
-        
-                        <div class="space-y-6 text-xl text-gray-700">
-                            <p>
-                                Développement d’un ERP pour une librairie permettant de centraliser :
-                            </p>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <p class="font-semibold mb-2">L'inventaire :</p>
-                                    <ul class="list-disc list-inside space-y-1 text-lg">
-                                        <li>Gestion des inventaires</li>
-                                        <li>Gestion du catalogue</li>
-                                        <li>Gestion des catégories</li>
-                                        <li>Gestion des succursales</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <p class="font-semibold mb-2">Ressources Humaines :</p>
-                                    <ul class="list-disc list-inside space-y-1 text-lg">
-                                        <li>Profils employés et contrats de travail</li>
-                                        <li>Quarts de travail et pointages</li>
-                                        <li>Feuilles de temps (approbation)</li>
-                                        <li>Absences et calcul de la paie</li>
-                                    </ul>
-                                </div>
-                            </div>
-        
-                            <p class="mt-6 font-semibold">
-                                Objectifs de l'Itération 3 :
-                            </p>
-        
-                            <ul class="list-disc list-inside space-y-2">
-                                <li>Développement Full-Stack (C# + React) complet du module RH de A à Z.</li>
-                                <li>Intégration d'une assurance qualité stricte (Tests d'intégration + Vitest).</li>
-                                <li>Résolution des conflits de sécurité RBAC sur le module d'inventaire.</li>
-                            </ul>
-                        </div>
-        
-                    </div>
-                </div>
+<main>
 
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                        <h2 class="text-4xl font-bold mb-6 text-gray-900 flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📉</span>
-                            Suivi de progression : Burndown Trend
-                        </h2>
-                        <div class="flex flex-col md:flex-row gap-8 items-center">
-                            <div class="w-full md:w-3/5">
-                                <div class="bg-white p-2 rounded-xl shadow-inner border border-gray-200">
-                                    <img src="assets/Burndown2.png" alt="Burndown Trend Graph" class="rounded-lg w-full h-auto cursor-pointer" onclick="openModal(this.src)">
-                                </div>
-                            </div>
-                            <div class="w-full md:w-2/5 space-y-6">
-                                <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500">
-                                    <h3 class="text-xl font-bold text-blue-900 mb-2">Avancement des US</h3>
-                                    <p class="text-gray-700 text-lg">
-                                        <strong>100% des User Stories</strong> planifiées pour ce sprint ont été complétées et livrées.
-                                    </p>
-                                </div>
-                                <ul class="space-y-3 text-lg text-gray-700">
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-green-600">✔</span> <strong>Inventaire </strong> Gestion avancée du catalogue et des stocks par succursale.
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-green-600">✔</span> <strong>Sécurité </strong> Nouveau système de permissions contextuelles (RBAC/ABAC).
-                                    </li>
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-green-600">✔</span> <strong>RH </strong> Cycle complet (pointages, contrats, feuilles de temps, paie brute).
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <div class="text-blue-300 font-semibold tracking-wider uppercase mb-2">Membre 1</div>
-                        <h1 class="text-6xl font-bold mb-4 text-white">Antony Burlet</h1>
-                        <h2 class="text-3xl font-light mb-10 text-blue-100">Rôle : Développeur Frontend</h2>
-                        
-                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-blue-400">
-                            <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
-                            <p class="text-xl text-blue-100">
-                                Cette itération, mon travail s'est concentré sur trois gros blocs frontend :
-                                le CRUD des succursales, le CRUD des items (produits et livres), et le ménage de la sidebar
-                                pour rendre la navigation plus claire et plus maintenable.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Page 2 : Bleu -->
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
-                            Gros livrables
-                        </h2>
-                        
-                        <ul class="space-y-6 text-xl">
-                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                                <div class="text-blue-400 mt-1">1</div>
-                                <div>
-                                    <strong class="text-white">CRUD des succursales côté frontend</strong>
-                                    <p class="text-blue-100 mt-2">Créer, consulter, modifier et supprimer des succursales depuis l'interface.</p>
-                                </div>
-                            </li>
-                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                                <div class="text-blue-400 mt-1">2</div>
-                                <div>
-                                    <strong class="text-white">CRUD des items</strong>
-                                    <p class="text-blue-100 mt-2">Gestion des produits et des livres, avec les écrans nécessaires pour manipuler le catalogue.</p>
-                                </div>
-                            </li>
-                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                                <div class="text-blue-400 mt-1">3</div>
-                                <div>
-                                    <strong class="text-white">Ménage de la sidebar</strong>
-                                    <p class="text-blue-100 mt-2">Réorganisation de la navigation pour mieux refléter les modules et réduire le bruit visuel.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-        
-                <!-- Page 3 : Bleu -->
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                        
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">💻</span>
-                            Démonstration visuelle
-                        </h2>
-        
-                        <div class="grid grid-cols-3 gap-5">
-                            <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                                <h3 class="text-xl font-semibold text-white mb-4">Gestion inventaire</h3>
-                                <img src="assets/GestionInventaire.png" 
-                                    class="rounded-xl shadow-lg mx-auto w-full h-[300px] object-contain cursor-pointer"
-                                    onclick="openModal(this.src)">
-                                <p class="text-blue-200 mt-4">Vue de gestion pour les produits et les livres.</p>
-                            </div>
-
-                            <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                                <h3 class="text-xl font-semibold text-white mb-4">Ajout produit/livre</h3>
-                                <div class="grid grid-cols-2 gap-3 h-[300px]">
-                                    <img src="assets/addProduct.png" 
-                                        class="rounded-xl shadow-lg mx-auto w-full h-full object-contain cursor-pointer"
-                                        onclick="openModal(this.src)">
-                                    <img src="assets/addBook.png" 
-                                        class="rounded-xl shadow-lg mx-auto w-full h-full object-contain cursor-pointer"
-                                        onclick="openModal(this.src)">
-                                </div>
-                                <p class="text-blue-200 mt-4">Formulaires d'ajout pour les deux types d'items.</p>
-                            </div>
-        
-                            <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                                <h3 class="text-xl font-semibold text-white mb-4">Détail d'un item</h3>
-                                <img src="assets/DetailsItem.png" 
-                                    class="rounded-xl shadow-lg mx-auto w-full h-[300px] object-contain cursor-pointer"
-                                    onclick="openModal(this.src)">
-                                <p class="text-blue-200 mt-4">Page de consultation d'un produit ou d'un livre.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-        
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🏬</span>
-                            Démonstration visuelle : succursales
-                        </h2>
-
-                        <div class="bg-black/20 p-6 rounded-2xl border border-white/10 text-center">
-                            <h3 class="text-xl font-semibold text-white mb-4">CRUD des succursales</h3>
-                            <img src="assets/Succursale.png"
-                                class="rounded-xl shadow-lg mx-auto w-full max-h-[500px] object-contain cursor-pointer"
-                                onclick="openModal(this.src)">
-                            <p class="text-blue-200 mt-4">Interface frontend pour consulter et gérer les succursales.</p>
-                        </div>
-                    </div>
-                </div>
-
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                        
-                        <h2 class="text-4xl font-bold mb-6 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🧭</span>
-                            Démonstration visuelle : sidebar
-                        </h2>
-
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="bg-black/20 p-5 rounded-2xl border border-white/10 text-center">
-                                <h3 class="text-xl font-semibold text-white mb-4">Sidebar compacte</h3>
-                                <div class="h-[390px] overflow-hidden rounded-xl bg-black/30 flex items-start justify-center">
-                                    <img src="assets/SideBarre.png"
-                                        class="w-full h-full object-contain object-top cursor-pointer"
-                                        onclick="openModal(this.src)">
-                                </div>
-                            </div>
-
-                            <div class="bg-black/20 p-5 rounded-2xl border border-white/10 text-center">
-                                <h3 class="text-xl font-semibold text-white mb-4">Sidebar inventaire</h3>
-                                <div class="h-[390px] overflow-hidden rounded-xl bg-black/30 flex items-start justify-center">
-                                    <img src="assets/SideBar2.png"
-                                        class="w-full h-full object-contain object-top cursor-pointer"
-                                        onclick="openModal(this.src)">
-                                </div>
-                            </div>
-                        </div>
-
-                        <p class="text-blue-200 mt-5 text-center text-lg">Deux vues de la sidebar montrant la navigation et l'accès aux sections du module inventaire.</p>
-                    </div>
-                </div>
-
-
-                <!-- Page 4 : Bleu -->
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🧩</span>
-                            Travail frontend réalisé
-                        </h2>
-        
-                        <div class="space-y-6 text-xl">
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10">
-                                <h3 class="text-2xl font-semibold text-white mb-2">Écrans CRUD complets</h3>
-                                <p class="text-blue-100">
-                                    Mise en place des pages, formulaires et actions nécessaires pour gérer les succursales
-                                    ainsi que les items du catalogue.
-                                </p>
-                            </div>
-        
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10">
-                                <h3 class="text-2xl font-semibold text-white mb-2">Intégration avec l'application existante</h3>
-                                <p class="text-blue-100">
-                                    Alignement avec la structure React déjà en place, les permissions, les routes et la navigation
-                                    pour que les nouveaux écrans s'insèrent naturellement dans l'ERP.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Page 5 : Bleu -->
-
-        <div class="slide bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🚀</span>
-                            Défis
-                        </h2>
-                        
-                        <div class="grid grid-cols-2 gap-8">
-                            
-                            <!-- Défis -->
-                            <div class="bg-red-900/30 p-8 rounded-2xl border border-red-500/30">
-                                <h3 class="text-2xl font-semibold mb-4 text-red-300">Défis rencontrés</h3>
-                                
-                                <ul class="space-y-3 text-lg text-white">
-                                    <li>• Distinguer clairement produits et livres dans le CRUD des items</li>
-                                    <li>• Garder les formulaires simples malgré plusieurs types de données</li>
-                                    <li>• Nettoyer la sidebar sans briser la navigation existante</li>
-                                    <li>• Brancher les écrans au reste de l'application de façon cohérente</li>
-                                </ul>
-                            </div>
-        
-                            <!-- Solutions -->
-                            <div class="bg-green-900/30 p-8 rounded-2xl border border-green-500/30">
-                                <h3 class="text-2xl font-semibold mb-4 text-green-300">Solutions appliquées</h3>
-                                
-                                <ul class="space-y-3 text-lg text-white">
-                                    <li>• Séparer les responsabilités entre les écrans et les formulaires</li>
-                                    <li>• Réutiliser les patterns frontend déjà présents dans le projet</li>
-                                    <li>• Regrouper la navigation par module dans la sidebar</li>
-                                    <li>• Tester les parcours principaux directement dans l'interface</li>
-                                </ul>
-                            </div>
-        
-                        </div>
-                    </div>
-                </div>
-          
-                <!-- ==============================
-                     SECTION BLANCHE (Conclusion)
-                =============================== -->
-                
-                <!-- Page 13 : Blanc -->
-
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2</div>
-                        <h1 class="text-6xl font-bold mb-4 text-white">Billy Hallé</h1>
-                        <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Développeur Full-Stack</h2>
-                        
-                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-orange-400">
-                            <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
-                            <p class="text-xl text-orange-50">
-                                Mon objectif a été de concevoir et livrer la totalité du <strong>module Ressources Humaines</strong> en mode de bout en bout (End-to-End).<br><br>
-                                Du modèle de données Entity Framework jusqu'aux formulaires React interactifs, j'ai implémenté la logique métier complexe (chevauchements de dates, paie) tout en sécurisant l'application avec plus de 230 tests automatisés au total et un ajustement rigoureux des permissions d'accès.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center justify-center gap-4">
-                            <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎬</span>
-                            Le Module RH & Inventaire en Action
-                        </h2>
-                        <div class="bg-black/30 p-4 rounded-2xl border border-white/10 mx-auto inline-block shadow-inner">
-                            <img src="assets/billy_rh.gif" alt="Démonstration Interface React" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
-                            Réalisations Techniques (Full-Stack)
-                        </h2>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                                <h3 class="text-xl font-bold text-white mb-2">Machine à États & Logique Métier</h3>
-                                <p class="text-orange-100">- Flux d'approbation strict pour les feuilles de temps et les absences.<br> - Validation algorithmique des chevauchements temporels (contrats, congés) avec messages 409 localisés.</p>
-                            </div>
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                                <h3 class="text-xl font-bold text-white mb-2">Interfaces React Dynamiques</h3>
-                                <p class="text-orange-100">- Création de 8 pages métier (Annuaire, Paie, Dashboard KPI, etc.).<br> - Utilisation de <code>useQuery</code> pour des formulaires à dépendances croisées (ex: Assigner un rôle à un employé).</p>
-                            </div>
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                                <h3 class="text-xl font-bold text-white mb-2">Assurance Qualité Totale</h3>
-                                <p class="text-orange-100">- Cap des 200 tests d'intégration backend dépassé.<br>- Mise en place de <strong>Vitest</strong> et <em>React Testing Library</em> sur le frontend pour garantir la stabilité des formulaires.</p>
-                            </div>
-                            <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                                <h3 class="text-xl font-bold text-white mb-2">Refonte RBAC Frontend/Backend</h3>
-                                <p class="text-orange-100">- Correction du mur "403 Forbidden" sur l'inventaire. <br>- Alignement des droits côté React via des requêtes allégées (<code>getDropdown</code>) respectant le principe du moindre privilège.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <div class="text-emerald-200 font-semibold tracking-wider uppercase mb-2">Membre 3</div>
-                        <h1 class="text-6xl font-bold mb-4 text-white"><span class="placeholder">William Peck</span></h1>
-                        <h2 class="text-3xl font-light mb-10 text-emerald-100">Rôle : <span class="placeholder">Frontend</span>
-                        </h2>
-        
-                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-400">
-                            <h3 class="text-2xl font-semibold mb-4 text-white">Mes responsabilités :</h3>
-                            <p class="text-xl text-emerald-50">
-                                <span class="placeholder">Développement frontend / application web</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Page 8 : Vert -->
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Restructuration /
-                                            cleanup du projet</span></h3>
-                                    <p class="text-emerald-100">Routes, pages, types<span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Gestion du Role Based
-                                            Access Control (RBAC)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Intégration API</span>
-                                    </h3>
-                                    <p class="text-emerald-100"><span class="placeholder">Tests avec API mock, maintenant en
-                                            cours d'intégrer le vrai système</span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Utilisation de librairies, dont Material UI</span>
-                                    </h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            User stories
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Accéder au Sidebar
-                                            (Utilisateurs)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter mon profil
-                                            (Utilisateurs)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la page RH
-                                            (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la liste des
-                                            utilisateurs (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter le profil d'un
-                                            utilisateur (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            User stories (suite)
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Ajouter un utilisateur
-                                            (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Modifier un utilisateur
-                                            (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Supprimer un utilisateur
-                                            (Admin/Gérant)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            User stories (suite)
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter l'inventaire
-                                            (Utilisateurs)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Consulter la page de
-                                            détails d'un item (Utilisateurs)</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Sidebar en mode
-                                            desktop</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                src="https://cdn.discordapp.com/attachments/1136726130565595186/1499072089183748146/image.png?ex=69f3772d&is=69f225ad&hm=680039eab9a60e835b02bfd88f54035821472e8e473155c6817f528be668ffa4&"></img>
-                        </div>
-                    </div>
-                </div>
-
-        <div
-                    class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8 min-h-screen">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-        
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-6">
-                            <div class="bg-black/20 p-6 rounded-xl flex flex-col gap-2">
-                                <h3 class="text-2xl font-bold text-white">Sidebar en mode mobile</h3>
-                                <p class="text-emerald-100"></p>
-                            </div>
-        
-                            <div class="flex flex-row gap-6 items-start">
-                                <div class="flex-1">
-                                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1499083355218772101/image.png?ex=69f381ab&is=69f2302b&hm=0fbbe6ccdbb90c5d6190a03305ba3a146c0a3294a6ec881946b0892b0fc73079&"
-                                        alt="Screenshot 1">
-                                </div>
-                                <div class="flex-1">
-                                    <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                        src="https://cdn.discordapp.com/attachments/1136726130565595186/1499081854425497640/image.png?ex=69f38045&is=69f22ec5&hm=55bb829cc42ed7895f629a9483c16186de873d9e94ac37a7bb0370eccbde5543&"
-                                        alt="Screenshot 2">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Requête API GET la liste des utilisateurs</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                src="https://media.discordapp.net/attachments/1136726130565595186/1499085264516288602/image.png?ex=69f38372&is=69f231f2&hm=a89e002e4b96070e8496f2bded2e884fd02906caf1d2e0203d8df83408da360c&=&format=webp&quality=lossless&width=953&height=456"></img>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Requête API GET un utilisateur par son id</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder"></span></p>
-                                </div>
-                            </div>
-                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                src="https://cdn.discordapp.com/attachments/1136726130565595186/1499086237040906430/image.png?ex=69f3845a&is=69f232da&hm=d7a36fc6e189039b9badd54ce6f27ed9d5308699416d89e4ee50f2a9ba481ce0&"></img>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Travail accompli
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Spinner pendant chargement</span></h3>
-                                    <p class="text-emerald-100"><span class="placeholder">Librairie React Spinners</span></p>
-                                </div>
-                            </div>
-                            <img class="w-full rounded-xl border border-white/10 shadow-lg"
-                                src="https://media.discordapp.net/attachments/1136726130565595186/1499088063396319284/image.png?ex=69f3860e&is=69f2348e&hm=da3fe055d146a6b8184e711caadc98f8bccef2fdd1d37a0855f74b311bdd6c42&=&format=webp&quality=lossless&width=953&height=315"></img>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Page 9 : Vert -->
-
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                            Objectifs pour le futur
-                        </h2>
-        
-                        <div class="flex flex-col gap-4">
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Continuer à bâtir les fonctionnalités</span></h3>
-        
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Écrire des tests unitaires</span></h3>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                                <div class="text-4xl"></div>
-                                <div>
-                                    <h3 class="text-2xl font-bold text-white"><span class="placeholder">Travailler le visuel et
-                                            l'utilisabilité (UI/UX)</span></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- ==============================
-                     SECTION BLANCHE (Conclusion)
-                =============================== -->
-        
-                <!-- Page 13 : Blanc -->
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <div class="text-purple-300 font-semibold tracking-wider uppercase mb-2">Membre 4</div>
-                        <h1 class="text-6xl font-bold mb-4 text-white"><span class="placeholder">Nicolas Michaud</span></h1>
-                        <h2 class="text-3xl font-light mb-10 text-purple-200">Rôle : <span class="placeholder">Je travail sur le
-                                frontend du site Web.</span></h2>
-        
-                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-purple-400">
-                            <h3 class="text-2xl font-semibold mb-4 text-white">Mon mandat :</h3>
-                            <p class="text-xl text-purple-100">
-                                <span class="placeholder">Durant cette itération, j'ai toute la portion des catégories d'un
-                                    livre.</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        
-                <!-- Page 11 : Mauve -->
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                            Tâches et Validations
-                        </h2>
-        
-                        <ul class="space-y-6 text-xl">
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <strong class="text-purple-300"><span class="placeholder">La page principale</span></strong>
-                                <p class="text-gray-200 mt-2"><span class="placeholder">Pour commencer, voici la page principale
-                                        des catégories.
-                                    </span></p>
-                            </li>
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <img src="assets/n1.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                            Tâches et Validations
-                        </h2>
-        
-                        <ul class="space-y-6 text-xl">
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <strong class="text-purple-300"><span class="placeholder">Le forumulaire</span></strong>
-                                <p class="text-gray-200 mt-2"><span class="placeholder">Et voici le formulaire d'ajout et de
-                                        modification de catégories seulement disponible pour les administrateurs et gérants.
-                                    </span></p>
-                            </li>
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <img src="assets/n2.png">
-                                <br>
-                                <img src="assets/n3.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                            Tâches et Validations
-                        </h2>
-        
-                        <ul class="space-y-6 text-xl">
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <strong class="text-purple-300"><span class="placeholder">Suppression</span></strong>
-                                <p class="text-gray-200 mt-2"><span class="placeholder">Bien sûr, il est aussi possible de supprimer une catégorie.
-                                    </span></p>
-                            </li>
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <img src="assets/n4.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                            Tâches et Validations
-                        </h2>
-        
-                        <ul class="space-y-6 text-xl">
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <strong class="text-purple-300"><span class="placeholder">Exemple</span></strong>
-                                <p class="text-gray-200 mt-2"><span class="placeholder">L'objectif est donc vraiment de catégoriser les produits. 
-                                    </span></p>
-                            </li>
-                            <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                                <img src="assets/n5.png">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-        
-                <!-- Page 12 : Mauve -->
-
-        <div class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
-                    <div
-                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                            <span
-                                class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📊</span>
-                            Ma conclusion sur ce que j'ai accompli.
-                        </h2>
-        
-                        <div class="flex flex-col md:flex-row gap-8">
-                            <div class="flex-1 bg-black/20 p-8 rounded-2xl">
-                                <h3 class="text-2xl font-bold text-white mb-4">État de santé (Sprint 2)</h3>
-                                <p class="text-purple-100 text-lg mb-4"><span class="placeholder">Je suis fier du travail que j’ai accompli sur cette itération, j’ai été rapide et efficace.
-                                    J’ai éprouvé des difficultés techniques avec mon ordinateur, que j’ai résolues en basculant de Windows à Linux.
-                                </span></p>
-        
-                                <div class="w-full bg-black/40 rounded-full h-4 mt-6">
-                                    <div class="bg-purple-500 h-4 rounded-full" style="width: 90%"></div>
-                                </div>
-                                <p class="text-right text-sm text-purple-300 mt-1"><span class="placeholder">Couverture:
-                                        90%</span></p>
-                            </div>
-        
-                            <div class="flex-1 bg-purple-900/50 p-8 rounded-2xl border border-purple-400/30">
-                                <h3 class="text-2xl font-bold text-white mb-4">Recommandations</h3>
-                                <ul class="list-disc list-inside space-y-2 text-purple-100">
-                                    <li><span class="placeholder">Me familiariser avec Arch Linux</span></li>
-                                    <li><span class="placeholder">Programmer la possibilité de voir la liste des produits d'une même catégorie.</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ==============================
-                     SECTION BLANCHE (Conclusion)
-                =============================== -->
-        
-                <!-- Page 13 : Blanc -->
-
-        <div class="slide bg-gray-50 flex items-center justify-center p-8">
-                    <div class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                        <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                            💎
-                        </div>
-                        <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan de l'Itération 3</h1>
-                        <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                            Une grande amélioration par rapport au sprint précédent.
-                            Une itération très technique, avec un nouveau levier de travail grâce à l'utilisation de l'IA.
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
-                            <div class="bg-gray-100 p-8 rounded-2xl">
-                                <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
-                                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                                    <li>Application stricte de nos normes</li>
-                                    <li>Bonne séparation des tâches</li>
-                                    <li>Grosses améliorations générales</li>
-                                    <li>Utilisation de l'IA pour accélérer la résolution de problèmes</li>
-                                </ul>
-                            </div>
-                            <div class="bg-gray-100 p-8 rounded-2xl">
-                                <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
-                                <ul class="list-disc list-inside space-y-2 text-gray-700">
-                                    <li>Efficacité</li>
-                                    <li>Rendre le processus plus ''agile''</li>
-                                    <li>Respecter la priorisation des récits</li>
-                                    <li>Synchroniser le développement backend et frontend</li>
-                                    <li>Mieux encadrer l'utilisation de l'IA dans le processus de développement</li>
-                                </ul>
-                            </div>
-                        </div>
-        
-                        <h2 class="text-4xl font-bold text-gray-900 mb-4">Merci !</h2>
-                        <p class="text-xl text-gray-500">Période de questions ?</p>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Interface de Navigation -->
-
-<div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
-            <span>&larr;</span> Précédent
-        </button>
-        
-        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
-        </div>
-        
-        <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
-            Suivant <span>&rarr;</span>
-        </button>
+  <!-- INTRO -->
+  <section id="intro">
+    <h1>Crystal ERP — Sprint 4</h1>
+    <p class="lead">
+      ERP pour librairie multi-succursales — inventaire, RH et administration unifiés.
+      Chaque rôle voit un menu, un dashboard et des actions adaptés à ses permissions.
+    </p>
+    <div class="badge-row">
+      <span class="badge done">✓ 4 phases livrées</span>
+      <span class="badge stack">ASP.NET Core 9</span>
+      <span class="badge stack">React 19 + Vite</span>
+      <span class="badge stack">PostgreSQL + Docker</span>
+      <span class="badge stack">Playwright</span>
     </div>
 
-    <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Stack</h3>
+        <table>
+          <tr><th>Zone</th><th>Technologie</th></tr>
+          <tr><td>Backend</td><td>ASP.NET Core 9, Identity + JWT, EF Core</td></tr>
+          <tr><td>Frontend</td><td>React 19, TypeScript, MUI, TanStack Query, CASL</td></tr>
+          <tr><td>Infra</td><td>Docker Compose</td></tr>
+          <tr><td>Tests</td><td>xUnit, Vitest, Playwright</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>URLs locales</h3>
+        <div class="url-box"><span class="url-label">Frontend</span><a href="http://localhost:3000" target="_blank">http://localhost:3000</a></div>
+        <div class="url-box"><span class="url-label">API</span><a href="http://localhost:8080/swagger" target="_blank">http://localhost:8080/swagger</a></div>
+        <div class="url-box"><span class="url-label">PostgreSQL</span><code>localhost:5432</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERP -->
+  <section id="erp">
+    <h2>L'ERP Crystal — c'est quoi ?</h2>
+    <p class="lead">
+      Crystal ERP est un système de gestion intégré pour une <strong>librairie multi-succursales</strong>.
+      Il centralise l'<strong>inventaire</strong> (catalogue, stock par succursale) et les
+      <strong>ressources humaines</strong> (employés, horaires, congés, paie) dans une seule application web.
+    </p>
+
+    <div class="card">
+      <h3>Problème résolu</h3>
+      <p style="margin:0;color:var(--text-muted)">
+        Avant le sprint 4, le frontend utilisait parfois des données simulées (json-server) et les permissions
+        n'étaient pas alignées entre l'API et l'interface. Aujourd'hui, <strong>une seule API .NET</strong>
+        fait foi : chaque écran et chaque bouton respecte les mêmes règles de sécurité que le backend.
+      </p>
     </div>
 
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const indicator = document.getElementById('slideIndicator');
-        const totalIndicator = document.getElementById('totalIndicator');
-        const btnPrev = document.getElementById('btnPrev');
-        const btnNext = document.getElementById('btnNext');
+    <h3>Parcours type d'une journée</h3>
+    <ol class="steps">
+      <li><strong>Connexion</strong> — l'utilisateur s'authentifie sur <code>/login</code> ; l'API renvoie un JWT.</li>
+      <li><strong>Dashboard</strong> — widgets adaptés au rôle (prochain quart, congés en attente, métriques RH…).</li>
+      <li><strong>Travail</strong> — navigation via la sidebar : inventaire, RH gestionnaire ou Mon espace employé.</li>
+      <li><strong>Actions</strong> — créer un congé, approuver une absence, ajuster un stock, gérer un employé… selon les permissions.</li>
+      <li><strong>Données filtrées</strong> — un employé ne voit que <em>ses</em> congés, quarts et pointages ; un gérant voit toute l'équipe.</li>
+    </ol>
 
-        if(totalIndicator) {
-            totalIndicator.textContent = totalSlides;
+    <div class="alert info">
+      <strong>Deux « rôles » distincts :</strong> le <em>rôle applicatif</em> (Admin, Gérant, Assistant, Employé) contrôle
+      la sécurité et les menus. Le <em>rôle organisationnel RH</em> (Ventes, Logistique…) est une donnée métier dans les référentiels RH.
+    </div>
+  </section>
+
+  <!-- FONCTIONNEMENT -->
+  <section id="fonctionnement">
+    <h2>Comment ça fonctionne</h2>
+    <p>Le système applique les droits à <strong>trois niveaux</strong> : route frontend, interface (boutons/menus) et API backend.</p>
+
+    <div class="archi">
+      <div class="archi-row">
+        <div class="archi-label">1. Auth</div>
+        <div class="archi-box"><code>POST /api/auth/login</code> → JWT (rôle Identity : Admin, Gerant, Assistant, Employee)</div>
+      </div>
+      <div class="archi-row">
+        <div class="archi-label">2. Permissions</div>
+        <div class="archi-box"><code>GET /api/users/me/permissions</code> → liste <code>{ action, subject }</code> (ex. <code>read:leave_request</code>)<br>
+        Si l'utilisateur a un <code>dynamicRoleId</code>, les permissions du rôle dynamique remplacent le preset.</div>
+      </div>
+      <div class="archi-row">
+        <div class="archi-label">3. Frontend</div>
+        <div class="archi-box">CASL (<code>defineAbilityFor</code>) → sidebar, widgets dashboard, boutons Ajouter/Modifier/Supprimer masqués si non autorisé.<br>
+        Routes <code>/rh/*</code> et <code>/ir</code> bloquées sans <code>read:hr_dashboard</code> (redirection vers le dashboard).</div>
+      </div>
+      <div class="archi-row">
+        <div class="archi-label">4. Backend</div>
+        <div class="archi-box"><code>[Authorize]</code> + <code>RequirePermission</code> sur chaque endpoint.<br>
+        <code>EmployeeScopeService</code> : sans <code>manage:{subject}</code>, filtrage automatique sur le profil RH de l'utilisateur connecté.</div>
+      </div>
+    </div>
+
+    <h3>Règles de permission</h3>
+    <table>
+      <tr><th>Règle</th><th>Effet</th></tr>
+      <tr><td><code>manage:all</code></td><td>Accès complet (Admin uniquement)</td></tr>
+      <tr><td><code>manage:{entité}</code></td><td>CRUD complet + voir toutes les données de l'entité</td></tr>
+      <tr><td><code>read/create/update/delete:{entité}</code></td><td>Action précise sur l'entité</td></tr>
+      <tr><td>Pas de <code>manage</code> + profil RH lié</td><td>Scoping « mes données » (congés, quarts, pointages, feuilles)</td></tr>
+    </table>
+  </section>
+
+  <!-- MODULES -->
+  <section id="modules">
+    <h2>Modules métier</h2>
+    <div class="module-grid">
+      <div class="card module-card">
+        <h4>📦 Inventaire</h4>
+        <ul>
+          <li>Catalogue d'articles / livres</li>
+          <li>Catégories et auteurs</li>
+          <li>Succursales (locations)</li>
+          <li>Quantités par succursale (<code>/ir</code>)</li>
+        </ul>
+      </div>
+      <div class="card module-card">
+        <h4>👥 Ressources humaines</h4>
+        <ul>
+          <li>Fiches employés et contrats</li>
+          <li>Demandes de congé (workflow Pending → Approved)</li>
+          <li>Planification des quarts</li>
+          <li>Pointages et feuilles de temps</li>
+          <li>Paie et métriques RH</li>
+          <li>Référentiels : postes, rôles org.</li>
+        </ul>
+      </div>
+      <div class="card module-card">
+        <h4>⚙️ Administration</h4>
+        <ul>
+          <li>Utilisateurs Identity (<code>/rh/utilisateurs</code>)</li>
+          <li>Rôles dynamiques et permissions (<code>/user-roles</code>)</li>
+          <li>Mon profil — compte et mot de passe (<code>/monprofil</code>)</li>
+        </ul>
+      </div>
+      <div class="card module-card">
+        <h4>🧑‍💼 Portail employé</h4>
+        <ul>
+          <li><code>/mon-espace</code> — horaire, congés, fiche, pointages, feuille</li>
+          <li>Réservé aux utilisateurs sans accès gestionnaire RH</li>
+          <li>Données strictement personnelles (scoping backend)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert warn">
+      <strong>Hors scope sprint 4 :</strong> le module Opérations (transferts entre succursales, réceptions fournisseur)
+      est documenté dans le README frontend mais <em>non implémenté</em>.
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section id="roles">
+    <h2>Les 4 rôles applicatifs</h2>
+    <p>Chaque compte test est lié à un rôle Identity. Les permissions par défaut sont définies dans
+       <code>defaultRolePermissions.ts</code> (backend + frontend synchronisés via l'API).</p>
+
+    <div class="grid-2">
+      <div class="card role-card admin">
+        <div class="role-title">🔴 Administrateur</div>
+        <p class="role-desc">
+          Contrôle total du système. Crée des utilisateurs, des rôles dynamiques personnalisés,
+          gère tout l'inventaire et tout le module RH. Seul rôle avec <code>manage:all</code>.
+        </p>
+      </div>
+      <div class="card role-card gerant">
+        <div class="role-title">🔵 Gérant de succursale</div>
+        <p class="role-desc">
+          Pilote l'activité quotidienne : approuve les congés, consulte les métriques RH,
+          gère les employés et le stock. Pas d'administration des rôles système ni création d'utilisateurs.
+        </p>
+      </div>
+      <div class="card role-card assistant">
+        <div class="role-title">🟣 Assistant</div>
+        <p class="role-desc">
+          Appui opérationnel : accès au menu RH en <strong>lecture</strong> (sauf création de congés et pointages pour soi),
+          consultation du catalogue et de l'inventaire. Pas d'accès à la paie ni à la gestion des utilisateurs.
+        </p>
+      </div>
+      <div class="card role-card employee">
+        <div class="role-title">🟢 Employé</div>
+        <p class="role-desc">
+          Utilisateur terrain : pas de menu RH gestionnaire. Accède à <strong>Mon espace</strong> pour son horaire,
+          ses congés et sa fiche. Peut créer des demandes de congé et des pointages pour lui-même uniquement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCES MENU -->
+  <section id="acces-menu">
+    <h2>Menu &amp; routes — qui voit quoi ?</h2>
+    <p>La sidebar et les routes React déterminent ce qui est <strong>visible</strong> et <strong>atteignable</strong>.
+       Même si un lien apparaît, l'API peut refuser l'action (403).</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Élément</th>
+          <th>Admin</th>
+          <th>Gérant</th>
+          <th>Assistant</th>
+          <th>Employé</th>
+        </tr>
+        <tr>
+          <td>Dashboard <code>/dashboard</code></td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+        </tr>
+        <tr>
+          <td>Mon espace <code>/mon-espace</code></td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+          <td class="access-yes">✓</td>
+        </tr>
+        <tr>
+          <td>Menu RH <code>/rh/*</code> (employés, congés, paie…)</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗ redirigé</td>
+        </tr>
+        <tr>
+          <td>Gestion inventaire <code>/ir</code></td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Catalogue, catégories, succursales, auteurs</td>
+          <td class="access-yes">✓ CRUD</td>
+          <td class="access-partial">✓ lecture + MAJ stock</td>
+          <td class="access-partial">✓ lecture</td>
+          <td class="access-partial">✓ lecture</td>
+        </tr>
+        <tr>
+          <td>Utilisateurs <code>/rh/utilisateurs</code></td>
+          <td class="access-yes">✓ CRUD</td>
+          <td class="access-partial">✓ liste seule</td>
+          <td class="access-no">✗ API 403</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Rôles &amp; permissions <code>/user-roles</code></td>
+          <td class="access-yes">✓ CRUD</td>
+          <td class="access-no">✗ lecture seule</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Mon profil compte <code>/monprofil</code></td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="alert info">
+      <strong>Mon espace</strong> s'affiche si l'utilisateur <em>n'a pas</em> <code>read:hr_dashboard</code>
+      et a au moins <code>read:leave_request</code> ou <code>read:scheduled_shift</code> — typiquement l'employé.
+    </div>
+  </section>
+
+  <!-- ACCES PERMISSIONS -->
+  <section id="acces-permissions">
+    <h2>Matrice des permissions par entité</h2>
+    <p>Actions effectives sur les données (backend + boutons UI). « Soi » = scoping automatique via <code>EmployeeScopeService</code>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Entité / fonctionnalité</th>
+          <th>Admin</th>
+          <th>Gérant</th>
+          <th>Assistant</th>
+          <th>Employé</th>
+        </tr>
+        <tr>
+          <td>Tout le système (<code>manage:all</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Tableau de bord RH (<code>hr_dashboard</code>)</td>
+          <td class="access-yes">read</td>
+          <td class="access-yes">read</td>
+          <td class="access-yes">read</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Fiches employés (<code>employee_profile</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read (tous)</td>
+          <td class="access-partial">read (soi)</td>
+        </tr>
+        <tr>
+          <td>Congés (<code>leave_request</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage + approuver</td>
+          <td class="access-partial">create + read (soi)</td>
+          <td class="access-partial">create + read (soi)</td>
+        </tr>
+        <tr>
+          <td>Planning / quarts (<code>scheduled_shift</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read (tous)</td>
+          <td class="access-partial">read (soi)</td>
+        </tr>
+        <tr>
+          <td>Pointages (<code>time_entry</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read + create (soi)</td>
+          <td class="access-partial">read + create (soi)</td>
+        </tr>
+        <tr>
+          <td>Feuilles de temps (<code>timesheet</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read (tous)</td>
+          <td class="access-partial">read (soi)</td>
+        </tr>
+        <tr>
+          <td>Paie (<code>payroll</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Contrats de travail</td>
+          <td class="access-yes">manage</td>
+          <td class="access-yes">manage</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Articles / catalogue (<code>item</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read</td>
+          <td class="access-partial">read</td>
+          <td class="access-partial">read</td>
+        </tr>
+        <tr>
+          <td>Quantités inventaire</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read + update</td>
+          <td class="access-partial">read</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Succursales (<code>location</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-partial">read + update</td>
+          <td class="access-partial">read</td>
+          <td class="access-partial">read</td>
+        </tr>
+        <tr>
+          <td>Rôles dynamiques (<code>user_role</code>)</td>
+          <td class="access-yes">manage</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+        </tr>
+        <tr>
+          <td>Utilisateurs Identity (<code>user</code>)</td>
+          <td class="access-yes">manage (via all)</td>
+          <td class="access-partial">liste API seulement</td>
+          <td class="access-no">—</td>
+          <td class="access-no">—</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>Ce que l'employé ne peut pas faire</h3>
+    <ul>
+      <li>Accéder au menu RH gestionnaire (<code>/rh/employes</code>, paie, planning global…) — redirection dashboard</li>
+      <li>Lister tous les employés via <code>GET /api/employee-profiles</code> — <strong>403 Forbidden</strong></li>
+      <li>Voir les congés, quarts ou pointages d'un collègue — <strong>404</strong> ou liste filtrée</li>
+      <li>Modifier le stock, créer des articles, gérer la paie ou les rôles système</li>
+      <li>Approuver ou rejeter des demandes de congé (réservé au gérant/admin)</li>
+    </ul>
+
+    <h3>Ce que le gérant ne peut pas faire</h3>
+    <ul>
+      <li>Créer ou supprimer des rôles dynamiques (<code>manage:user_role</code> — Admin seulement)</li>
+      <li>Créer des utilisateurs via l'UI (pas de permission <code>create:user</code> — Admin via <code>manage:all</code>)</li>
+    </ul>
+  </section>
+
+  <!-- DASHBOARD ROLES -->
+  <section id="dashboard-roles">
+    <h2>Dashboard par rôle</h2>
+    <p>Le <code>/dashboard</code> est la tour de contrôle : chaque widget n'apparaît que si la permission associée est présente.
+       Un clic mène vers la page de travail (filtrée si besoin).</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>Widget</th>
+          <th>Admin</th>
+          <th>Gérant</th>
+          <th>Assistant</th>
+          <th>Employé</th>
+        </tr>
+        <tr>
+          <td>Prochain quart de travail</td>
+          <td class="access-yes">→ planning RH</td>
+          <td class="access-yes">→ planning RH</td>
+          <td class="access-yes">→ planning RH</td>
+          <td class="access-yes">→ Mon espace / horaire</td>
+        </tr>
+        <tr>
+          <td>Congés en attente</td>
+          <td class="access-yes">→ absences Pending</td>
+          <td class="access-yes">→ absences Pending</td>
+          <td class="access-partial">→ absences (lecture)</td>
+          <td class="access-yes">→ Mes congés</td>
+        </tr>
+        <tr>
+          <td>Métriques RH (effectifs, masse salariale…)</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Feuilles de temps en attente</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Alertes catalogue / stock</td>
+          <td class="access-yes">✓</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Widget inventaire rapide (<code>/ir</code>)</td>
+          <td class="access-muted">—</td>
+          <td class="access-muted">—</td>
+          <td class="access-muted">—</td>
+          <td class="access-no">✗</td>
+        </tr>
+        <tr>
+          <td>Rôles et permissions</td>
+          <td class="access-yes">✓</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+          <td class="access-no">✗</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Mon espace — contenu employé</h3>
+      <table>
+        <tr><th>Onglet</th><th>Accès</th><th>Actions possibles</th></tr>
+        <tr><td>Horaire</td><td class="access-yes">✓</td><td>Consulter ses quarts planifiés</td></tr>
+        <tr><td>Congés</td><td class="access-yes">✓</td><td>Créer une demande (statut Pending), suivre ses demandes</td></tr>
+        <tr><td>Ma fiche</td><td class="access-yes">✓</td><td>Nom, poste, statut ; salaire masqué sans <code>read:hr_dashboard</code></td></tr>
+        <tr><td>Pointages</td><td class="access-yes">✓</td><td>Lecture + création pour soi</td></tr>
+        <tr><td>Feuille de temps</td><td class="access-yes">✓</td><td>Lecture seule de sa feuille</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- VISION -->
+  <section id="vision">
+    <h2>Vision &amp; ordre d'exécution</h2>
+    <p>À la fin du sprint, un utilisateur peut se connecter, voir un dashboard adapté à son rôle,
+       accéder uniquement aux menus autorisés, et — en tant qu'employé — consulter son espace RH personnel.</p>
+
+    <div class="flow">
+      <span class="flow-step" style="border-color: var(--accent)">Phase 1<br><small>Alignement BE/FE</small></span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step" style="border-color: var(--purple)">Phase 2<br><small>Permissions</small></span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step" style="border-color: var(--green)">Phase 3<br><small>Mon espace + Dashboard</small></span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step" style="border-color: var(--cyan)">Phase 4<br><small>E2E Playwright</small></span>
+    </div>
+
+    <div class="alert info">
+      Les tests E2E viennent <strong>en dernier</strong> : valider des mocks ne garantit rien.
+      La stack réelle (<code>USE_MOCK_API = false</code>) est la source de vérité.
+    </div>
+
+    <table>
+      <tr><th>Épic</th><th>Titre</th><th>Phase</th></tr>
+      <tr><td>E1</td><td>Alignement backend / frontend</td><td>1</td></tr>
+      <tr><td>E2</td><td>Rôles et permissions dynamiques</td><td>2</td></tr>
+      <tr><td>E3</td><td>Portail employé (Mon espace)</td><td>3</td></tr>
+      <tr><td>E4</td><td>Dashboard et widgets</td><td>3</td></tr>
+      <tr><td>E5</td><td>Tests E2E Playwright</td><td>4</td></tr>
+    </table>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section id="phase1">
+    <h2>Phase 1 — Alignement Backend / Frontend</h2>
+    <div class="card phase p1">
+      <div class="card-header">
+        <h3>Épic E1 · Une seule source de vérité</h3>
+        <span class="badge done">Terminée</span>
+      </div>
+      <p>L'API ASP.NET Core sur le port <strong>8080</strong> remplace json-server pour l'inventaire et le module RH.
+         Le frontend pointe vers l'API réelle (<code>USE_MOCK_API = false</code>).</p>
+    </div>
+
+    <h3>Décisions clés</h3>
+    <table>
+      <tr><th>Sujet</th><th>Décision</th></tr>
+      <tr><td>API mock</td><td>Désactivée — services RH et inventaire sur l'API .NET</td></tr>
+      <tr><td><code>EmployeeProfile.locationId</code></td><td>Ajouté au backend + DTO</td></tr>
+      <tr><td>API Auteurs</td><td>Créée — <code>/api/authors</code></td></tr>
+      <tr><td>Rôles dynamiques</td><td>Presets locaux en attendant la Phase 2</td></tr>
+      <tr><td>Seed Docker</td><td>4 comptes test liés à des profils RH</td></tr>
+      <tr><td>Seed tests intégration</td><td>Minimal, sans profils RH (évite les 409)</td></tr>
+    </table>
+
+    <h3>Domaines alignés</h3>
+    <p>Auth, catalogue, inventaire, employés, contrats, congés, planning, pointages, feuilles de temps, paie, métriques RH, auteurs.</p>
+    <p><strong>Doc :</strong> <code>docs/phase1-alignement.md</code></p>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section id="phase2">
+    <h2>Phase 2 — Permissions unifiées</h2>
+    <div class="card phase p2">
+      <div class="card-header">
+        <h3>Épic E2 · API + UI sur la même règle</h3>
+        <span class="badge done">Terminée</span>
+      </div>
+      <p>Un administrateur crée et assigne des rôles dynamiques avec permissions CRUD par entité.
+         Le backend (<code>RequirePermission</code>) et le frontend (CASL) lisent la même source en base.</p>
+    </div>
+
+    <h3>Architecture</h3>
+    <pre><code>ApplicationUser ──► JWT ──► [Authorize] + RequirePermission
+       │
+       ▼
+DynamicRole ◄── RolePermission (action:subject)
+       │
+       ▼
+GET /api/users/me/permissions ──► CASL Ability ──► Sidebar / boutons</code></pre>
+
+    <h3>Résolution du rôle effectif</h3>
+    <table>
+      <tr><th>Situation</th><th>Rôle utilisé</th></tr>
+      <tr><td><code>DynamicRoleId</code> renseigné</td><td>Permissions du rôle dynamique assigné</td></tr>
+      <tr><td>Sinon</td><td>Preset Identity (Admin, Gérant, Assistant, Employé)</td></tr>
+    </table>
+
+    <h3>Endpoints principaux</h3>
+    <table>
+      <tr><th>Endpoint</th><th>Action</th></tr>
+      <tr><td><code>GET/POST/PUT/DELETE /api/roles</code></td><td>CRUD rôles dynamiques</td></tr>
+      <tr><td><code>GET /api/permission-entities</code></td><td>Entités configurables</td></tr>
+      <tr><td><code>GET /api/users/me/permissions</code></td><td>Permissions effectives de l'utilisateur</td></tr>
+    </table>
+    <p><strong>Doc :</strong> <code>docs/phase2-permissions.md</code></p>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section id="phase3">
+    <h2>Phase 3 — Portail employé + Dashboard</h2>
+    <div class="card phase p3">
+      <div class="card-header">
+        <h3>Épics E3 + E4 · Mes données &amp; widgets par rôle</h3>
+        <span class="badge done">Terminée</span>
+      </div>
+      <p>Les employés accèdent à <strong>leurs</strong> données RH via <code>/mon-espace</code>.
+         Le dashboard affiche des widgets selon les permissions CASL.</p>
+    </div>
+
+    <h3>Scoping backend (<code>EmployeeScopeService</code>)</h3>
+    <table>
+      <tr><th>Situation</th><th>Comportement</th></tr>
+      <tr><td>Permission <code>manage:{subject}</code></td><td>Accès global (tous les profils)</td></tr>
+      <tr><td>Utilisateur lié à un profil RH</td><td>Filtrage automatique sur son <code>EmployeeProfileId</code></td></tr>
+      <tr><td><code>GET /api/employee-profiles</code> sans manage</td><td>403 Forbidden</td></tr>
+      <tr><td><code>GET /api/employee-profiles/me</code></td><td>Profil de l'utilisateur connecté</td></tr>
+    </table>
+
+    <h3>Mon espace — 5 onglets</h3>
+    <table>
+      <tr><th>Onglet</th><th>Route</th><th>API</th></tr>
+      <tr><td>Horaire</td><td><code>?tab=horaire</code></td><td><code>GET /api/schedules</code></td></tr>
+      <tr><td>Congés</td><td><code>?tab=conges</code></td><td><code>GET/POST /api/leave-requests</code></td></tr>
+      <tr><td>Ma fiche</td><td><code>?tab=fiche</code></td><td><code>GET /api/employee-profiles/me</code></td></tr>
+      <tr><td>Pointages</td><td><code>?tab=pointages</code></td><td><code>GET /api/time-entries</code></td></tr>
+      <tr><td>Feuille de temps</td><td><code>?tab=feuille</code></td><td><code>GET /api/timesheets</code></td></tr>
+    </table>
+
+    <h3>Dashboard widgets (exemples)</h3>
+    <ul>
+      <li><code>read:scheduled_shift</code> → prochain quart (employé → Mon espace, gérant → planning)</li>
+      <li><code>read:leave_request</code> → congés en attente</li>
+      <li><code>read:hr_dashboard</code> → métriques RH, feuilles en attente</li>
+      <li><code>read:user_role</code> → lien rôles et permissions</li>
+    </ul>
+    <p><strong>Doc :</strong> <code>docs/phase3-mon-espace.md</code></p>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section id="phase4">
+    <h2>Phase 4 — Tests E2E Playwright</h2>
+    <div class="card phase p4">
+      <div class="card-header">
+        <h3>Épic E5 · Happy paths par rôle</h3>
+        <span class="badge done">Terminée · 27 scénarios</span>
+      </div>
+      <p>Quatre suites couvrent Admin, Gérant, Assistant et Employé contre la stack Docker réelle.</p>
+    </div>
+
+    <h3>Structure <code>e2e/</code></h3>
+    <pre><code>e2e/
+  playwright.config.ts
+  fixtures/          auth.ts, api.ts, auth.setup.ts
+  shared/            login, navigation
+  admin/             A1–A4
+  gerant/            G1–G4
+  assistant/         AS1–AS4
+  employee/          E1–E5</code></pre>
+
+    <h3>Couverture par rôle</h3>
+    <table>
+      <tr><th>Rôle</th><th>Scénarios</th><th>Exemples</th></tr>
+      <tr><td>Admin</td><td>4</td><td>Dashboard, CRUD rôle, création utilisateur, menu RH</td></tr>
+      <tr><td>Gérant</td><td>4</td><td>Métriques RH, approbation congé, fiche employé, planning</td></tr>
+      <tr><td>Assistant</td><td>4</td><td>Congé personnel, catalogue, refus paie/utilisateurs</td></tr>
+      <tr><td>Employé</td><td>5</td><td>Mon espace, horaire, congé, pas de menu RH gestionnaire</td></tr>
+      <tr><td>Partagé</td><td>—</td><td>Login, erreurs d'authentification</td></tr>
+    </table>
+    <p><strong>Doc :</strong> <code>docs/phase4-e2e-playwright.md</code> · CI : <code>.azure-pipelines/azure-pipelines-e2e.yml</code></p>
+  </section>
+
+  <!-- DEMARRAGE -->
+  <section id="demarrage">
+    <h2>Démarrer le projet</h2>
+
+    <h3>Option A — Reset complet (<code>./start.sh</code>)</h3>
+    <div class="alert warn">
+      <strong>Attention — reset nucléaire :</strong> ce script supprime les volumes Docker, efface les migrations EF Core,
+      régénère une migration <code>InitialCreate</code> et reconstruit tout sans cache.
+      À utiliser pour une base 100 % vierge (première install ou reset total).
+    </div>
+
+    <p>Prérequis : Docker, Node.js/npm, pnpm, SDK .NET 9.</p>
+    <pre><code><span class="comment"># Linux, macOS ou WSL — à la racine du dépôt</span>
+chmod +x start.sh
+./start.sh</code></pre>
+
+    <p>Ce que fait <code>start.sh</code> :</p>
+    <ol class="steps">
+      <li>Vérifie npm, pnpm, dotnet et installe <code>dotnet-ef</code> si besoin</li>
+      <li><code>docker-compose down -v</code> — purge conteneurs + volumes (DB à neuf)</li>
+      <li>Supprime les anciennes migrations et crée <code>InitialCreate</code></li>
+      <li><code>pnpm install</code> dans <code>frontend/</code></li>
+      <li><code>docker-compose build --no-cache</code> puis <code>up -d</code></li>
+      <li>Affiche les logs (<code>docker-compose logs -f</code>)</li>
+    </ol>
+
+    <h3>Option B — Démarrage quotidien (sans reset)</h3>
+    <p>Pour le développement courant, sans effacer la base :</p>
+    <pre><code>docker compose up -d --build</code></pre>
+
+    <h3>Option C — Arrêter la stack</h3>
+    <pre><code>docker compose down          <span class="comment"># garde les volumes</span>
+docker compose down -v       <span class="comment"># efface aussi la base</span></code></pre>
+
+    <div class="alert success">
+      Une fois démarré : ouvrez <a href="http://localhost:3000" style="color:inherit">localhost:3000</a>
+      et connectez-vous avec un compte test (voir section Comptes).
+    </div>
+  </section>
+
+  <!-- NIX WSL -->
+  <section id="nix-wsl">
+    <h2>Environnement Nix + WSL</h2>
+    <p>Le fichier <code>flake.nix</code> à la racine fournit un shell reproductible (dotnet 9, Node 22, pnpm, Docker)
+       et des commandes <code>nix run</code> pour tester et lancer E2E.</p>
+
+    <h3>Prérequis WSL</h3>
+    <ol class="steps">
+      <li><strong>Nix</strong> installé dans votre distro WSL (flakes activés)</li>
+      <li><strong>Docker Desktop</strong> lancé sur Windows</li>
+      <li>Settings → Resources → <strong>WSL Integration</strong> → activer votre distro</li>
+      <li>Optionnel : vérifier <code>docker info</code> dans WSL</li>
+    </ol>
+
+    <h3>Entrer dans le shell Nix</h3>
+    <pre><code><span class="comment"># Depuis la racine du projet (chemin WSL, ex. /mnt/c/Users/.../ERP)</span>
+nix develop</code></pre>
+    <p>Le shell affiche les versions dotnet/node/pnpm et l'état Docker.
+       Si Docker est indisponible, il rappelle d'activer l'intégration WSL.</p>
+
+    <h3>Commandes <code>nix run</code></h3>
+    <table>
+      <tr><th>Commande</th><th>Description</th></tr>
+      <tr><td><code>nix run .#docker-up</code></td><td>Docker Compose (build + détaché)</td></tr>
+      <tr><td><code>nix run .#docker-up-wait</code></td><td>Idem + attente frontend (3000) et API (8080)</td></tr>
+      <tr><td><code>nix run .#docker-down</code></td><td>Arrêter les conteneurs</td></tr>
+      <tr><td><code>nix run .#backend-test</code></td><td><code>dotnet test</code> (solution complète)</td></tr>
+      <tr><td><code>nix run .#frontend-test</code></td><td>Vitest (frontend)</td></tr>
+      <tr><td><code>nix run .#frontend-build</code></td><td>Build production frontend</td></tr>
+      <tr><td><code>nix run .#e2e-install</code></td><td>npm + navigateur Chromium Playwright</td></tr>
+      <tr><td><code>nix run .#e2e-test</code></td><td>Playwright (stack Docker requise)</td></tr>
+      <tr><td><code>nix run .#test-all</code></td><td>Backend + frontend (sans E2E)</td></tr>
+      <tr><td><code>nix run .#verify</code></td><td>Stack + backend + frontend + E2E (tout-en-un)</td></tr>
+    </table>
+
+    <h3>Workflow recommandé sous WSL</h3>
+    <pre><code><span class="comment"># 1. Shell reproductible</span>
+nix develop
+
+<span class="comment"># 2. Démarrer la stack et attendre qu'elle réponde</span>
+nix run .#docker-up-wait
+
+<span class="comment"># 3. Tests unitaires / intégration</span>
+nix run .#backend-test
+nix run .#frontend-test
+
+<span class="comment"># 4. E2E (première fois : installer Chromium)</span>
+nix run .#e2e-install
+nix run .#e2e-test
+
+<span class="comment"># Ou tout en une commande :</span>
+nix run .#verify</code></pre>
+
+    <div class="alert info">
+      <code>e2e-test</code> vérifie que <code>http://localhost:3000</code> répond.
+      Si la stack n'est pas démarrée, lancez d'abord <code>nix run .#docker-up-wait</code>.
+    </div>
+  </section>
+
+  <!-- E2E -->
+  <section id="e2e">
+    <h2>Tests E2E — guide rapide</h2>
+
+    <h3>Sans Nix (npm direct)</h3>
+    <pre><code><span class="comment"># Stack Docker en cours</span>
+docker compose up -d --build
+
+<span class="comment"># À la racine du dépôt</span>
+npm install
+npm run e2e:install    <span class="comment"># Chromium — première fois</span>
+npm run e2e            <span class="comment"># 27 scénarios</span>
+
+<span class="comment"># Mode interactif</span>
+npm run e2e:ui</code></pre>
+
+    <h3>Variables d'environnement</h3>
+    <table>
+      <tr><th>Variable</th><th>Défaut</th><th>Usage</th></tr>
+      <tr><td><code>E2E_BASE_URL</code></td><td><code>http://localhost:3000</code></td><td>URL frontend</td></tr>
+      <tr><td><code>E2E_API_URL</code></td><td><code>http://localhost:8080</code></td><td>URL API</td></tr>
+      <tr><td><code>CI=true</code></td><td>—</td><td>Retries ×2, 1 worker (pipeline Azure)</td></tr>
+    </table>
+
+    <h3>Rapport Playwright</h3>
+    <p>Après exécution, le rapport HTML est dans <code>playwright-report/</code> :</p>
+    <pre><code>npx playwright show-report</code></pre>
+
+    <h3>Tests backend &amp; frontend (hors E2E)</h3>
+    <pre><code><span class="comment"># Backend — 206 tests intégration + unitaires</span>
+cd backend && dotnet test Crystal.sln
+
+<span class="comment"># Frontend — Vitest</span>
+cd frontend && pnpm test --run</code></pre>
+  </section>
+
+  <!-- COMPTES -->
+  <section id="comptes">
+    <h2>Comptes de test</h2>
+    <p>Seedés au démarrage Docker (<code>SeedHrReferenceDataAsync</code>). Mot de passe identique pour tous :</p>
+
+    <table>
+      <tr><th>Rôle</th><th>Courriel</th><th>Mot de passe</th><th>Usage typique</th></tr>
+      <tr><td>Admin</td><td><code>admin@crystal.local</code></td><td><code>ValidPass1!a</code></td><td>Rôles, utilisateurs, tout le menu</td></tr>
+      <tr><td>Gérant</td><td><code>gerant@crystal.local</code></td><td><code>ValidPass1!a</code></td><td>RH complet, approbations</td></tr>
+      <tr><td>Assistant</td><td><code>assistant@crystal.local</code></td><td><code>ValidPass1!a</code></td><td>Congés perso, catalogue lecture</td></tr>
+      <tr><td>Employé</td><td><code>employee@crystal.local</code></td><td><code>ValidPass1!a</code></td><td>Mon espace, dashboard employé</td></tr>
+    </table>
+
+    <div class="alert info">
+      Deux concepts distincts : <strong>rôle applicatif</strong> (Admin, Gérant…) pour la sécurité JWT,
+      et <strong>rôle organisationnel RH</strong> (Ventes, Logistique…) pour le métier dans les référentiels.
+    </div>
+  </section>
+
+  <!-- DOCS -->
+  <section id="docs">
+    <h2>Documentation du dépôt</h2>
+    <table>
+      <tr><th>Fichier</th><th>Contenu</th></tr>
+      <tr><td><code>docs/sprint4.md</code></td><td>Plan complet itération 4, matrice API↔UI, DoD</td></tr>
+      <tr><td><code>docs/phase1-alignement.md</code></td><td>Alignement backend / frontend</td></tr>
+      <tr><td><code>docs/phase2-permissions.md</code></td><td>Permissions dynamiques API + CASL</td></tr>
+      <tr><td><code>docs/phase3-mon-espace.md</code></td><td>Portail employé + dashboard widgets</td></tr>
+      <tr><td><code>docs/phase4-e2e-playwright.md</code></td><td>Suite E2E, structure, CI</td></tr>
+      <tr><td><code>docs/presentation.html</code></td><td>Cette présentation</td></tr>
+      <tr><td><code>flake.nix</code></td><td>Shell Nix et apps <code>nix run</code></td></tr>
+      <tr><td><code>start.sh</code></td><td>Reset nucléaire + premier démarrage</td></tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  Crystal ERP — Itération 4 · Juin 2026 · Généré depuis <code>docs/</code>
+</footer>
+
+<script>
+  // Surbrillance du lien actif dans la navigation
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll("nav a");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+          });
         }
+      });
+    },
+    { rootMargin: "-20% 0px -70% 0px", threshold: 0 }
+  );
 
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                } else {
-                    slide.classList.add('next');
-                }
-            });
+  sections.forEach((section) => observer.observe(section));
+</script>
 
-            // Update UI
-            indicator.textContent = currentSlide + 1;
-            
-            // Handle buttons opacity
-            if(currentSlide === 0) {
-                btnPrev.style.opacity = '0.3';
-                btnPrev.style.cursor = 'not-allowed';
-            } else {
-                btnPrev.style.opacity = '1';
-                btnPrev.style.cursor = 'pointer';
-            }
-
-            if(currentSlide === totalSlides - 1) {
-                btnNext.style.opacity = '0.3';
-                btnNext.style.cursor = 'not-allowed';
-            } else {
-                btnNext.style.opacity = '1';
-                btnNext.style.cursor = 'pointer';
-            }
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlides();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlides();
-            }
-        }
-
-        // Navigation au clavier
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
-        });
-        function openModal(src) {
-            const modal = document.getElementById("imageModal");
-            const img = document.getElementById("modalImg");
-            img.src = src;
-            modal.classList.remove("hidden");
-            modal.classList.add("flex");
-        }
-
-        document.getElementById("imageModal").addEventListener("click", () => {
-            const modal = document.getElementById("imageModal");
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
-        });
-
-        // Initialisation
-        updateSlides();
-    </script>
 </body>
 </html>
