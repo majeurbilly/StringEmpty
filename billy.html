@@ -3,238 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Itération 3</title>
+    <title>ERP Crystal — Itération 4 · Billy Hallé</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
-        
-        /* Slide transitions */
-        .slide { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease; 
+
+        .slide {
+            position: absolute; inset: 0;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
             opacity: 0; pointer-events: none;
         }
-        .slide.active { 
-            transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto;
-        }
-        .slide.prev { 
-            transform: translateX(-100%); opacity: 0; z-index: 1; 
-        }
-        .slide.next { 
-            transform: translateX(100%); opacity: 0; z-index: 1; 
-        }
+        .slide.active { transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto; }
+        .slide.prev { transform: translateX(-100%); opacity: 0; z-index: 1; }
+        .slide.next { transform: translateX(100%); opacity: 0; z-index: 1; }
 
-        /* Content Animations */
-        .slide-content > * { 
-            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
+        .slide-content > * {
+            opacity: 0; transform: translateY(24px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .slide.active .slide-content > * { 
-            opacity: 1; transform: translateY(0); 
+        .slide.active .slide-content > * { opacity: 1; transform: translateY(0); }
+        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.08s; }
+        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.14s; }
+        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.2s; }
+
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+
+        pre {
+            background: rgba(0,0,0,0.45);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.72rem;
+            line-height: 1.45;
+            overflow-x: auto;
+            text-align: left;
         }
-        
-        /* Staggered animation delays for elements */
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
-        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
+        code { font-family: ui-monospace, monospace; }
+        .tag-before { color: #fca5a5; }
+        .tag-after { color: #86efac; }
 
-        /* Custom scrollbar for content if it overflows */
-        .custom-scroll::-webkit-scrollbar { width: 8px; }
-        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+        img { display: block; margin-left: auto; margin-right: auto; }
 
-        .placeholder { color: inherit; opacity: 0.7; font-style: italic; }
-
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .media-slot {
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 0.75rem;
+            min-height: 8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body class="text-gray-100">
 
     <div id="presentation" class="relative w-screen h-screen">
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
+
+        <!-- 1 · Résumé -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <p class="text-orange-200 uppercase tracking-wider mb-2">Full-Stack · Lead technique</p>
+                <h1 class="text-5xl font-bold mb-8 text-white">Billy Hallé</h1>
+                <h3 class="text-xl font-semibold mb-3 text-white">Focus itération 4</h3>
+                <p class="text-orange-50 mb-4">Du prototype mocké vers une application unifiée et sécurisée.</p>
+                <ul class="text-lg text-orange-50 space-y-2 list-disc list-inside">
+                    <li>Alignement API (.NET)</li>
+                    <li>Permissions dynamiques</li>
+                    <li>Scoping employé</li>
+                    <li>Pointage</li>
+                    <li>Rôles unifiés (<code>DynamicRoleId</code>)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 2 · Alignement API -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-6">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto">
+                <h2 class="text-2xl font-bold mb-2 text-white">Alignement API (.NET)</h2>
+                <p class="text-orange-100 mb-4 text-sm">Une seule source de vérité — fin de json-server et des données simulées.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — mock</p>
+                        <pre><code><span class="text-gray-400">// apiBaseUrl.ts</span>
+export const USE_MOCK_API = <span class="tag-before">true</span>;
+
+<span class="text-gray-400">// service</span>
+if (USE_MOCK_API) {
+  return fetch(<span class="tag-before">"http://localhost:3001/items"</span>);
+}</code></pre>
+                    </div>
+                    <div>
+                        <p class="tag-after text-xs font-bold mb-1 uppercase">Après — API Crystal</p>
+                        <pre><code><span class="text-gray-400">// apiBaseUrl.ts</span>
+export const USE_MOCK_API = <span class="tag-after">false</span>;
+export const API_URL = `${AUTH_URL}/api`;
+
+<span class="text-gray-400">// service</span>
+return apiClient.get(<span class="tag-after">`${API_ITEMS_URL}`</span>);</code></pre>
+                    </div>
                 </div>
 
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">
-                    ERP Crystal
-                </h1>
+                <p class="text-orange-100 text-sm mb-2">Swagger — test des routes en direct :</p>
+                <img src="assets/swagger_gif.gif" alt="Démo Swagger"
+                     class="rounded-xl max-h-[32vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                     onclick="openModal(this.src)"
+                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/swagger.gif'}))">
+            </div>
+        </div>
 
-                <p class="text-2xl text-gray-600 mb-8">
-                    Revue de l'Itération 3
+        <!-- 3 · Permissions dynamiques -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-6">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                <h2 class="text-2xl font-bold mb-2 text-white">Permissions dynamiques</h2>
+                <p class="text-orange-100 mb-4 text-sm">Même modèle côté API et UI — configurable en base de données.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                        <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — hybride</p>
+                        <pre><code><span class="text-gray-400">// Rôle Identity + presets locaux</span>
+if (user.role === <span class="tag-before">"Admin"</span>) {
+  showMenu(<span class="tag-before">"rh"</span>);
+}
+<span class="text-gray-400">// json-server pour les rôles custom</span></code></pre>
+                    </div>
+                    <div>
+                        <p class="tag-after text-xs font-bold mb-1 uppercase">Après — unifié</p>
+                        <pre><code><span class="text-gray-400">// Backend</span>
+[<span class="tag-after">RequirePermission("read", "employee_profile")</span>]
+
+<span class="text-gray-400">// Frontend (CASL)</span>
+GET <span class="tag-after">/api/users/me/permissions</span>
+→ defineAbilityFor(user, permissions)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 · Scoping employé -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">Scoping employé</h2>
+                <p class="text-orange-50 text-lg mb-4">Chaque employé ne voit que <strong>ses</strong> données RH.</p>
+                <ul class="text-orange-50 space-y-2 list-disc list-inside">
+                    <li><code>EmployeeScopeService</code> — filtre backend centralisé</li>
+                    <li>Congés, quarts, pointages, feuilles de temps scopés</li>
+                    <li>Portail <code>/mon-espace</code> pour l'employé</li>
+                    <li>Inventaire limité à la succursale de l'utilisateur</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 · Pointage -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">Pointage</h2>
+                <ul class="text-orange-50 space-y-2 list-disc list-inside mb-6">
+                    <li>Widget punch-in / punch-out sur le dashboard</li>
+                    <li><code>PunchEligibilityService</code> — validation du quart lié</li>
+                    <li><code>BusinessClock</code> — règles métier (fuseau Toronto)</li>
+                </ul>
+                <img src="assets/pointage0.png" alt="Capture pointage"
+                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                     onclick="openModal(this.src)"
+                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/pointage.png'}))">
+                     <img src="assets/pointage1.png" alt="Capture pointage"
+                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                     onclick="openModal(this.src)"
+                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/pointage1.png'}))">
+            </div>
+        </div>
+
+        <!-- 6 · Rôles unifiés -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-2xl font-bold mb-4 text-white">Rôles unifiés — <code>DynamicRoleId</code></h2>
+                <ul class="text-orange-50 space-y-2 list-disc list-inside">
+                    <li>Un seul champ sur l'utilisateur : <code>DynamicRoleId</code></li>
+                    <li>4 presets (Admin, Gérant, Assistant, Employé) + rôles custom</li>
+                    <li>Suppression du code Identity legacy redondant</li>
+                    <li>Admin peut créer et assigner un rôle depuis l'UI</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 7 · Architecture dev -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-6">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
+                <h2 class="text-2xl font-bold mb-2 text-white">Architecture de développement</h2>
+                <p class="text-orange-100 text-sm mb-4">Docker Compose local — <code>localhost:3000</code> / <code>:8080</code></p>
+                <img src="assets/diagramme_dev.svg" alt="Diagramme architecture développement"
+                     class="rounded-xl max-h-[62vh] w-full object-contain bg-white/95 p-4 cursor-pointer"
+                     onclick="openModal(this.src)">
+            </div>
+        </div>
+
+        <!-- 8 · Architecture prod -->
+        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-6">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
+                <h2 class="text-2xl font-bold mb-2 text-white">Architecture de production</h2>
+                <p class="text-orange-100 text-sm mb-4">
+                    Serveur <code>crystal-server</code> · Cloudflare Tunnel ·
+                    <a href="https://dev.librairiecrystal.com/" class="underline hover:text-white" target="_blank" rel="noopener">dev.librairiecrystal.com</a>
                 </p>
-
-                <div class="text-xl text-gray-700 space-y-2">
-                    <p><strong>Antony Burlet</strong></p>
-                    <p><strong>Billy Hallé</strong></p>
-                    <p><strong>William Peck</strong></p>
-                    <p><strong>Nicolas Michaud</strong></p>
-                </div>
+                <img src="assets/diagramme_prod.svg" alt="Diagramme architecture production"
+                     class="rounded-xl max-h-[62vh] w-full object-contain bg-white/95 p-4 cursor-pointer"
+                     onclick="openModal(this.src)">
             </div>
         </div>
 
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                
-                <h2 class="text-4xl font-bold mb-8 text-gray-900 flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📖</span>
-                    Contexte du projet
-                </h2>
-
-                <div class="space-y-6 text-xl text-gray-700">
-                    <p>
-                        Développement d’un ERP pour une librairie permettant de centraliser :
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <p class="font-semibold mb-2">L'inventaire :</p>
-                            <ul class="list-disc list-inside space-y-1 text-lg">
-                                <li>Gestion des inventaires</li>
-                                <li>Gestion du catalogue</li>
-                                <li>Gestion des catégories</li>
-                                <li>Gestion des succursales</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class="font-semibold mb-2">Ressources Humaines :</p>
-                            <ul class="list-disc list-inside space-y-1 text-lg">
-                                <li>Profils employés et contrats de travail</li>
-                                <li>Quarts de travail et pointages</li>
-                                <li>Feuilles de temps (approbation)</li>
-                                <li>Absences et calcul de la paie</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <p class="mt-6 font-semibold">
-                        Objectifs de l'Itération 3 :
-                    </p>
-
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Développement Full-Stack (C# + React) complet du module RH de A à Z.</li>
-                        <li>Intégration d'une assurance qualité stricte (Tests d'intégration + Vitest).</li>
-                        <li>Résolution des conflits de sécurité RBAC sur le module d'inventaire.</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/80 backdrop-blur rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900 flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">📉</span>
-                    Suivi de progression : Burndown Trend
-                </h2>
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="w-full md:w-3/5">
-                        <div class="bg-white p-2 rounded-xl shadow-inner border border-gray-200">
-                            <img src="assets/Burndown2.png" alt="Burndown Trend Graph" class="rounded-lg w-full h-auto cursor-pointer" onclick="openModal(this.src)">
-                        </div>
-                    </div>
-                    <div class="w-full md:w-2/5 space-y-6">
-                        <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-500">
-                            <h3 class="text-xl font-bold text-blue-900 mb-2">Avancement des US</h3>
-                            <p class="text-gray-700 text-lg">
-                                <strong>100% des User Stories</strong> planifiées pour ce sprint ont été complétées et livrées.
-                            </p>
-                        </div>
-                        <ul class="space-y-3 text-lg text-gray-700">
-                            <li class="flex items-start gap-2">
-                                <span class="text-green-600">✔</span> <strong>Inventaire </strong> Gestion avancée du catalogue et des stocks par succursale.
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-green-600">✔</span> <strong>Sécurité </strong> Nouveau système de permissions contextuelles (RBAC/ABAC).
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <span class="text-green-600">✔</span> <strong>RH </strong> Cycle complet (pointages, contrats, feuilles de temps, paie brute).
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <!-- 9 · Bilan -->
         <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">Billy Hallé</h1>
-                <h2 class="text-3xl font-light mb-10 text-orange-100">Rôle : Développeur Full-Stack</h2>
-                
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-orange-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de cette itération :</h3>
-                    <p class="text-xl text-orange-50">
-                        Mon objectif a été de concevoir et livrer la totalité du <strong>module Ressources Humaines</strong> en mode de bout en bout (End-to-End).<br><br>
-                        Du modèle de données Entity Framework jusqu'aux formulaires React interactifs, j'ai implémenté la logique métier complexe (chevauchements de dates, paie) tout en sécurisant l'application avec plus de 230 tests automatisés au total et un ajustement rigoureux des permissions d'accès.
-                    </p>
-                </div>
+            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
+                <h2 class="text-3xl font-bold mb-6 text-white">Bilan</h2>
+                <p class="text-xl text-orange-50 mb-2">ERP fonctionnel, déployé et accessible en ligne.</p>
+                <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener"
+                   class="inline-block text-2xl font-semibold text-white hover:text-orange-200 underline decoration-orange-300 underline-offset-4 mb-8 transition-colors">
+                    dev.librairiecrystal.com
+                </a>
+                <p class="text-lg text-orange-50/90 font-light">
+                    « Une API, une vérité sur les permissions — du login au bouton masqué. »
+                </p>
             </div>
         </div>
 
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center justify-center gap-4">
-                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎬</span>
-                    Le Module RH & Inventaire en Action
-                </h2>
-                <div class="bg-black/30 p-4 rounded-2xl border border-white/10 mx-auto inline-block shadow-inner">
-                    <img src="assets/billy_rh.gif" alt="Démonstration Interface React" class="rounded-xl max-h-[50vh] w-auto mx-auto shadow-2xl border border-white/5">
-                </div>
-            </div>
-        </div>
-
-        <div class="slide bg-gradient-to-br from-orange-500 to-orange-800 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🛠️</span>
-                    Réalisations Techniques (Full-Stack)
-                </h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Machine à États & Logique Métier</h3>
-                        <p class="text-orange-100">- Flux d'approbation strict pour les feuilles de temps et les absences.<br> - Validation algorithmique des chevauchements temporels (contrats, congés) avec messages 409 localisés.</p>
-                    </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Interfaces React Dynamiques</h3>
-                        <p class="text-orange-100">- Création de 8 pages métier (Annuaire, Paie, Dashboard KPI, etc.).<br> - Utilisation de <code>useQuery</code> pour des formulaires à dépendances croisées (ex: Assigner un rôle à un employé).</p>
-                    </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Assurance Qualité Totale</h3>
-                        <p class="text-orange-100">- Cap des 200 tests d'intégration backend dépassé.<br>- Mise en place de <strong>Vitest</strong> et <em>React Testing Library</em> sur le frontend pour garantir la stabilité des formulaires.</p>
-                    </div>
-                    <div class="bg-black/10 p-6 rounded-xl border border-white/10 hover:bg-black/20 transition">
-                        <h3 class="text-xl font-bold text-white mb-2">Refonte RBAC Frontend/Backend</h3>
-                        <p class="text-orange-100">- Correction du mur "403 Forbidden" sur l'inventaire. <br>- Alignement des droits côté React via des requêtes allégées (<code>getDropdown</code>) respectant le principe du moindre privilège.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+        <button onclick="prevSlide()" id="btnPrev"
+                class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             <span>&larr;</span> Précédent
         </button>
-        
-        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator">6</span>
+        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10">
+            <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
         </div>
-        
-        <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+        <button onclick="nextSlide()" id="btnNext"
+                class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
             Suivant <span>&rarr;</span>
         </button>
     </div>
 
     <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
+        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl" alt="Agrandissement">
     </div>
 
     <script>
@@ -246,80 +259,43 @@
         const btnPrev = document.getElementById('btnPrev');
         const btnNext = document.getElementById('btnNext');
 
-        if(totalIndicator) {
-            totalIndicator.textContent = totalSlides;
-        }
+        if (totalIndicator) totalIndicator.textContent = totalSlides;
 
         function updateSlides() {
             slides.forEach((slide, index) => {
                 slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                } else {
-                    slide.classList.add('next');
-                }
+                if (index === currentSlide) slide.classList.add('active');
+                else if (index < currentSlide) slide.classList.add('prev');
+                else slide.classList.add('next');
             });
-
-            // Update UI
             indicator.textContent = currentSlide + 1;
-            
-            // Handle buttons opacity
-            if(currentSlide === 0) {
-                btnPrev.style.opacity = '0.3';
-                btnPrev.style.cursor = 'not-allowed';
-            } else {
-                btnPrev.style.opacity = '1';
-                btnPrev.style.cursor = 'pointer';
-            }
-
-            if(currentSlide === totalSlides - 1) {
-                btnNext.style.opacity = '0.3';
-                btnNext.style.cursor = 'not-allowed';
-            } else {
-                btnNext.style.opacity = '1';
-                btnNext.style.cursor = 'pointer';
-            }
+            btnPrev.style.opacity = currentSlide === 0 ? '0.3' : '1';
+            btnPrev.style.cursor = currentSlide === 0 ? 'not-allowed' : 'pointer';
+            btnNext.style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
+            btnNext.style.cursor = currentSlide === totalSlides - 1 ? 'not-allowed' : 'pointer';
         }
 
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlides();
-            }
-        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlides(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlides();
-            }
-        }
-
-        // Navigation au clavier
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') nextSlide();
+            else if (e.key === 'ArrowLeft') prevSlide();
         });
+
         function openModal(src) {
-            const modal = document.getElementById("imageModal");
-            const img = document.getElementById("modalImg");
-            img.src = src;
-            modal.classList.remove("hidden");
-            modal.classList.add("flex");
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImg').src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
-        document.getElementById("imageModal").addEventListener("click", () => {
-            const modal = document.getElementById("imageModal");
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
+        document.getElementById('imageModal').addEventListener('click', () => {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
         });
 
-        // Initialisation
         updateSlides();
     </script>
 </body>
