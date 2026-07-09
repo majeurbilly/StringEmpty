@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP Crystal — Itération 4 · Billy Hallé</title>
+    <title>ERP Crystal — Billy Hallé · Sprint 4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #1a2332; }
 
+        .slide-theme-intro {
+            background: linear-gradient(145deg, #2a3344 0%, #1e2636 100%);
+        }
         .slide-theme-orange {
             background: linear-gradient(145deg, #4a4038 0%, #3d3530 45%, #2e2824 100%);
         }
+
+        .slide-theme-intro .slide-content,
         .slide-theme-orange .slide-content {
             background: rgba(255, 255, 255, 0.06) !important;
             border-color: rgba(255, 255, 255, 0.09) !important;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
+            color: #b8c2ce;
         }
-        .slide-theme-orange .text-orange-200,
-        .slide-theme-orange .text-orange-100,
-        .slide-theme-orange .text-orange-50 { color: #b8b0a8; }
-        .slide-theme-orange .decoration-orange-300 { text-decoration-color: #8a7a6a; }
-        .slide-theme-orange .text-white { color: #c8d0da !important; }
+        .slide-theme-intro h1,
+        .slide-theme-intro h2 { color: #d4dbe4 !important; }
+        .slide-theme-intro p,
+        .slide-theme-intro li { color: #a8b4c0 !important; }
+        .slide-theme-intro strong { color: #c8d2dc !important; }
+
+        .challenge-box {
+            background: rgba(120, 60, 60, 0.18);
+            border-color: rgba(220, 150, 150, 0.2);
+        }
+        .challenge-box h3 { color: #e8b4b4; }
+        .solution-box {
+            background: rgba(60, 100, 75, 0.18);
+            border-color: rgba(150, 210, 170, 0.2);
+        }
+        .solution-box h3 { color: #b8dcc8; }
 
         .diagram-frame {
             background: #232d3c !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
         }
-        .slide-content img { background-color: #232d3c; }
-        [class*="bg-white/95"] { background-color: #232d3c !important; }
-        [class*="bg-white/10"] { background-color: rgba(255, 255, 255, 0.06) !important; }
-        .text-white { color: #c8d0da !important; }
-
-        [class*="bg-black/20"] { background-color: rgba(0, 0, 0, 0.14) !important; }
-        [class*="bg-black/10"] { background-color: rgba(0, 0, 0, 0.08) !important; }
 
         .slide {
-            position: absolute; inset: 0;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
             opacity: 0; pointer-events: none;
         }
@@ -45,16 +55,20 @@
         .slide.next { transform: translateX(100%); opacity: 0; z-index: 1; }
 
         .slide-content > * {
-            opacity: 0; transform: translateY(24px);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .slide.active .slide-content > * { opacity: 1; transform: translateY(0); }
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.08s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.14s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.2s; }
+        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
+        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
+        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
+        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
 
-        .custom-scroll::-webkit-scrollbar { width: 6px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar { width: 8px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
+
+        img { display: block; margin-left: auto; margin-right: auto; }
+        .slide-content img { background-color: #232d3c; }
 
         pre {
             background: rgba(0, 0, 0, 0.28);
@@ -80,17 +94,30 @@
             border-color: rgba(255, 255, 255, 0.12);
         }
 
-        img { display: block; margin-left: auto; margin-right: auto; }
+        .slide-theme-orange .text-orange-200,
+        .slide-theme-orange .text-orange-100,
+        .slide-theme-orange .text-orange-50 { color: #d8d0c8; }
+        .slide-theme-orange .decoration-orange-300 { text-decoration-color: #a89888; }
 
-        .media-slot {
-            border: 2px dashed rgba(255,255,255,0.25);
-            border-radius: 0.75rem;
-            min-height: 8rem;
-            display: flex;
+        [class*="bg-black/20"] { background-color: rgba(0, 0, 0, 0.14) !important; }
+        [class*="bg-black/10"] { background-color: rgba(0, 0, 0, 0.08) !important; }
+        [class*="bg-white/10"] { background-color: rgba(255, 255, 255, 0.06) !important; }
+        [class*="border-white/10"] { border-color: rgba(255, 255, 255, 0.08) !important; }
+        [class*="border-white/20"] { border-color: rgba(255, 255, 255, 0.1) !important; }
+
+        .slide-theme-orange .text-white { color: #c8d0da !important; }
+        .text-slate-300 { color: #b0bac6 !important; }
+
+        .phase-pill {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.45);
-            font-size: 0.85rem;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
@@ -98,29 +125,73 @@
 
     <div id="presentation" class="relative w-screen h-screen">
 
-        <!-- 1 · Résumé -->
+        <!-- Slide 1 — Titre -->
+        <div class="slide slide-theme-intro flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-3xl rounded-3xl border shadow-2xl p-12 text-center">
+                <div class="text-5xl mb-6">💎</div>
+                <h1 class="text-5xl font-bold mb-3">ERP Crystal</h1>
+                <p class="text-xl mb-2">Sprint 4</p>
+                <p class="text-sm opacity-70 mb-8">28 mai – 25 juin 2026</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 — Mon mandat -->
         <div class="slide slide-theme-orange flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <p class="text-orange-200 uppercase tracking-wider mb-2">Full-Stack · Lead technique</p>
-                <h1 class="text-5xl font-bold mb-8 text-white">Billy Hallé</h1>
-                <h3 class="text-xl font-semibold mb-3 text-white">Focus itération 4</h3>
-                <p class="text-orange-50 mb-4">Du prototype mocké vers une application unifiée et sécurisée.</p>
+                <h3 class="text-xl font-semibold mb-3 text-white">Focus de l'itération 4</h3>
+                <p class="text-orange-50 mb-4 text-lg">
+                    Faire passer Crystal ERP du <strong>prototype mocké</strong> à une application
+                    <strong>unifiée, sécurisée et déployable</strong> — backend, permissions et infrastructure.
+                </p>
                 <ul class="text-lg text-orange-50 space-y-2 list-disc list-inside">
-                    <li>Alignement API (.NET)</li>
-                    <li>Permissions dynamiques</li>
-                    <li>Scoping employé</li>
-                    <li>Pointage</li>
-                    <li>Rôles unifiés (<code>DynamicRoleId</code>)</li>
+                    <li>Alignement API ASP.NET Core (fin de json-server)</li>
+                    <li>Système de permissions dynamiques (API + CASL)</li>
+                    <li>Scoping employé et portail <code>/mon-espace</code></li>
+                    <li>Flux de pointage punch-in / punch-out</li>
+                    <li>Unification des rôles via <code>DynamicRoleId</code></li>
+                    <li>Déploiement production (URLs relatives, port 8080)</li>
                 </ul>
             </div>
         </div>
 
-        <!-- 2 · Alignement API -->
+        <!-- Slide 3 — Vision 4 phases -->
+        <div class="slide slide-theme-orange flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-3xl font-bold mb-2 text-white">Les 4 phases du Sprint 4</h2>
+                <p class="text-orange-100 mb-6 text-sm">Plan livré en fin d'itération — merge <code>dev → master</code> le 23 juin.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                        <span class="phase-pill mb-3">Phase 1</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Alignement backend / frontend</h3>
+                        <p class="text-orange-50 text-sm mt-2">API Auteurs, <code>locationId</code> sur les profils RH, seed Docker, <code>USE_MOCK_API = false</code>.</p>
+                    </div>
+                    <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                        <span class="phase-pill mb-3">Phase 2</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Permissions unifiées</h3>
+                        <p class="text-orange-50 text-sm mt-2"><code>RequirePermission</code> côté API, CASL côté UI, rôles configurables en base.</p>
+                    </div>
+                    <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                        <span class="phase-pill mb-3">Phase 3</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Portail employé + dashboard</h3>
+                        <p class="text-orange-50 text-sm mt-2"><code>EmployeeScopeService</code>, <code>/mon-espace</code>, widgets par permission.</p>
+                    </div>
+                    <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                        <span class="phase-pill mb-3">Phase 4</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Stabilisation & production</h3>
+                        <p class="text-orange-50 text-sm mt-2">Refactor RH, pointage, config prod, nettoyage legacy, merge finale.</p>
+                    </div>
+                </div>
+                <p class="text-orange-100 text-sm text-center">
+                    Stack : ASP.NET Core 9 · React 19 · PostgreSQL · Docker Compose
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 4 — Alignement API -->
         <div class="slide slide-theme-orange flex items-center justify-center p-6">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto">
-                <h2 class="text-2xl font-bold mb-2 text-white">Alignement API (.NET)</h2>
+                <h2 class="text-2xl font-bold mb-2 text-white">Phase 1 — Alignement API (.NET)</h2>
                 <p class="text-orange-100 mb-4 text-sm">Une seule source de vérité — fin de json-server et des données simulées.</p>
-
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                     <div>
                         <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — mock</p>
@@ -142,22 +213,23 @@ export const API_URL = `${AUTH_URL}/api`;
 return apiClient.get(<span class="tag-after">`${API_ITEMS_URL}`</span>);</code></pre>
                     </div>
                 </div>
-
+                <ul class="text-orange-50 text-sm space-y-1 list-disc list-inside mb-4">
+                    <li>Commits clés : API Auteurs, champs ISBN/éditeurs, seed démo, support <code>locationId</code></li>
+                    <li>Domaines alignés : auth, inventaire, employés, congés, planning, paie, métriques RH</li>
+                </ul>
                 <p class="text-orange-100 text-sm mb-2">Swagger — test des routes en direct :</p>
                 <img src="assets/swagger_gif.gif" alt="Démo Swagger"
-                     class="rounded-xl max-h-[32vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                     onclick="openModal(this.src)"
-                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/swagger.gif'}))">
+                     class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                     onclick="openModal(this.src)">
             </div>
         </div>
 
-        <!-- 3 · Permissions dynamiques -->
+        <!-- Slide 5 — Permissions -->
         <div class="slide slide-theme-orange flex items-center justify-center p-6">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
-                <h2 class="text-2xl font-bold mb-2 text-white">Permissions dynamiques</h2>
+                <h2 class="text-2xl font-bold mb-2 text-white">Phase 2 — Permissions dynamiques</h2>
                 <p class="text-orange-100 mb-4 text-sm">Même modèle côté API et UI — configurable en base de données.</p>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
                     <div>
                         <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — hybride</p>
                         <pre><code><span class="text-gray-400">// Rôle Identity + presets locaux</span>
@@ -176,68 +248,111 @@ GET <span class="tag-after">/api/users/me/permissions</span>
 → defineAbilityFor(user, permissions)</code></pre>
                     </div>
                 </div>
+                <ul class="text-orange-50 text-sm space-y-1 list-disc list-inside">
+                    <li>CRUD <code>/api/roles</code> + entités configurables</li>
+                    <li>Labels de permissions dans l'UI admin</li>
+                    <li>Permissions inventaire scopées par succursale (<code>location-scoped</code>)</li>
+                </ul>
             </div>
         </div>
 
-        <!-- 4 · Scoping employé -->
+        <!-- Slide 6 — Scoping -->
         <div class="slide slide-theme-orange flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                <h2 class="text-2xl font-bold mb-4 text-white">Scoping employé</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">Phase 3 — Scoping employé</h2>
                 <p class="text-orange-50 text-lg mb-4">Chaque employé ne voit que <strong>ses</strong> données RH.</p>
-                <ul class="text-orange-50 space-y-2 list-disc list-inside">
+                <ul class="text-orange-50 space-y-2 list-disc list-inside mb-4">
                     <li><code>EmployeeScopeService</code> — filtre backend centralisé</li>
-                    <li>Congés, quarts, pointages, feuilles de temps scopés</li>
-                    <li>Portail <code>/mon-espace</code> pour l'employé</li>
+                    <li>Congés, quarts, pointages, feuilles de temps scopés au profil connecté</li>
+                    <li>Portail <code>/mon-espace</code> — 5 onglets (horaire, congés, fiche, pointages, feuille)</li>
+                    <li><code>GET /api/employee-profiles/me</code> pour la fiche personnelle</li>
                     <li>Inventaire limité à la succursale de l'utilisateur</li>
                 </ul>
+                <div class="bg-black/20 p-4 rounded-xl border border-white/10 text-sm text-orange-50">
+                    <strong class="text-white">Règle :</strong> sans <code>manage:{entité}</code>, l'API filtre automatiquement sur le <code>EmployeeProfileId</code> lié au compte.
+                </div>
             </div>
         </div>
 
-        <!-- 5 · Pointage -->
+        <!-- Slide 7 — Pointage -->
         <div class="slide slide-theme-orange flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                <h2 class="text-2xl font-bold mb-4 text-white">Pointage</h2>
+                <h2 class="text-2xl font-bold mb-4 text-white">Flux de pointage</h2>
                 <ul class="text-orange-50 space-y-2 list-disc list-inside mb-6">
                     <li>Widget punch-in / punch-out sur le dashboard</li>
-                    <li><code>PunchEligibilityService</code> — validation du quart lié</li>
-                    <li><code>BusinessClock</code> — règles métier (fuseau Toronto)</li>
+                    <li><code>PunchEligibilityService</code> — validation du quart lié à l'employé</li>
+                    <li><code>BusinessClock</code> — règles métier (fuseau America/Toronto)</li>
+                    <li>Gestion du cas <code>too_late</code> pour un punch tardif</li>
                 </ul>
-                <img src="assets/pointage0.png" alt="Capture pointage"
-                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                     onclick="openModal(this.src)"
-                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/pointage.png'}))">
-                     <img src="assets/pointage1.png" alt="Capture pointage"
-                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                     onclick="openModal(this.src)"
-                     onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'media-slot',textContent:'assets/pointage1.png'}))">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <img src="assets/pointage0.png" alt="Capture pointage"
+                         class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                         onclick="openModal(this.src)">
+                    <img src="assets/pointage1.png" alt="Capture pointage"
+                         class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                         onclick="openModal(this.src)">
+                </div>
             </div>
         </div>
 
-        <!-- 6 · Rôles unifiés -->
+        <!-- Slide 8 — DynamicRoleId -->
         <div class="slide slide-theme-orange flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
                 <h2 class="text-2xl font-bold mb-4 text-white">Rôles unifiés — <code>DynamicRoleId</code></h2>
-                <ul class="text-orange-50 space-y-2 list-disc list-inside">
+                <ul class="text-orange-50 space-y-2 list-disc list-inside mb-6">
                     <li>Un seul champ sur l'utilisateur : <code>DynamicRoleId</code></li>
-                    <li>4 presets (Admin, Gérant, Assistant, Employé) + rôles custom</li>
+                    <li>4 presets (Admin, Gérant, Assistant, Employé) + rôles personnalisés</li>
                     <li>Suppression du code Identity legacy redondant</li>
                     <li>Admin peut créer et assigner un rôle depuis l'UI</li>
+                    <li>Types de compte clarifiés sur la fiche utilisateur</li>
                 </ul>
+                <div class="bg-black/20 p-4 rounded-xl border border-white/10 text-sm">
+                    <p class="text-orange-50"><strong class="text-white">Refactor RH (juin) :</strong> retrait des rôles organisationnels du modèle de sécurité, ajout des périodes de paie et wizards d'onboarding employé.</p>
+                </div>
             </div>
         </div>
 
-        <!-- 7 · Architecture dev -->
+        <!-- Slide 9 — Défis -->
+        <div class="slide slide-theme-orange flex items-center justify-center p-8">
+            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <h2 class="text-3xl font-bold mb-6 text-white">Défis & solutions</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="challenge-box p-6 rounded-2xl border">
+                        <h3 class="text-xl font-semibold mb-4">Défis rencontrés</h3>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li>• Synchroniser permissions backend et boutons frontend</li>
+                            <li>• Migrer sans casser les tests d'intégration (SQLite partagé)</li>
+                            <li>• Unifier deux systèmes de rôles (Identity + dynamique)</li>
+                            <li>• Préparer le déploiement (URLs, port API 8080)</li>
+                            <li>• Nettoyer le code legacy en fin de sprint</li>
+                        </ul>
+                    </div>
+                    <div class="solution-box p-6 rounded-2xl border">
+                        <h3 class="text-xl font-semibold mb-4">Solutions appliquées</h3>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li>• <code>GET /api/users/me/permissions</code> comme source unique pour CASL</li>
+                            <li>• Tests backend avec utilisateurs jetables en mémoire</li>
+                            <li>• Migration vers <code>DynamicRoleId</code> (PR 2307)</li>
+                            <li>• Config production + URLs relatives API</li>
+                            <li>• Refacto fichiers orphelins + suppression sujets legacy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 — Archi dev -->
         <div class="slide slide-theme-orange flex items-center justify-center p-6">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
                 <h2 class="text-2xl font-bold mb-2 text-white">Architecture de développement</h2>
-                <p class="text-orange-100 text-sm mb-4">Docker Compose local — <code>localhost:3000</code> / <code>:8080</code></p>
+                <p class="text-orange-100 text-sm mb-4">Docker Compose local — <code>localhost:3000</code> (frontend) · <code>:8080</code> (API)</p>
                 <img src="assets/diagramme_dev.svg" alt="Diagramme architecture développement"
                      class="rounded-xl max-h-[62vh] w-full object-contain diagram-frame p-4 cursor-pointer"
                      onclick="openModal(this.src)">
             </div>
         </div>
 
-        <!-- 8 · Architecture prod -->
+        <!-- Slide 11 — Archi prod -->
         <div class="slide slide-theme-orange flex items-center justify-center p-6">
             <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
                 <h2 class="text-2xl font-bold mb-2 text-white">Architecture de production</h2>
@@ -246,43 +361,63 @@ GET <span class="tag-after">/api/users/me/permissions</span>
                     <a href="https://dev.librairiecrystal.com/" class="underline hover:text-white" target="_blank" rel="noopener">dev.librairiecrystal.com</a>
                 </p>
                 <img src="assets/diagramme_prod.svg" alt="Diagramme architecture production"
-                     class="rounded-xl max-h-[62vh] w-full object-contain diagram-frame p-4 cursor-pointer"
+                     class="rounded-xl max-h-[58vh] w-full object-contain diagram-frame p-4 cursor-pointer mb-4"
                      onclick="openModal(this.src)">
+                <p class="text-orange-50 text-xs">Merge finale sprint 4 → <code>master</code> · 23 juin 2026</p>
             </div>
         </div>
 
-        <!-- 9 · Bilan -->
+        <!-- Slide 12 — Bilan -->
         <div class="slide slide-theme-orange flex items-center justify-center p-8">
             <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
-                <h2 class="text-3xl font-bold mb-6 text-white">Bilan</h2>
+                <h2 class="text-3xl font-bold mb-6 text-white">Bilan du Sprint 4</h2>
                 <p class="text-xl text-orange-50 mb-2">ERP fonctionnel, déployé et accessible en ligne.</p>
                 <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener"
                    class="inline-block text-2xl font-semibold text-white hover:text-orange-200 underline decoration-orange-300 underline-offset-4 mb-8 transition-colors">
                     dev.librairiecrystal.com
                 </a>
-                <p class="text-lg text-orange-50/90 font-light">
+                <p class="text-lg text-orange-50/90 font-light mb-6">
                     « Une API, une vérité sur les permissions — du login au bouton masqué. »
                 </p>
+                <div class="grid grid-cols-2 gap-4 text-left text-sm">
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                        <h3 class="font-bold text-white mb-2">Livré</h3>
+                        <ul class="text-orange-50 space-y-1 list-disc list-inside">
+                            <li>4 phases complètes</li>
+                            <li>4 rôles applicatifs</li>
+                            <li>Pointage employé</li>
+                            <li>Déploiement prod</li>
+                        </ul>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                        <h3 class="font-bold text-white mb-2">Comptes test</h3>
+                        <ul class="text-orange-50 space-y-1 text-xs font-mono">
+                            <li>admin@crystal.local</li>
+                            <li>gerant@crystal.local</li>
+                            <li>assistant@crystal.local</li>
+                            <li>employee@crystal.local</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-xl text-orange-200 mt-8">Merci — questions ?</p>
             </div>
         </div>
 
     </div>
 
     <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev"
-                class="nav-btn pointer-events-auto text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
+        <button onclick="prevSlide()" id="btnPrev" class="nav-btn pointer-events-auto hover:bg-white/15 text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
             <span>&larr;</span> Précédent
         </button>
-        <div class="nav-counter backdrop-blur-md px-6 py-3 rounded-full text-slate-200 font-mono shadow-lg border">
+        <div class="nav-counter backdrop-blur-md px-6 py-3 rounded-full text-slate-200 font-mono shadow-lg border flex items-center gap-2">
             <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
         </div>
-        <button onclick="nextSlide()" id="btnNext"
-                class="nav-btn pointer-events-auto text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
+        <button onclick="nextSlide()" id="btnNext" class="nav-btn pointer-events-auto hover:bg-white/15 text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
             Suivant <span>&rarr;</span>
         </button>
     </div>
 
-    <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+    <div id="imageModal" class="fixed inset-0 bg-slate-950/85 hidden items-center justify-center z-50">
         <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl" alt="Agrandissement">
     </div>
 
@@ -295,28 +430,61 @@ GET <span class="tag-after">/api/users/me/permissions</span>
         const btnPrev = document.getElementById('btnPrev');
         const btnNext = document.getElementById('btnNext');
 
-        if (totalIndicator) totalIndicator.textContent = totalSlides;
+        if (totalIndicator) {
+            totalIndicator.textContent = totalSlides;
+        }
 
         function updateSlides() {
             slides.forEach((slide, index) => {
                 slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) slide.classList.add('active');
-                else if (index < currentSlide) slide.classList.add('prev');
-                else slide.classList.add('next');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
             });
+
             indicator.textContent = currentSlide + 1;
-            btnPrev.style.opacity = currentSlide === 0 ? '0.3' : '1';
-            btnPrev.style.cursor = currentSlide === 0 ? 'not-allowed' : 'pointer';
-            btnNext.style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
-            btnNext.style.cursor = currentSlide === totalSlides - 1 ? 'not-allowed' : 'pointer';
+
+            if (currentSlide === 0) {
+                btnPrev.style.opacity = '0.3';
+                btnPrev.style.cursor = 'not-allowed';
+            } else {
+                btnPrev.style.opacity = '1';
+                btnPrev.style.cursor = 'pointer';
+            }
+
+            if (currentSlide === totalSlides - 1) {
+                btnNext.style.opacity = '0.3';
+                btnNext.style.cursor = 'not-allowed';
+            } else {
+                btnNext.style.opacity = '1';
+                btnNext.style.cursor = 'pointer';
+            }
         }
 
-        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlides(); } }
-        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') nextSlide();
-            else if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
         });
 
         function openModal(src) {
