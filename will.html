@@ -144,97 +144,179 @@
         <!-- Page 7 : Vert -->
         <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-emerald-200 font-semibold tracking-wider uppercase mb-2">Membre 3</div>
-                <h1 class="text-6xl font-bold mb-4 text-white"><span class="placeholder">William Peck</span></h1>
-                <h2 class="text-3xl font-light mb-10 text-emerald-100">Rôle : <span class="placeholder">Frontend</span>
-                </h2>
+                class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h3 class="text-xl font-semibold mb-3 text-white">Focus de l'itération 3</h3>
+                <p class="text-emerald-50 mb-4 text-lg">
+                    Suite à l'insatisfaction du client concernant l'état d'avancement du projet, notre priorité absolue
+                    fut
+                    d'implémenter toutes les fonctionnalités manquantes demandées.
+                </p>
+                <ul class="text-lg text-emerald-50 space-y-2 list-disc list-inside">
+                    <li>Mise en place d'outils pour faciliter la réutilisation de code</li>
+                    <li>Fonctionnalités RH</li>
+                    <li>Gestion d'inventaire des succursales</li>
+                </ul>
+            </div>
+        </div>
 
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Mes responsabilités :</h3>
-                    <p class="text-xl text-emerald-50">
-                        <span class="placeholder">Développement frontend / application web</span>
-                    </p>
+
+        <!-- Wrapper page query -->
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
+
+                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable PageQueryWrapper
+                </h2>
+                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la gestion
+                    d'état et des erreurs.</p>
+
+                <div class="mb-6">
+                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
+                        Wrapper</p>
+                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;PageQueryWrapper
+  isLoading={isLoading}
+  error={error}
+  refetch={() =&gt; query.refetch()}
+  errorReturnUrl={ROUTE}
+  errorReturnLabel="Retour"
+&gt;
+  &lt;!-- Page content --&gt;
+&lt;/PageQueryWrapper&gt;</code></pre>
+                </div>
+
+                <img src="assets/will/PageQueryWrapper.gif" alt="Démo PageQueryWrapper"
+                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                    onclick="openModal(this.src)">
+            </div>
+        </div>
+
+
+
+        <!-- Wrapper GenericPageLayout -->
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
+
+                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable
+                    GenericPageLayout
+                </h2>
+                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
+                    des pages.</p>
+
+                <div class="mb-6">
+                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
+                        Wrapper</p>
+                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;GenericPageLayout
+  title={title}
+  subtitle={subtitle}
+  onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
+  onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
+&gt;
+  &lt;!-- Page content --&gt;
+&lt;/GenericPageLayout&gt;</code></pre>
+                </div>
+
+                <img src="assets/will/GenericPageLayout.png" alt="Démo GenericPageLayout"
+                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                    onclick="openModal(this.src)">
+            </div>
+        </div>
+
+
+        <!-- Wrapper CustomDataGrid -->
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
+
+                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable CustomDataGrid
+                </h2>
+                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
+                    des pages.</p>
+
+                <div class="mb-6">
+                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
+                        Wrapper</p>
+                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;CustomDataGrid
+  rows={query.items}
+  columns={itemColumns}
+  addLabel="Ajouter un item"
+  onAddClick={canAdd ? () =&gt; onAddClick() : undefined}
+  onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
+  onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
+  onRowClick={(item) =&gt; navigate(ROUTE_ITEM_DETAILS.replace(":id", item.id))}
+  {...query.searchProps}
+/&gt;</code></pre>
+                </div>
+
+                <img src="assets/will/CustomDataGrid.gif" alt="Démo GenericPageLayout"
+                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                    onclick="openModal(this.src)">
+            </div>
+        </div>
+
+
+        <!-- RH-->
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
+                <h2 class="text-2xl font-bold mb-4 text-white">Fonctionnalités RH</h2>
+                <ul class="text-emerald-100 space-y-2 list-disc list-inside mb-6">
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                </ul>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <img src="assets/pointage0.png" alt="Capture pointage"
+                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                        onclick="openModal(this.src)">
+                    <img src="assets/pointage1.png" alt="Capture pointage"
+                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                        onclick="openModal(this.src)">
                 </div>
             </div>
         </div>
 
-        <!-- Page 8 : Vert -->
+        <!-- Gestion inventaire -->
         <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span
-                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                    Travail accompli
-                </h2>
-
-                <div class="flex flex-col gap-4">
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Mise en place d'un système initial de permissions dynamiques</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder"></span></p>
-                        </div>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Divers ajustements, améliorations et corrections de bugs</span></h3>
-                            <p class="text-emerald-100"><span class="placeholder"></span></p>
-                        </div>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Refactoring et cleanup du projet</span></h3>
-                            <!-- <p class="text-emerald-100">Wrapper query, Layout de page générique, Data grid réutilisable,
-                                Rendu global des formulaires,
-                                Gestionnaire global de permissions<span class="placeholder"></span></p> -->
-                        </div>
-                    </div>
-                </div>
+                class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
+                <h2 class="text-2xl font-bold mb-4 text-white">Gestion de l'inventaire d'une succursale</h2>
+                <ul class="text-emerald-100 space-y-2 list-disc list-inside mb-6">
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                    <li>Lorem ipsum</li>
+                </ul>
+                    <img src="assets/will/InventaireSuccursale.png" alt="Inventaire succursale"
+                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                        onclick="openModal(this.src)">
             </div>
         </div>
 
-        <!-- Page 9 : Vert -->
+        <!-- Defis et solutions -->
         <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span
-                        class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg"></span>
-                    Objectifs pour le futur
-                </h2>
-
-                <div class="flex flex-col gap-4">
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Continuer à travailler le visuel et
-                                    l'utilisabilité (UI/UX)</span></h3>
-
-                        </div>
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
+                <h2 class="text-3xl font-bold mb-6 text-white">Défis & solutions</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-6 rounded-2xl border border-emerald-400/30 bg-emerald-900/20">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Défis rencontrés</h3>
+                        <ul class="space-y-2 text-emerald-100 text-sm">
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                        </ul>
                     </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Retravailler le positionnement des boutons dans le sidebar</span></h3>
-                        </div>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Continuer à assurer la maintenabilité de l'application</span></h3>
-
-                        </div>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div class="text-4xl"></div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white"><span class="placeholder">Écrire des tests
-                                    unitaires</span></h3>
-                        </div>
+                    <div class="p-6 rounded-2xl border border-emerald-400/30 bg-emerald-900/20">
+                        <h3 class="text-xl font-semibold mb-4 text-white">Solutions appliquées</h3>
+                        <ul class="space-y-2 text-emerald-100 text-sm">
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                            <li>• Lorem ipsum</li>
+                        </ul>
                     </div>
                 </div>
             </div>
