@@ -4,21 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation ERP Crystal - Sprint 1</title>
+    <title>Présentation ERP Crystal — Itération 1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             overflow: hidden;
-            background-color: #111827;
+            background-color: #064e3b;
         }
 
-        /* Slide transitions */
         .slide {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
@@ -45,7 +43,6 @@
             z-index: 1;
         }
 
-        /* Content Animations */
         .slide-content>* {
             opacity: 0;
             transform: translateY(30px);
@@ -56,428 +53,239 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Staggered animation delays for elements */
-        .slide.active .slide-content>*:nth-child(1) {
-            transition-delay: 0.1s;
-        }
-
-        .slide.active .slide-content>*:nth-child(2) {
-            transition-delay: 0.2s;
-        }
-
-        .slide.active .slide-content>*:nth-child(3) {
-            transition-delay: 0.3s;
-        }
-
-        .slide.active .slide-content>*:nth-child(4) {
-            transition-delay: 0.4s;
-        }
-
-        /* Custom scrollbar for content if it overflows */
-        .custom-scroll::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .custom-scroll::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-        }
-
-        .placeholder {
-            color: inherit;
-            opacity: 0.7;
-            font-style: italic;
-        }
-
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
     </style>
 </head>
 
-<body class="text-gray-100">
+<body class="text-emerald-50">
+    <main id="presentation" class="relative w-screen h-screen">
 
-    <div id="presentation" class="relative w-screen h-screen">
-        <!-- ==============================
-             SECTION BLANC (Intro)
-        =============================== -->
-
-        <!-- Page Intro : Blanc -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-5xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-
-                <div
-                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <div class="flex items-center justify-between gap-6 mb-2">
+                    <div class="text-emerald-200 font-semibold tracking-wider uppercase">Itération 3</div>
+                    <div
+                        class="bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-2 text-emerald-50 font-semibold">
+                        11 mai — 27 mai 2026
+                    </div>
                 </div>
-
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">
-                    ERP Crystal
-                </h1>
-
-                <p class="text-2xl text-gray-600 mb-8">
-                    Revue du Sprint 1
-                </p>
-
-                <div class="text-xl text-gray-700 space-y-2">
-                    <p><strong>Antony Burlet</strong></p>
-                    <p><strong>Billy Hallé</strong></p>
-                    <p><strong>William Peck</strong></p>
-                    <p><strong>Nicolas Michaud</strong></p>
+                <h1 class="text-6xl font-bold mb-10 text-white">William Peck</h1>
+                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal</h3>
+                    <p class="text-xl text-emerald-50 leading-relaxed">
+                        TODO Avancer le projet pour attraper le retard
+                    </p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- ==============================
-             SECTION VERTE (Membre 3)
-        =============================== -->
-
-        <!-- Page 7 : Vert -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+        <!-- Rencontre avec client-->
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h3 class="text-xl font-semibold mb-3 text-white">Focus de l'itération 3</h3>
-                <p class="text-emerald-50 mb-4 text-lg">
-                    Suite à l'insatisfaction du client concernant l'état d'avancement du projet, notre priorité absolue
-                    fut
-                    d'implémenter toutes les fonctionnalités manquantes demandées.
-                </p>
-                <ul class="text-lg text-emerald-50 space-y-2 list-disc list-inside">
-                    <li>Mise en place d'outils pour faciliter la réutilisation de code</li>
-                    <li>Fonctionnalités RH</li>
-                    <li>Gestion d'inventaire des succursales</li>
+                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-red-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">⚠️</span>
+                    Rencontre avec le client
+                </h2>
+                <div class="grid grid-cols-2 gap-6">
+                    <!-- Les cartes gardent leur style rouge pour bien marquer le contraste des problèmes -->
+                    <div class="bg-red-950/60 p-6 rounded-2xl border border-red-500/50 backdrop-blur-sm">
+                        <h3 class="text-xl font-semibold text-red-200 mb-2">TODO reproche 1</h3>
+                        <p class="text-white">TODO reproche 1
+                        </p>
+                    </div>
+                    <div class="bg-red-950/60 p-6 rounded-2xl border border-red-500/50 backdrop-blur-sm">
+                        <h3 class="text-xl font-semibold text-red-200 mb-2">TODO reproche 2</h3>
+                        <p class="text-white">TODO reproche 2</p>
+                    </div>
+                    <div class="bg-red-950/60 p-6 rounded-2xl border border-red-500/50 backdrop-blur-sm">
+                        <h3 class="text-xl font-semibold text-red-200 mb-2">TODO reproche 3</h3>
+                        <p class="text-white">TODO reproche 3
+                        </p>
+                    </div>
+                    <div class="bg-red-950/60 p-6 rounded-2xl border border-red-500/50 backdrop-blur-sm">
+                        <h3 class="text-xl font-semibold text-red-200 mb-2">TODO reproche 4</h3>
+                        <p class="text-white">TODO reproche 4</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide Style : Réalisations -->
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
+                    Réalisations principales
+                </h2>
+                <ul class="space-y-6 text-xl">
+                    <!-- Style appliqué : bg-black/20 pour le fond sombre -->
+                    <li class="bg-black/20 p-6 rounded-xl border border-emerald-400/20 flex items-start gap-4">
+                        <span class="text-emerald-300 font-bold">✓</span>
+                        <div>
+                            <strong class="text-white">TODO réalisation 1</strong>
+                            <p class="text-emerald-50 mt-2">TODO réalisation 1</p>
+                        </div>
+                    </li>
+                    <li class="bg-black/20 p-6 rounded-xl border border-emerald-400/20 flex items-start gap-4">
+                        <span class="text-emerald-300 font-bold">✓</span>
+                        <div>
+                            <strong class="text-white">TODO réalisation 2</strong>
+                            <p class="text-emerald-50 mt-2">TODO réalisation 2</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-
-        <!-- Wrapper page query -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+        <!-- fondations techniques -->
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
-
-                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable PageQueryWrapper
+                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚙️</span>
+                    Fondations techniques
                 </h2>
-                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la gestion
-                    d'état et des erreurs.</p>
-
-                <div class="mb-6">
-                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
-                        Wrapper</p>
-                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;PageQueryWrapper
-  isLoading={isLoading}
-  error={error}
-  refetch={() =&gt; query.refetch()}
-  errorReturnUrl={ROUTE}
-  errorReturnLabel="Retour"
-&gt;
-  &lt;!-- Page content --&gt;
-&lt;/PageQueryWrapper&gt;</code></pre>
-                </div>
-
-                <img src="assets/will/PageQueryWrapper.gif" alt="Démo PageQueryWrapper"
-                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                    onclick="openModal(this.src)">
-            </div>
-        </div>
-
-
-
-        <!-- Wrapper GenericPageLayout -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
-            <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
-
-                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable
-                    GenericPageLayout
-                </h2>
-                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
-                    des pages.</p>
-
-                <div class="mb-6">
-                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
-                        Wrapper</p>
-                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;GenericPageLayout
-  title={title}
-  subtitle={subtitle}
-  onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
-  onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
-&gt;
-  &lt;!-- Page content --&gt;
-&lt;/GenericPageLayout&gt;</code></pre>
-                </div>
-
-                <img src="assets/will/GenericPageLayout.png" alt="Démo GenericPageLayout"
-                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                    onclick="openModal(this.src)">
-            </div>
-        </div>
-
-
-        <!-- Wrapper CustomDataGrid -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
-            <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
-
-                <h2 class="text-2xl font-bold mb-2 text-white">Implémentation du composant réutilisable CustomDataGrid
-                </h2>
-                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
-                    des pages.</p>
-
-                <div class="mb-6">
-                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
-                        Wrapper</p>
-                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;CustomDataGrid
-  rows={query.items}
-  columns={itemColumns}
-  addLabel="Ajouter un item"
-  onAddClick={canAdd ? () =&gt; onAddClick() : undefined}
-  onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
-  onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
-  onRowClick={(item) =&gt; navigate(ROUTE_ITEM_DETAILS.replace(":id", item.id))}
-  {...query.searchProps}
-/&gt;</code></pre>
-                </div>
-
-                <img src="assets/will/CustomDataGrid.gif" alt="Démo GenericPageLayout"
-                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                    onclick="openModal(this.src)">
-            </div>
-        </div>
-
-
-        <!-- RH-->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-            <div
-                class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
-                <h2 class="text-2xl font-bold mb-4 text-white">Fonctionnalités RH</h2>
-                <ul class="text-emerald-100 space-y-2 list-disc list-inside mb-6">
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
-                </ul>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <img src="assets/pointage0.png" alt="Capture pointage"
-                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                        onclick="openModal(this.src)">
-                    <img src="assets/pointage1.png" alt="Capture pointage"
-                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                        onclick="openModal(this.src)">
+                <div class="grid grid-cols-3 gap-6">
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🏗️</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Frontend : Composants réutilisables</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">TODO Création de composants réutilisables
+                            permettant la création rapide de nouvelles pages</p>
+                    </article>
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🗄️</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Données</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">TODO idk quoi mettre ici</p>
+                    </article>
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🔌</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Mock API</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">TODO Utilisation de json-server pour
+                            permettre aux développeurs frontend d'implémenter et tester des fonctionnalités
+                            immédiatement</p>
+                    </article>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Gestion inventaire -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+        <!-- Burndown -->
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
-                class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
-                <h2 class="text-2xl font-bold mb-4 text-white">Gestion de l'inventaire d'une succursale</h2>
-                <ul class="text-emerald-100 space-y-2 list-disc list-inside mb-6">
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
-                    <li>Lorem ipsum</li>
-                </ul>
-                    <img src="assets/will/InventaireSuccursale.png" alt="Inventaire succursale"
-                        class="rounded-xl max-h-[38vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                        onclick="openModal(this.src)">
-            </div>
-        </div>
-
-        <!-- Defis et solutions -->
-        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-            <div
-                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10 text-emerald-50">
-                <h2 class="text-3xl font-bold mb-6 text-white">Défis & solutions</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="p-6 rounded-2xl border border-emerald-400/30 bg-emerald-900/20">
-                        <h3 class="text-xl font-semibold mb-4 text-white">Défis rencontrés</h3>
-                        <ul class="space-y-2 text-emerald-100 text-sm">
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 rounded-2xl border border-emerald-400/30 bg-emerald-900/20">
-                        <h3 class="text-xl font-semibold mb-4 text-white">Solutions appliquées</h3>
-                        <ul class="space-y-2 text-emerald-100 text-sm">
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                            <li>• Lorem ipsum</li>
-                        </ul>
-                    </div>
+                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                <div class="flex items-center justify-between gap-6 mb-6">
+                    <h2 class="text-4xl font-bold text-white flex items-center gap-4">
+                        <span
+                            class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📉</span>
+                        Burndown de l’itération 3
+                    </h2>
+                    <span
+                        class="bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-2 text-emerald-50 font-semibold whitespace-nowrap">
+                        11 mai — 27 mai 2026
+                    </span>
                 </div>
-            </div>
-        </div>
-
-        <!-- ==============================
-             SECTION BLANCHE (Conclusion)
-        =============================== -->
-
-        <!-- Page 13 : Blanc -->
-        <div class="slide bg-gray-50 flex items-center justify-center p-8">
-            <div
-                class="slide-content w-full max-w-5xl bg-white rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div
-                    class="w-24 h-24 bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
+                <div class="bg-white p-5 rounded-2xl shadow-2xl">
+                    <img src="assets/burndown3.png" alt="Graphique burndown de l’itération 3"
+                        class="w-full max-h-[540px] object-contain rounded-xl">
                 </div>
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">Bilan du Sprint 1</h1>
-                <p class="text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                    Ce premier sprint nous a permis de poser des bases solides pour Crystal ERP. L'architecture est
-                    prête pour le développement intensif des modules métiers au Sprint 2.
+                <p class="text-emerald-50 text-lg mt-5 text-center">
+                    TODO ca a avance vite
                 </p>
+            </div>
+        </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">Ce qui s'est bien passé</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Bon flow de travail global (malgré des difficultés en fin de sprint)</li>
-                            <li>Bonne compartimentation des tâches</li>
-                            <li>Mise en place d’une base technique solide</li>
-                            <li>Utilisation d’outils pertinents pour la suite du projet</li>
-                            <li>Satisfaction du client vis-à-vis du travail réalisé</li>
-                        </ul>
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <div class="text-emerald-300 font-semibold tracking-wider uppercase mb-3">TODO</div>
+                <h2 class="text-4xl font-bold mb-8 text-white">TODO pourquoi ca va bien</h2>
+                <div class="space-y-5 text-xl text-emerald-50">
+                    <p class="bg-black/20 p-5 rounded-xl border-l-4 border-emerald-400">TODO pk ca va bien</p>
+                    <p class="bg-black/20 p-5 rounded-xl border-l-4 border-emerald-400">TODO pk ca va bien</p>
+                    <p class="bg-black/20 p-5 rounded-xl border-l-4 border-emerald-400">TODO pk ca va bien</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white">Conséquences sur l’itération</h2>
+                <div class="grid grid-cols-2 gap-6 text-xl">
+                    <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                        <strong class="text-emerald-300">TODO consequence 1</strong>
+                        <p class="text-emerald-50 mt-2">TODO consequence 1</p>
                     </div>
-                    <div class="bg-gray-100 p-8 rounded-2xl">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 border-b pb-2">À améliorer</h3>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Avoir une meilleure vision globale du projet</li>
-                            <li>Définir une politique de travail claire (rôles, méthodes, organisation)</li>
-                            <li>Prendre davantage de recul sur les choix d’architecture</li>
-                            <li>Mieux valider les besoins avec le client avant d’implémenter</li>
-                            <li>Trouver un équilibre entre autonomie et validation client</li>
-                        </ul>
+                    <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                        <strong class="text-emerald-300">TODO consequence 2</strong>
+                        <p class="text-emerald-50 mt-2">TODO consequence 2</p>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                        <strong class="text-emerald-300">TODO consequence 3</strong>
+                        <p class="text-emerald-50 mt-2">TODO consequence 3</p>
+                    </div>
+                    <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                        <strong class="text-emerald-300">TODO consequence 4</strong>
+                        <p class="text-emerald-50 mt-2">TODO consequence 4</p>
                     </div>
                 </div>
-
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Merci !</h2>
-                <p class="text-xl text-gray-500">Période de questions ?</p>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Interface de Navigation -->
-    <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev"
-            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+    </main>
+
+    <!-- Navigation restaurée avec boutons sur les côtés et indicateur au centre -->
+    <nav class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none"
+        aria-label="Navigation">
+        <button type="button" onclick="prevSlide()" id="btnPrev"
+            class="pointer-events-auto bg-emerald-900/50 hover:bg-emerald-800 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-emerald-400/30">
             <span>&larr;</span> Précédent
         </button>
 
         <div
-            class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10 flex items-center gap-2">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator">4</span>
+            class="bg-emerald-900/50 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-emerald-400/30">
+            <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
         </div>
 
-        <button onclick="nextSlide()" id="btnNext"
-            class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
+        <button type="button" onclick="nextSlide()" id="btnNext"
+            class="pointer-events-auto bg-emerald-900/50 hover:bg-emerald-800 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-emerald-400/30">
             Suivant <span>&rarr;</span>
         </button>
-    </div>
+    </nav>
 
-
-    <!-- Modal zoom image -->
-    <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl">
-    </div>
-
-
-    <!-- Script de logique de présentation -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
         const indicator = document.getElementById('slideIndicator');
         const totalIndicator = document.getElementById('totalIndicator');
         const btnPrev = document.getElementById('btnPrev');
         const btnNext = document.getElementById('btnNext');
 
-        if (totalIndicator) {
-            totalIndicator.textContent = totalSlides;
-        }
+        totalIndicator.textContent = slides.length;
 
         function updateSlides() {
             slides.forEach((slide, index) => {
                 slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                } else {
-                    slide.classList.add('next');
-                }
+                slide.classList.add(index === currentSlide ? 'active' : index < currentSlide ? 'prev' : 'next');
             });
-
-            // Update UI
             indicator.textContent = currentSlide + 1;
-
-            // Handle buttons opacity
-            if (currentSlide === 0) {
-                btnPrev.style.opacity = '0.3';
-                btnPrev.style.cursor = 'not-allowed';
-            } else {
-                btnPrev.style.opacity = '1';
-                btnPrev.style.cursor = 'pointer';
-            }
-
-            if (currentSlide === totalSlides - 1) {
-                btnNext.style.opacity = '0.3';
-                btnNext.style.cursor = 'not-allowed';
-            } else {
-                btnNext.style.opacity = '1';
-                btnNext.style.cursor = 'pointer';
-            }
+            btnPrev.disabled = currentSlide === 0;
+            btnNext.disabled = currentSlide === slides.length - 1;
+            btnPrev.style.opacity = btnPrev.disabled ? '0.3' : '1';
+            btnNext.style.opacity = btnNext.disabled ? '0.3' : '1';
         }
 
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlides();
-            }
-        }
+        function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlides(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlides(); } }
 
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlides();
-            }
-        }
-
-        // Navigation au clavier
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
         });
-        function openModal(src) {
-            const modal = document.getElementById("imageModal");
-            const img = document.getElementById("modalImg");
-            img.src = src;
-            modal.classList.remove("hidden");
-            modal.classList.add("flex");
-        }
-
-        document.getElementById("imageModal").addEventListener("click", () => {
-            const modal = document.getElementById("imageModal");
-            modal.classList.add("hidden");
-            modal.classList.remove("flex");
-        });
-
-        // Initialisation
         updateSlides();
     </script>
 </body>
