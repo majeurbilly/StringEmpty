@@ -71,9 +71,9 @@
                 </div>
                 <h1 class="text-6xl font-bold mb-10 text-white">William Peck</h1>
                 <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-300">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal :</h3>
                     <p class="text-xl text-emerald-50 leading-relaxed">
-                        TODO Avancer le projet pour attraper le retard
+                        Avancer le projet pour attraper le retard.
                     </p>
                 </div>
             </div>
@@ -109,13 +109,78 @@
                     <li class="bg-red-950/40 p-6 rounded-xl border border-red-500/30 flex items-start gap-4">
                         <span class="text-red-400 font-bold">!</span>
                         <div>
-                            <strong class="text-white">TODO reproche 3</strong>
-                            <p class="text-red-100 mt-2">TODO description du reproche 3</p>
+                            <strong class="text-white">UI insatisfaisant</strong>
+                            <p class="text-red-100 mt-2">Le client était mécontent du visuel encore « placeholder ».</p>
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
+
+        <!-- fondations techniques -->
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                    <span
+                        class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚙️</span>
+                    Fondations techniques
+                </h2>
+                <div class="grid grid-cols-3 gap-6">
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🏗️</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Composants réutilisables</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">Nous avons investi massivement dans des
+                            composants React réutilisables comme « building blocks » pour les futures pages et
+                            fonctionnalités, ce qui nous a grandement aidés.</p>
+                    </article>
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🗄️</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Système de permissions dynamiques</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">Nous avons commencé à mettre en place un
+                            système centralisé de gestion des
+                            permissions : single source of truth.</p>
+                    </article>
+                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                        <div class="text-4xl mb-5">🔌</div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">Mock API</h3>
+                        <p class="text-emerald-50 text-lg leading-relaxed">Nous avons utilisé json-server pour simuler
+                            une
+                            API et permettre au frontend d'avancer immédiatement, facilitant ainsi une transition
+                            simple vers le serveur réel dès qu'il fut prêt.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+            <div
+                class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
+
+                <h2 class="text-2xl font-bold mb-2 text-white">Exemple d'un composant réutilisable :
+                    GenericPageLayout
+                </h2>
+                <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
+                    des pages.</p>
+
+                <div class="mb-6">
+                    <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
+                        Wrapper</p>
+                    <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;GenericPageLayout
+  title={title}
+  subtitle={subtitle}
+  onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
+  onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
+&gt;
+  &lt;!-- Page content --&gt;
+&lt;/GenericPageLayout&gt;</code></pre>
+                </div>
+
+                <img src="assets/will/GenericPageLayout.png" alt="Démo GenericPageLayout"
+                    class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                    onclick="openModal(this.src)">
+            </div>
+        </div>
 
         <!-- Slide Style : Réalisations -->
         <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
@@ -195,39 +260,6 @@
             </div>
         </section>
 
-        <!-- fondations techniques -->
-        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
-            <div
-                class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span
-                        class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚙️</span>
-                    Fondations techniques
-                </h2>
-                <div class="grid grid-cols-3 gap-6">
-                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
-                        <div class="text-4xl mb-5">🏗️</div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">Composants réutilisables</h3>
-                        <p class="text-emerald-50 text-lg leading-relaxed">Nous avons investi massivement dans des
-                            composants React réutilisables destinés à servir de briques de base pour de futures pages et
-                            fonctionnalités, ce qui nous a grandement aidés.</p>
-                    </article>
-                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
-                        <div class="text-4xl mb-5">🗄️</div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">Système de permissions dynamiques</h3>
-                        <p class="text-emerald-50 text-lg leading-relaxed">Début d'un système centralisé</p>
-                    </article>
-                    <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
-                        <div class="text-4xl mb-5">🔌</div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">Mock API</h3>
-                        <p class="text-emerald-50 text-lg leading-relaxed">TODO Utilisation de json-server pour
-                            permettre aux développeurs frontend d'implémenter et tester des fonctionnalités
-                            immédiatement et facilement changer pour le vrai API quand prêt.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
         <!-- Burndown -->
         <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
             <div
@@ -276,6 +308,43 @@
                     <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
                         <strong class="text-emerald-300">Gain d'expérience</strong>
                         <p class="text-emerald-50 mt-2">Nos erreurs antérieures nous ont permis de nous améliorer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+            <div
+                class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center text-white">
+                <div class="text-5xl mb-6">💎</div>
+                <h1 class="text-4xl font-bold mb-3">Bilan de l’Itération 4</h1>
+                <span
+                    class="inline-block bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-1 mb-6 font-semibold">11
+                    mai – 27 mai 2026</span>
+
+                <p class="text-xl mb-8 mt-6 max-w-2xl mx-auto text-emerald-50">
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
+                    <!-- Ce qui s'est bien passé -->
+                    <div class="bg-black/20 p-6 rounded-2xl border border-emerald-400/20">
+                        <h3 class="text-lg font-bold text-white mb-3 border-b border-emerald-400/20 pb-2">Ce qui s’est
+                            bien passé</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm text-emerald-50">
+                            <li>Excellent progrès</li>
+                            <li>Retard rattrapé : objectif accompli</li>
+                        </ul>
+                    </div>
+
+                    <!-- À retenir / améliorer -->
+                    <div class="bg-black/20 p-6 rounded-2xl border border-emerald-400/20">
+                        <h3 class="text-lg font-bold text-white mb-3 border-b border-emerald-400/20 pb-2">À retenir /
+                            améliorer</h3>
+                        <ul class="list-disc list-inside space-y-2 text-sm text-emerald-50">
+                            <li>Avec du recul, la majorité de ce que nous avons réalisé cette itération aurait dû être
+                                fait pendant la
+                                première.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
