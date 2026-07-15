@@ -3,157 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP Crystal — Itération 4 · Introduction</title>
+    <title>ERP Crystal — Introduction</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
-
-        .slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-            opacity: 0; pointer-events: none;
-        }
-        .slide.active { transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto; }
-        .slide.prev { transform: translateX(-100%); opacity: 0; z-index: 1; }
-        .slide.next { transform: translateX(100%); opacity: 0; z-index: 1; }
-
-        .slide-content > * {
-            opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .slide.active .slide-content > * { opacity: 1; transform: translateY(0); }
-        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
-        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
-        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
-        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
-
-        img { display: block; margin-left: auto; margin-right: auto; }
-    </style>
+    <link href="assets/presentation-common.css" rel="stylesheet">
 </head>
-<body class="text-gray-100">
-
-    <div id="presentation" class="relative w-screen h-screen">
-
-        <!-- Slide 1 : Titre -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-gray-50 rounded-3xl border border-gray-200 shadow-2xl p-12 text-gray-800 text-center">
-                <div class="text-5xl mb-6">💎</div>
-                <h1 class="text-5xl font-bold mb-3 text-gray-900">ERP Crystal</h1>
-                <p class="text-xl text-gray-600 mb-2">Itération 4 — Sprint finale</p>
-                <p class="text-gray-500 mb-8">28 mai – 22 juin 2026</p>
-                <p class="text-lg text-gray-700">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
+<body>
+    <main id="presentation" class="relative w-screen h-screen">
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-5xl rounded-3xl p-12 text-center">
+                <div class="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-3xl bg-blue-400/15 text-5xl shadow-xl">💎</div>
+                <p class="eyebrow mb-3">Projet de fin d’études</p>
+                <h1 class="mb-5 text-6xl font-bold text-white">ERP Crystal</h1>
+                <p class="mb-4 text-2xl text-blue-100">Bilan de quatre itérations de développement</p>
+                <span class="date-chip mb-9">26 mars — 25 juin 2026</span>
+                <p class="text-lg text-slate-300">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
             </div>
-        </div>
+        </section>
 
-        <!-- Slide 2 : Objectifs -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-white rounded-3xl border border-gray-300 shadow-2xl p-12 text-gray-800">
-                <h2 class="text-3xl font-bold mb-6 text-gray-900">Objectifs du Sprint 4</h2>
-                <p class="text-lg text-gray-700 mb-6">
-                    Un ERP <strong>fonctionnel de bout en bout</strong> — une API .NET, des permissions unifiées, un portail employé.
-                </p>
-                <ul class="space-y-3 text-lg text-gray-700">
-                    <li><strong>Phase 1</strong> — Fin du mock, API réelle</li>
-                    <li><strong>Phase 2</strong> — Rôles dynamiques + CASL</li>
-                    <li><strong>Phase 3</strong> — Portail <code>/mon-espace</code></li>
-                    <li><strong>Phase 4</strong> — Refactorisation de l'ERP</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 3 : Burndown -->
-        <div class="slide bg-gray-200 flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-4xl bg-white rounded-3xl border border-gray-300 shadow-2xl p-10 text-gray-800">
-                <h2 class="text-3xl font-bold mb-6 text-gray-900">Suivi de progression</h2>
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="w-full md:w-2/3">
-                        <img src="assets/burndown4.png" alt="Burndown" class="rounded-lg w-full cursor-pointer border border-gray-200" onclick="openModal(this.src)">
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                <p class="eyebrow mb-3">Avant de présenter le projet</p>
+                <h2 class="mb-5 text-5xl font-bold text-white">Qu’est-ce qu’un ERP ?</h2>
+                <p class="mb-9 text-2xl text-blue-100">Un <strong>progiciel de gestion intégré</strong> rassemble les activités principales d’une organisation dans une seule application.</p>
+                <div class="responsive-grid grid grid-cols-3 items-center gap-7 text-center">
+                    <div class="space-y-4">
+                        <div class="card rounded-xl p-4 text-slate-200">📦 Inventaire</div>
+                        <div class="card rounded-xl p-4 text-slate-200">👥 Employés</div>
+                        <div class="card rounded-xl p-4 text-slate-200">💵 Paie</div>
                     </div>
-                    <ul class="space-y-3 text-gray-700">
-                        <li>✔ 5 phases livrées</li>
-                        <li>✔ 4 rôles (Admin, Gérant, Assistant, Employé)</li>
-                        <li>✔ Pointage punch-in / punch-out</li>
-                    </ul>
+                    <div class="flex flex-col items-center">
+                        <div class="mb-3 text-4xl text-blue-300">→</div>
+                        <div class="flex h-44 w-44 items-center justify-center rounded-full border border-blue-300/30 bg-blue-400/15 text-center shadow-xl">
+                            <div><div class="mb-2 text-5xl">💎</div><strong class="text-2xl text-white">ERP</strong><p class="mt-1 text-sm text-blue-100">Données centralisées</p></div>
+                        </div>
+                        <div class="mt-3 text-4xl text-blue-300">→</div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="card rounded-xl p-4 text-slate-200">📅 Planification</div>
+                        <div class="card rounded-xl p-4 text-slate-200">📚 Catalogue</div>
+                        <div class="card rounded-xl p-4 text-slate-200">🏪 Succursales</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-    </div>
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                <p class="eyebrow mb-3">Pourquoi centraliser ?</p>
+                <h2 class="mb-8 text-4xl font-bold text-white">Une même information sert à plusieurs opérations</h2>
+                <div class="responsive-grid grid grid-cols-2 gap-8">
+                    <article class="card rounded-2xl border-red-300/15 bg-red-400/5 p-7">
+                        <h3 class="mb-5 text-2xl font-semibold text-red-200">Sans ERP</h3>
+                        <ul class="space-y-4 text-lg text-slate-300">
+                            <li>• Plusieurs outils et fichiers séparés</li>
+                            <li>• Données saisies plus d’une fois</li>
+                            <li>• Risque d’informations contradictoires</li>
+                            <li>• Vision partielle des opérations</li>
+                        </ul>
+                    </article>
+                    <article class="card rounded-2xl border-emerald-300/20 bg-emerald-400/5 p-7">
+                        <h3 class="mb-5 text-2xl font-semibold text-emerald-200">Avec un ERP</h3>
+                        <ul class="space-y-4 text-lg text-slate-200">
+                            <li>✓ Une seule source d’information</li>
+                            <li>✓ Des modules qui communiquent entre eux</li>
+                            <li>✓ Des actions adaptées au rôle de chacun</li>
+                            <li>✓ Une vue globale de l’organisation</li>
+                        </ul>
+                    </article>
+                </div>
+                <p class="mt-8 text-center text-xl text-blue-100">Exemple : un quart planifié influence les heures travaillées, la feuille de temps et éventuellement la paie.</p>
+            </div>
+        </section>
 
-    <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
-            <span>&larr;</span> Précédent
-        </button>
-        <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-full text-white font-mono shadow-lg border border-white/10">
-            <span id="slideIndicator">1</span> / <span id="totalIndicator">3</span>
-        </div>
-        <button onclick="nextSlide()" id="btnNext" class="pointer-events-auto bg-black/40 hover:bg-black/60 text-white backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border border-white/10">
-            Suivant <span>&rarr;</span>
-        </button>
-    </div>
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                <p class="eyebrow mb-3">Notre mandat</p>
+                <h2 class="mb-5 text-5xl font-bold text-white">Créer l’ERP d’une librairie multisuccursale</h2>
+                <p class="mb-8 max-w-4xl text-xl leading-relaxed text-slate-300">Notre équipe devait concevoir une application web permettant de gérer, au même endroit, les produits vendus par la librairie et les opérations liées à ses employés.</p>
+                <div class="responsive-grid grid grid-cols-2 gap-6 text-lg">
+                    <article class="card accent-blue rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-blue-100">Catalogue et inventaire</h3><p class="text-slate-300">Livres, produits, auteurs, catégories, succursales et quantités en stock.</p></article>
+                    <article class="card accent-purple rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-purple-100">Ressources humaines</h3><p class="text-slate-300">Employés, contrats, congés, horaires, pointages, feuilles de temps et paie.</p></article>
+                    <article class="card accent-green rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-emerald-100">Utilisateurs et permissions</h3><p class="text-slate-300">Présenter les bonnes informations et les bonnes actions selon le rôle et la succursale.</p></article>
+                    <article class="card accent-orange rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-orange-100">Produit utilisable</h3><p class="text-slate-300">Développer le frontend, l’API, la base de données, les tests et le déploiement.</p></article>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <div id="imageModal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
-        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl" alt="Agrandissement">
-    </div>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const indicator = document.getElementById('slideIndicator');
-        const totalIndicator = document.getElementById('totalIndicator');
-        const btnPrev = document.getElementById('btnPrev');
-        const btnNext = document.getElementById('btnNext');
-
-        if (totalIndicator) totalIndicator.textContent = totalSlides;
-
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) slide.classList.add('active');
-                else if (index < currentSlide) slide.classList.add('prev');
-                else slide.classList.add('next');
-            });
-            indicator.textContent = currentSlide + 1;
-            btnPrev.style.opacity = currentSlide === 0 ? '0.3' : '1';
-            btnPrev.style.cursor = currentSlide === 0 ? 'not-allowed' : 'pointer';
-            btnNext.style.opacity = currentSlide === totalSlides - 1 ? '0.3' : '1';
-            btnNext.style.cursor = currentSlide === totalSlides - 1 ? 'not-allowed' : 'pointer';
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateSlides();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateSlides();
-            }
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') nextSlide();
-            else if (e.key === 'ArrowLeft') prevSlide();
-        });
-
-        function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            document.getElementById('modalImg').src = src;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        document.getElementById('imageModal').addEventListener('click', () => {
-            const modal = document.getElementById('imageModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        });
-
-        updateSlides();
-    </script>
+    <nav class="pointer-events-none fixed bottom-6 left-0 right-0 z-50 flex justify-between px-10" aria-label="Navigation">
+        <button id="btnPrev" onclick="prevSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">← Précédent</button>
+        <div class="nav-counter rounded-full px-6 py-3 font-mono text-white"><span id="slideIndicator">1</span> / <span id="totalIndicator"></span></div>
+        <button id="btnNext" onclick="nextSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">Suivant →</button>
+    </nav>
+    <script src="assets/presentation-common.js"></script>
 </body>
 </html>

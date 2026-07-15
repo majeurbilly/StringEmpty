@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Crystal — Conclusion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="assets/presentation-common.css" rel="stylesheet">
+</head>
+<body>
+    <main id="presentation" class="relative w-screen h-screen">
+        <section class="slide soft-slate flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                <p class="eyebrow mb-3">Bilan du projet</p>
+                <h1 class="mb-9 text-5xl font-bold text-white">Une évolution en quatre étapes</h1>
+                <div class="responsive-grid grid grid-cols-4 gap-5">
+                    <article class="card accent-blue rounded-2xl p-6"><span class="text-sm font-bold text-blue-300">01</span><h2 class="my-3 text-xl font-semibold text-white">Comprendre</h2><p class="text-slate-300">Poser l’architecture et corriger une mauvaise compréhension initiale des besoins.</p></article>
+                    <article class="card accent-purple rounded-2xl p-6"><span class="text-sm font-bold text-purple-300">02</span><h2 class="my-3 text-xl font-semibold text-white">Construire</h2><p class="text-slate-300">Connecter le frontend et le backend puis livrer les premiers modules.</p></article>
+                    <article class="card accent-green rounded-2xl p-6"><span class="text-sm font-bold text-emerald-300">03</span><h2 class="my-3 text-xl font-semibold text-white">Compléter</h2><p class="text-slate-300">Étendre les fonctionnalités et uniformiser les parcours de l’application.</p></article>
+                    <article class="card accent-orange rounded-2xl p-6"><span class="text-sm font-bold text-orange-300">04</span><h2 class="my-3 text-xl font-semibold text-white">Stabiliser</h2><p class="text-slate-300">Sécuriser les accès, finaliser les parcours clés et déployer le produit.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide soft-slate flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                <p class="eyebrow mb-3">Rétrospective</p>
+                <h2 class="mb-8 text-4xl font-bold text-white">Ce que nous retenons</h2>
+                <div class="responsive-grid grid grid-cols-2 gap-7">
+                    <article class="card rounded-2xl border-emerald-300/20 bg-emerald-400/5 p-7">
+                        <h3 class="mb-5 text-2xl font-semibold text-emerald-200">Forces du projet</h3>
+                        <ul class="space-y-3 text-lg text-slate-200"><li>✓ Une application couvrant plusieurs domaines métier</li><li>✓ Des parcours adaptés aux rôles et aux succursales</li><li>✓ Une meilleure cohérence entre le frontend et l’API</li><li>✓ Une équipe capable de réagir aux changements</li></ul>
+                    </article>
+                    <article class="card rounded-2xl border-orange-300/20 bg-orange-400/5 p-7">
+                        <h3 class="mb-5 text-2xl font-semibold text-orange-200">À améliorer</h3>
+                        <ul class="space-y-3 text-lg text-slate-200"><li>• Valider les besoins plus tôt avec le client</li><li>• Partager les décisions d’architecture rapidement</li><li>• Intégrer les branches plus fréquemment</li><li>• Automatiser davantage les parcours critiques</li></ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-4xl rounded-3xl p-12 text-center">
+                <div class="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-full bg-blue-400/15 text-5xl">💎</div>
+                <h1 class="mb-5 text-6xl font-bold text-white">Merci !</h1>
+                <p class="mb-8 text-2xl text-blue-100">Questions et échanges</p>
+                <div class="mx-auto mb-8 h-px max-w-xl bg-white/15"></div>
+                <p class="text-lg text-slate-300">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
+                <p class="mt-3 text-sm text-slate-400">Crystal ERP · 2026</p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="pointer-events-none fixed bottom-6 left-0 right-0 z-50 flex justify-between px-10" aria-label="Navigation">
+        <button id="btnPrev" onclick="prevSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">← Précédent</button>
+        <div class="nav-counter rounded-full px-6 py-3 font-mono text-white"><span id="slideIndicator">1</span> / <span id="totalIndicator"></span></div>
+        <button id="btnNext" onclick="nextSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">Suivant →</button>
+    </nav>
+    <script src="assets/presentation-common.js"></script>
+</body>
+</html>

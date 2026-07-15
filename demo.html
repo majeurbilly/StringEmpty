@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Crystal — Démonstration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="assets/presentation-common.css" rel="stylesheet">
+</head>
+<body>
+    <main id="presentation" class="relative w-screen h-screen">
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-5xl rounded-3xl p-12 text-center">
+                <div class="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-3xl bg-blue-400/15 text-4xl">🎬</div>
+                <p class="eyebrow mb-3">Résultat final</p>
+                <h1 class="mb-5 text-5xl font-bold text-white">Démonstration de Crystal ERP</h1>
+                <p class="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-slate-300">Deux parcours complémentaires pour montrer la gestion quotidienne d’une succursale et l’espace personnel d’un employé.</p>
+                <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener" class="inline-block rounded-full border border-blue-300/30 bg-blue-400/15 px-7 py-3 font-semibold text-blue-100 transition hover:bg-blue-400/25">Ouvrir l’application ↗</a>
+            </div>
+        </section>
+
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-10">
+                <div class="mb-7 flex items-center justify-between gap-6"><div><p class="eyebrow mb-2">Parcours 1</p><h2 class="text-4xl font-bold text-white">Gérer une succursale</h2></div><span class="date-chip">Gérant / Assistant</span></div>
+                <div class="responsive-grid grid grid-cols-2 gap-8">
+                    <ol class="space-y-4 text-lg">
+                        <li class="card rounded-xl p-4"><strong class="text-blue-200">1. Tableau de bord</strong><p class="mt-1 text-slate-300">Voir les tâches, les indicateurs et les accès autorisés.</p></li>
+                        <li class="card rounded-xl p-4"><strong class="text-blue-200">2. Catalogue et inventaire</strong><p class="mt-1 text-slate-300">Consulter un article et vérifier le stock d’une succursale.</p></li>
+                        <li class="card rounded-xl p-4"><strong class="text-blue-200">3. Planification</strong><p class="mt-1 text-slate-300">Créer ou déplacer un quart avec un employé disponible.</p></li>
+                        <li class="card rounded-xl p-4"><strong class="text-blue-200">4. Feuille de temps</strong><p class="mt-1 text-slate-300">Consulter les heures et effectuer l’approbation autorisée.</p></li>
+                    </ol>
+                    <div class="card flex items-center rounded-2xl p-4"><img src="assets/Planification.png" alt="Planification des quarts" class="max-h-[490px] w-full rounded-xl object-contain"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide soft-blue flex items-center justify-center p-8">
+            <div class="slide-content panel w-full max-w-6xl rounded-3xl p-10">
+                <div class="mb-7 flex items-center justify-between gap-6"><div><p class="eyebrow mb-2">Parcours 2</p><h2 class="text-4xl font-bold text-white">Utiliser « Mon espace »</h2></div><span class="date-chip">Employé</span></div>
+                <div class="responsive-grid grid grid-cols-2 gap-8">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="card rounded-xl p-5"><div class="mb-2 text-2xl">📅</div><strong class="text-white">Horaire</strong><p class="mt-1 text-sm text-slate-300">Consulter ses quarts.</p></div>
+                        <div class="card rounded-xl p-5"><div class="mb-2 text-2xl">🏖️</div><strong class="text-white">Congés</strong><p class="mt-1 text-sm text-slate-300">Suivre ses demandes.</p></div>
+                        <div class="card rounded-xl p-5"><div class="mb-2 text-2xl">⏱️</div><strong class="text-white">Pointage</strong><p class="mt-1 text-sm text-slate-300">Enregistrer arrivée et départ.</p></div>
+                        <div class="card rounded-xl p-5"><div class="mb-2 text-2xl">🧾</div><strong class="text-white">Paie</strong><p class="mt-1 text-sm text-slate-300">Voir ses fiches publiées.</p></div>
+                        <div class="card col-span-2 rounded-xl p-5"><strong class="text-blue-200">Point central de la démonstration</strong><p class="mt-2 text-slate-300">L’employé ne voit que ses propres données, tandis que les actions disponibles respectent ses permissions.</p></div>
+                    </div>
+                    <div class="card grid grid-cols-2 items-center gap-4 rounded-2xl p-4"><img src="assets/pointage0.png" alt="Widget de pointage" class="rounded-xl"><img src="assets/pointage1.png" alt="Confirmation du pointage" class="rounded-xl"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="pointer-events-none fixed bottom-6 left-0 right-0 z-50 flex justify-between px-10" aria-label="Navigation">
+        <button id="btnPrev" onclick="prevSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">← Précédent</button>
+        <div class="nav-counter rounded-full px-6 py-3 font-mono text-white"><span id="slideIndicator">1</span> / <span id="totalIndicator"></span></div>
+        <button id="btnNext" onclick="nextSlide()" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">Suivant →</button>
+    </nav>
+    <script src="assets/presentation-common.js"></script>
+</body>
+</html>
