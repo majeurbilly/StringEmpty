@@ -3,54 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERP Crystal — Itération 4</title>
+    <title>ERP Crystal — Présentation complète</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #1a2332; }
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #101827;
+    color: #d8e1ec;
+    font-family: "Inter", sans-serif;
+}
 
-        /* Fonds de diapos — dégradés atténués, sans blanc */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+}
+
+.slide.active { transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto; }
+.slide.prev { transform: translateX(-100%); z-index: 1; }
+.slide.next { transform: translateX(100%); z-index: 1; }
+
+.soft-blue {
+    background: linear-gradient(145deg, #27364d 0%, #1d2d48 48%, #131d30 100%);
+}
+
+.soft-slate {
+    background: linear-gradient(145deg, #293545 0%, #202c3d 50%, #141d2c 100%);
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.065);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.slide-content > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.slide.active .slide-content > * { opacity: 1; transform: translateY(0); }
+.slide.active .slide-content > *:nth-child(1) { transition-delay: 0.08s; }
+.slide.active .slide-content > *:nth-child(2) { transition-delay: 0.16s; }
+.slide.active .slide-content > *:nth-child(3) { transition-delay: 0.24s; }
+.slide.active .slide-content > *:nth-child(4) { transition-delay: 0.32s; }
+
+.eyebrow {
+    color: #93c5fd;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.date-chip {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(147, 197, 253, 0.28);
+    background: rgba(59, 130, 246, 0.12);
+    color: #c9ddf4;
+    font-size: 0.86rem;
+    font-weight: 600;
+}
+
+.nav-btn, .nav-counter {
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover { background: rgba(30, 41, 59, 0.92); }
+.nav-btn:disabled { cursor: not-allowed; opacity: 0.3; }
+
+.accent-blue { border-left: 4px solid #60a5fa; }
+.accent-purple { border-left: 4px solid #a78bfa; }
+.accent-green { border-left: 4px solid #6ee7b7; }
+.accent-orange { border-left: 4px solid #fdba74; }
+
+code {
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.35rem;
+    background: rgba(0, 0, 0, 0.24);
+    color: #dbeafe;
+}
+
+img { display: block; max-width: 100%; }
+
+@media (max-width: 900px) {
+    .slide { overflow-y: auto; }
+    .slide-content { padding: 1.5rem !important; }
+    .responsive-grid { grid-template-columns: 1fr !important; }
+}
+
+body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #111827; }
+        .slide {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0; pointer-events: none;
+        }
+        .slide.active { transform: translateX(0); opacity: 1; z-index: 10; pointer-events: auto; }
+        .slide.prev { transform: translateX(-100%); opacity: 0; z-index: 1; }
+        .slide.next { transform: translateX(100%); opacity: 0; z-index: 1; }
+        .slide-content > * {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .slide.active .slide-content > * { opacity: 1; transform: translateY(0); }
+        .slide.active .slide-content > *:nth-child(1) { transition-delay: 0.1s; }
+        .slide.active .slide-content > *:nth-child(2) { transition-delay: 0.2s; }
+        .slide.active .slide-content > *:nth-child(3) { transition-delay: 0.3s; }
+        .slide.active .slide-content > *:nth-child(4) { transition-delay: 0.4s; }
+
+body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #111827;
+        }
+
+        /* Slide transitions */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        /* Content Animations */
+        .slide-content>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .slide-content>* {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation delays for elements */
+        .slide.active .slide-content>*:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .slide.active .slide-content>*:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .slide.active .slide-content>*:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .slide.active .slide-content>*:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+
+        /* Custom scrollbar for content if it overflows */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        .placeholder {
+            color: inherit;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #064e3b;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .slide-content>* {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .slide-content>* {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+body { font-family: 'Inter', sans-serif; overflow: hidden; background-color: #1a2332; }
+
         .slide-theme-intro {
             background: linear-gradient(145deg, #2a3344 0%, #1e2636 100%);
         }
-        .slide-theme-blue {
-            background: linear-gradient(145deg, #3d4f63 0%, #2c3e50 45%, #243044 100%);
-        }
         .slide-theme-orange {
             background: linear-gradient(145deg, #4a4038 0%, #3d3530 45%, #2e2824 100%);
-        }
-        .slide-theme-green {
-            background: linear-gradient(145deg, #3a4f4a 0%, #2f403c 45%, #263330 100%);
-        }
-        .slide-theme-purple {
-            background: linear-gradient(145deg, #403a52 0%, #353048 45%, #2a2638 100%);
         }
         .slide-theme-conclusion {
             background: linear-gradient(145deg, #2a3344 0%, #1e2636 100%);
         }
 
-        /* Cartes — verre sombre */
-        .slide-theme-blue .slide-content,
+        .slide-theme-intro .slide-content,
         .slide-theme-orange .slide-content,
-        .slide-theme-green .slide-content,
-        .slide-theme-purple .slide-content,
-        .slide-theme-conclusion .slide-content,
-        .slide-theme-intro .slide-content {
+        .slide-theme-conclusion .slide-content {
             background: rgba(255, 255, 255, 0.06) !important;
             border-color: rgba(255, 255, 255, 0.09) !important;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35) !important;
             color: #b8c2ce;
         }
         .slide-theme-intro h1,
-        .slide-theme-intro h2 { color: #d4dbe4 !important; }
+        .slide-theme-intro h2,
+        .slide-theme-conclusion h1,
+        .slide-theme-conclusion h2 { color: #d4dbe4 !important; }
         .slide-theme-intro p,
-        .slide-theme-intro li { color: #a8b4c0 !important; }
-        .slide-theme-intro strong { color: #c8d2dc !important; }
+        .slide-theme-intro li,
+        .slide-theme-conclusion p,
+        .slide-theme-conclusion li { color: #a8b4c0 !important; }
+        .slide-theme-intro strong,
+        .slide-theme-conclusion strong { color: #c8d2dc !important; }
 
-        .slide-inner {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.08);
-        }
         .challenge-box {
             background: rgba(120, 60, 60, 0.18);
             border-color: rgba(220, 150, 150, 0.2);
@@ -62,15 +309,8 @@
         }
         .solution-box h3 { color: #b8dcc8; }
 
-        .diagram-frame {
-            background: #232d3c !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        }
         .img-frame {
             border-color: rgba(255, 255, 255, 0.1) !important;
-            background-color: #232d3c;
-        }
-        .slide-content img {
             background-color: #232d3c;
         }
 
@@ -96,23 +336,8 @@
         .custom-scroll::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 10px; }
 
-        .placeholder { color: inherit; opacity: 0.7; font-style: italic; }
-
         img { display: block; margin-left: auto; margin-right: auto; }
-
-        pre {
-            background: rgba(0, 0, 0, 0.28);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-size: 0.72rem;
-            line-height: 1.45;
-            overflow-x: auto;
-            text-align: left;
-        }
-        code { font-family: ui-monospace, monospace; }
-        .tag-before { color: #d4a5a5; }
-        .tag-after { color: #a8c9b0; }
+        .slide-content img { background-color: #232d3c; }
 
         .nav-btn {
             background: rgba(255, 255, 255, 0.08);
@@ -124,736 +349,1421 @@
             border-color: rgba(255, 255, 255, 0.12);
         }
 
-        /* Accents texte adoucis par section */
-        .slide-theme-blue .text-blue-300 { color: #b0bcc9; }
-        .slide-theme-blue .text-blue-100 { color: #cbd5e1; }
-        .slide-theme-blue .text-blue-200 { color: #b8c5d4; }
-        .slide-theme-blue .text-blue-400 { color: #94a8bc; }
-        .slide-theme-blue .border-blue-400 { border-color: rgba(147, 170, 194, 0.45); }
-        .slide-theme-blue .bg-blue-500 { background-color: #5b7a94 !important; }
+        .date-chip {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.2);
+            color: #d8d0c8;
+        }
 
         .slide-theme-orange .text-orange-200,
         .slide-theme-orange .text-orange-100,
         .slide-theme-orange .text-orange-50 { color: #d8d0c8; }
         .slide-theme-orange .decoration-orange-300 { text-decoration-color: #a89888; }
 
-        .slide-theme-green .text-emerald-200 { color: #b8cfc4; }
-        .slide-theme-green .text-emerald-100 { color: #c5d9cf; }
-        .slide-theme-green .text-emerald-50 { color: #d0e0d8; }
-        .slide-theme-green .border-emerald-400 { border-color: rgba(140, 180, 160, 0.45); }
-        .slide-theme-green .bg-emerald-500 { background-color: #5a8a72 !important; }
-
-        .slide-theme-purple .text-purple-300 { color: #c4b8d4; }
-        .slide-theme-purple .text-purple-200 { color: #d0c8dc; }
-        .slide-theme-purple .text-purple-100 { color: #d8d2e0; }
-        .slide-theme-purple .border-purple-400 { border-color: rgba(170, 155, 195, 0.35); }
-        .slide-theme-purple .bg-purple-500 { background-color: #7a6a94 !important; }
-
-        .slide-theme-conclusion .text-blue-100 { color: #c5d0dc; }
-        .slide-theme-conclusion .text-blue-200 { color: #b0bec9; }
-
         [class*="bg-black/20"] { background-color: rgba(0, 0, 0, 0.14) !important; }
         [class*="bg-black/10"] { background-color: rgba(0, 0, 0, 0.08) !important; }
-        [class*="bg-black/30"] { background-color: rgba(0, 0, 0, 0.18) !important; }
-        [class*="bg-black/40"] { background-color: rgba(0, 0, 0, 0.22) !important; }
-        [class*="bg-white/5"] { background-color: rgba(255, 255, 255, 0.04) !important; }
         [class*="bg-white/10"] { background-color: rgba(255, 255, 255, 0.06) !important; }
-        [class*="bg-white/95"] { background-color: #232d3c !important; }
         [class*="border-white/10"] { border-color: rgba(255, 255, 255, 0.08) !important; }
         [class*="border-white/20"] { border-color: rgba(255, 255, 255, 0.1) !important; }
-        [class*="border-gray-200"],
-        [class*="border-gray-300"] { border-color: rgba(255, 255, 255, 0.1) !important; }
 
-        .text-white,
-        .slide-theme-blue .text-white,
         .slide-theme-orange .text-white,
-        .slide-theme-green .text-white,
-        .slide-theme-purple .text-white,
         .slide-theme-conclusion .text-white { color: #c8d0da !important; }
-        .text-gray-100 { color: #b0bac6 !important; }
-        .text-gray-200 { color: #a8b2be !important; }
+        .text-slate-300 { color: #b0bac6 !important; }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #101827;
+            color: #d8e1ec;
+            font-family: "Inter", sans-serif;
+        }
+
+        #sectionIndicator {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.5rem;
+            z-index: 50;
+            padding: 0.45rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.62);
+            color: #cbd5e1;
+            font-size: 0.78rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
     </style>
 </head>
-<body class="text-slate-300">
-
-    <div id="presentation" class="relative w-screen h-screen">
-
-        <!-- ==============================
-             INTRO (intro.html)
-        =============================== -->
-
-        <div class="slide slide-theme-intro flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl rounded-3xl border shadow-2xl p-12 text-center">
-                <div class="text-5xl mb-6">💎</div>
-                <h1 class="text-5xl font-bold mb-3">ERP Crystal</h1>
-                <p class="text-xl mb-2">Itération 4 — Sprint finale</p>
-                <p class="text-sm opacity-70 mb-8">28 mai – 22 juin 2026</p>
-                <p class="text-lg">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-intro flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl rounded-3xl border shadow-2xl p-12">
-                <h2 class="text-3xl font-bold mb-6">Objectifs du Sprint 4</h2>
-                <p class="text-lg mb-6">
-                    Un ERP <strong>fonctionnel de bout en bout</strong> — une API .NET, des permissions unifiées, un portail employé.
-                </p>
-                <ul class="space-y-3 text-lg">
-                    <li><strong>Phase 1</strong> — Fin du mock, API réelle</li>
-                    <li><strong>Phase 2</strong> — Rôles dynamiques + CASL</li>
-                    <li><strong>Phase 3</strong> — Portail <code>/mon-espace</code></li>
-                    <li><strong>Phase 4</strong> — Refactorisation de l'ERP</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-intro flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-4xl rounded-3xl border shadow-2xl p-10">
-                <h2 class="text-3xl font-bold mb-6">Suivi de progression</h2>
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="w-full md:w-2/3">
-                        <img src="assets/burndown4.png" alt="Burndown" class="rounded-lg w-full cursor-pointer border img-frame" onclick="openModal(this.src)">
+<body>
+    <main id="presentation" class="relative h-screen w-screen">
+        <!-- ===== Introduction ===== -->
+        <section data-section="Introduction" class="slide soft-blue flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-5xl rounded-3xl p-12 text-center">
+                        <div class="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-3xl bg-blue-400/15 text-5xl shadow-xl">💎</div>
+                        <p class="eyebrow mb-3">Projet de fin d’études</p>
+                        <h1 class="mb-5 text-6xl font-bold text-white">ERP Crystal</h1>
+                        <p class="mb-4 text-2xl text-blue-100">Bilan de quatre itérations de développement</p>
+                        <span class="date-chip mb-9">26 mars — 25 juin 2026</span>
+                        <p class="text-lg text-slate-300">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
                     </div>
-                    <ul class="space-y-3">
-                        <li>✔ 5 phases livrées</li>
-                        <li>✔ 4 rôles (Admin, Gérant, Assistant, Employé)</li>
-                        <li>✔ Pointage punch-in / punch-out</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                </section>
 
-        <!-- ==============================
-             ANTONY (anto.html)
-        =============================== -->
+        <!-- ===== Plan ===== -->
+        <section data-section="Plan" class="slide soft-slate flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                        <p class="eyebrow mb-3">Ordre de passage</p>
+                        <h1 class="mb-9 text-5xl font-bold text-white">Plan de la présentation</h1>
 
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-blue-300 font-semibold tracking-wider uppercase mb-2">Membre 1</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">Antony Burlet</h1>
-                <h2 class="text-3xl font-light mb-10 text-blue-100">Rôle : Développeur Full Stack / Ressources humaines</h2>
+                        <div class="card mx-auto max-w-4xl rounded-2xl p-8">
+                            <ul class="list-disc space-y-5 pl-8 text-2xl text-slate-200 marker:text-blue-300">
+                                <li>Introduction</li>
+                                <li>
+                                    Présentation des quatre itérations
+                                    <ul class="mt-4 list-disc space-y-3 pl-9 text-xl text-slate-300 marker:text-slate-500">
+                                        <li>Itération 1</li>
+                                        <li>Itération 2</li>
+                                        <li>Itération 3</li>
+                                        <li>Itération 4</li>
+                                    </ul>
+                                </li>
+                                <li>Démonstration de l’application</li>
+                                <li>Conclusion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
 
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-blue-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de l'itération 4 :</h3>
-                    <p class="text-xl text-blue-100">
-                        Développer et stabiliser les écrans RH liés aux feuilles de temps, aux fiches de paie et à la
-                        planification, en les reliant aux données réelles et aux permissions de l'application.
-                    </p>
-                </div>
-            </div>
-        </div>
+                <section data-section="Introduction" class="slide soft-blue flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                        <p class="eyebrow mb-3">Avant de présenter le projet</p>
+                        <h2 class="mb-5 text-5xl font-bold text-white">Qu’est-ce qu’un ERP ?</h2>
+                        <p class="mb-9 text-2xl text-blue-100">Un <strong>progiciel de gestion intégré</strong> rassemble les activités principales d’une organisation dans une seule application.</p>
+                        <div class="responsive-grid grid grid-cols-3 items-center gap-7 text-center">
+                            <div class="space-y-4">
+                                <div class="card rounded-xl p-4 text-slate-200">📦 Inventaire</div>
+                                <div class="card rounded-xl p-4 text-slate-200">👥 Employés</div>
+                                <div class="card rounded-xl p-4 text-slate-200">💵 Paie</div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="mb-3 text-4xl text-blue-300">→</div>
+                                <div class="flex h-44 w-44 items-center justify-center rounded-full border border-blue-300/30 bg-blue-400/15 text-center shadow-xl">
+                                    <div><div class="mb-2 text-5xl">💎</div><strong class="text-2xl text-white">ERP</strong><p class="mt-1 text-sm text-blue-100">Données centralisées</p></div>
+                                </div>
+                                <div class="mt-3 text-4xl text-blue-300">→</div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="card rounded-xl p-4 text-slate-200">📅 Planification</div>
+                                <div class="card rounded-xl p-4 text-slate-200">📚 Catalogue</div>
+                                <div class="card rounded-xl p-4 text-slate-200">🏪 Succursales</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
-                    Travail couvert
-                </h2>
+                <section data-section="Introduction" class="slide soft-blue flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-6xl rounded-3xl p-12">
+                        <p class="eyebrow mb-3">Notre mandat</p>
+                        <h2 class="mb-5 text-5xl font-bold text-white">Créer l’ERP d’une librairie multisuccursale</h2>
+                        <p class="mb-8 max-w-4xl text-xl leading-relaxed text-slate-300">Notre équipe devait concevoir une application web permettant de gérer, au même endroit, les produits vendus par la librairie et les opérations liées à ses employés.</p>
+                        <div class="responsive-grid grid grid-cols-2 gap-6 text-lg">
+                            <article class="card accent-blue rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-blue-100">Catalogue et inventaire</h3><p class="text-slate-300">Livres, produits, auteurs, catégories, succursales et quantités en stock.</p></article>
+                            <article class="card accent-purple rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-purple-100">Ressources humaines</h3><p class="text-slate-300">Employés, contrats, congés, horaires, pointages, feuilles de temps et paie.</p></article>
+                            <article class="card accent-green rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-emerald-100">Utilisateurs et permissions</h3><p class="text-slate-300">Présenter les bonnes informations et les bonnes actions selon le rôle et la succursale.</p></article>
+                            <article class="card accent-orange rounded-2xl p-6"><h3 class="mb-2 text-xl font-semibold text-orange-100">Produit utilisable</h3><p class="text-slate-300">Développer le frontend, l’API, la base de données, les tests et le déploiement.</p></article>
+                        </div>
+                    </div>
+                </section>
 
-                <ul class="space-y-6 text-xl">
-                    <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                        <div class="text-blue-400 mt-1">✓</div>
-                        <div>
-                            <strong class="text-white">Feuilles de temps</strong>
-                            <p class="text-blue-100 mt-2">
-                                Consultation et suivi des feuilles liées aux employés, aux heures travaillées et aux statuts.
+        <!-- ===== Itération 1 ===== -->
+        <!-- 1 — Présentation -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <div class="flex items-center justify-between gap-6 mb-2">
+                            <div class="text-blue-300 font-semibold tracking-wider uppercase">Itération 1</div>
+                            <div class="bg-blue-400/20 border border-blue-300/30 rounded-full px-5 py-2 text-blue-100 font-semibold">
+                                26 mars — 15 avril 2026
+                            </div>
+                        </div>
+                        <h1 class="text-6xl font-bold mb-10 text-white">Antony Burlet</h1>
+                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-blue-400">
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal de l’itération</h3>
+                            <p class="text-xl text-blue-100 leading-relaxed">
+                                Poser les fondations techniques de Crystal ERP : structurer le backend,
+                                concevoir la base de données et rendre les premières routes API testables.
                             </p>
                         </div>
-                    </li>
-                    <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                        <div class="text-blue-400 mt-1">✓</div>
-                        <div>
-                            <strong class="text-white">Fiches de paie</strong>
-                            <p class="text-blue-100 mt-2">
-                                Affichage des informations de paie et cohérence avec les données RH disponibles.
+                    </div>
+                </section>
+
+                <!-- 2 — Réalisations -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
+                            Réalisations principales
+                        </h2>
+                        <ul class="space-y-6 text-xl">
+                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
+                                <span class="text-blue-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Architecture backend</strong>
+                                    <p class="text-blue-100 mt-2">Mise en place d’une structure claire pour accueillir les futurs modules métiers.</p>
+                                </div>
+                            </li>
+                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
+                                <span class="text-blue-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Base de données</strong>
+                                    <p class="text-blue-100 mt-2">Conception des entités principales et de leurs relations pour l’ERP.</p>
+                                </div>
+                            </li>
+                            <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
+                                <span class="text-blue-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Swagger et routes API</strong>
+                                    <p class="text-blue-100 mt-2">Ajout des premières routes et d’une interface pour les documenter et les tester.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 3 — Fondations techniques -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚙️</span>
+                            Fondations techniques
+                        </h2>
+                        <div class="grid grid-cols-3 gap-6">
+                            <article class="bg-black/20 p-7 rounded-2xl border border-white/10">
+                                <div class="text-4xl mb-5">🏗️</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">Structure</h3>
+                                <p class="text-blue-100 text-lg leading-relaxed">Séparation des responsabilités et préparation d’une architecture évolutive.</p>
+                            </article>
+                            <article class="bg-black/20 p-7 rounded-2xl border border-white/10">
+                                <div class="text-4xl mb-5">🗄️</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">Données</h3>
+                                <p class="text-blue-100 text-lg leading-relaxed">Modélisation initiale des données nécessaires aux employés, produits et inventaires.</p>
+                            </article>
+                            <article class="bg-black/20 p-7 rounded-2xl border border-white/10">
+                                <div class="text-4xl mb-5">🔌</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">API</h3>
+                                <p class="text-blue-100 text-lg leading-relaxed">Validation des échanges avec la base de données grâce aux routes exposées dans Swagger.</p>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4 — Burndown -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between gap-6 mb-6">
+                            <h2 class="text-4xl font-bold text-white flex items-center gap-4">
+                                <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📉</span>
+                                Burndown de l’itération 1
+                            </h2>
+                            <span class="bg-blue-400/20 border border-blue-300/30 rounded-full px-5 py-2 text-blue-100 font-semibold whitespace-nowrap">
+                                26 mars — 15 avril 2026
+                            </span>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-2xl">
+                            <img src="assets/burndown1.png"
+                                 alt="Graphique burndown de l’itération 1"
+                                 class="w-full max-h-[540px] object-contain rounded-xl">
+                        </div>
+                        <p class="text-blue-100 text-lg mt-5 text-center">
+                            L’évolution irrégulière du travail restant reflète les reprises, les changements d’architecture et les difficultés d’intégration rencontrées.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 5 — Vue d’ensemble des problèmes -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span class="bg-red-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚠️</span>
+                            Une itération marquée par plusieurs problèmes
+                        </h2>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-red-950/50 p-6 rounded-2xl border border-red-400/30">
+                                <h3 class="text-xl font-semibold text-red-200 mb-2">Architecture instable</h3>
+                                <p class="text-white">La structure du backend n’était pas assez définie avant le développement.</p>
+                            </div>
+                            <div class="bg-red-950/50 p-6 rounded-2xl border border-red-400/30">
+                                <h3 class="text-xl font-semibold text-red-200 mb-2">Fusions Git difficiles</h3>
+                                <p class="text-white">Les branches avaient trop divergé et les conflits étaient coûteux à résoudre.</p>
+                            </div>
+                            <div class="bg-red-950/50 p-6 rounded-2xl border border-red-400/30">
+                                <h3 class="text-xl font-semibold text-red-200 mb-2">Vision commune incomplète</h3>
+                                <p class="text-white">L’équipe n’avait pas toujours la même compréhension des choix techniques.</p>
+                            </div>
+                            <div class="bg-red-950/50 p-6 rounded-2xl border border-red-400/30">
+                                <h3 class="text-xl font-semibold text-red-200 mb-2">Mauvaise compréhension du besoin</h3>
+                                <p class="text-white">Une hypothèse de départ erronée sur les attentes du client a obligé l’équipe à modifier ses récits utilisateurs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6 — Architecture -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-5xl bg-black/20 backdrop-blur-lg rounded-3xl border border-red-300/20 shadow-2xl p-12">
+                        <div class="text-red-300 font-semibold tracking-wider uppercase mb-3">Problème 1</div>
+                        <h2 class="text-4xl font-bold mb-8 text-white">Une architecture définie trop tard</h2>
+                        <div class="space-y-5 text-xl text-red-50">
+                            <p class="bg-black/20 p-5 rounded-xl border-l-4 border-red-400">Nous avons commencé à développer avant d’avoir une structure backend complètement partagée et validée.</p>
+                            <p class="bg-black/20 p-5 rounded-xl border-l-4 border-orange-400">Des dossiers, responsabilités et dépendances ont dû être déplacés ou repensés pendant l’itération.</p>
+                            <p class="bg-black/20 p-5 rounded-xl border-l-4 border-yellow-400">Conséquence : du travail déjà terminé a dû être adapté, parfois plus d’une fois.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7 — Git -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-5xl bg-black/20 backdrop-blur-lg rounded-3xl border border-red-300/20 shadow-2xl p-12">
+                        <div class="text-red-300 font-semibold tracking-wider uppercase mb-3">Problème 2</div>
+                        <h2 class="text-4xl font-bold mb-8 text-white">Des conflits Git qui annulaient des progrès</h2>
+                        <div class="grid grid-cols-3 gap-5 mb-8">
+                            <div class="bg-black/30 p-6 rounded-2xl text-center"><div class="text-4xl mb-3">⑴</div><p class="text-red-100">Branches trop longtemps séparées</p></div>
+                            <div class="bg-black/30 p-6 rounded-2xl text-center"><div class="text-4xl mb-3">⑵</div><p class="text-red-100">Structures devenues incompatibles</p></div>
+                            <div class="bg-black/30 p-6 rounded-2xl text-center"><div class="text-4xl mb-3">⑶</div><p class="text-red-100">Ancien code réintroduit au merge</p></div>
+                        </div>
+                        <p class="text-xl text-white bg-red-950/50 p-6 rounded-xl border border-red-400/30">
+                            Le problème n’était pas seulement de résoudre des conflits : certaines fusions ramenaient une ancienne architecture et forçaient l’équipe à refaire des corrections.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 8 — Communication et besoins -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-black/20 backdrop-blur-lg rounded-3xl border border-red-300/20 shadow-2xl p-12">
+                        <div class="text-red-300 font-semibold tracking-wider uppercase mb-3">Problèmes 3 et 4</div>
+                        <h2 class="text-4xl font-bold mb-8 text-white">Communication et compréhension du besoin</h2>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="bg-black/30 p-7 rounded-2xl border border-white/10">
+                                <h3 class="text-2xl font-semibold text-red-200 mb-5">Dans l’équipe</h3>
+                                <ul class="space-y-4 text-lg text-white">
+                                    <li>• Décisions techniques pas toujours communiquées assez vite</li>
+                                    <li>• Compréhension différente de l’architecture cible</li>
+                                    <li>• Manque de recul collectif avant certaines implémentations</li>
+                                </ul>
+                            </div>
+                            <div class="bg-black/30 p-7 rounded-2xl border border-white/10">
+                                <h3 class="text-2xl font-semibold text-orange-200 mb-5">Avec le besoin client</h3>
+                                <ul class="space-y-4 text-lg text-white">
+                                    <li>• Besoins du client mal compris au départ</li>
+                                    <li>• Développement basé sur une hypothèse erronée</li>
+                                    <li>• Récits utilisateurs devenus incompatibles avec le besoin réel</li>
+                                    <li>• Reprise de l’analyse et modification des récits déjà planifiés</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9 — Conséquences -->
+                <section data-section="Itération 1" class="slide bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-black/20 backdrop-blur-lg rounded-3xl border border-orange-300/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white">Conséquences sur l’itération</h2>
+                        <div class="grid grid-cols-2 gap-6 text-xl">
+                            <div class="bg-black/25 p-6 rounded-xl border-l-4 border-orange-400"><strong class="text-orange-200">Temps perdu</strong><p class="text-white mt-2">Résolution de conflits et reprise de code déjà réalisé.</p></div>
+                            <div class="bg-black/25 p-6 rounded-xl border-l-4 border-orange-400"><strong class="text-orange-200">Planification bouleversée</strong><p class="text-white mt-2">La correction de l’hypothèse de départ a changé plusieurs récits utilisateurs en cours d’itération.</p></div>
+                            <div class="bg-black/25 p-6 rounded-xl border-l-4 border-orange-400"><strong class="text-orange-200">Dette technique</strong><p class="text-white mt-2">Des choix temporaires ont dû être conservés pour continuer d’avancer.</p></div>
+                            <div class="bg-black/25 p-6 rounded-xl border-l-4 border-orange-400"><strong class="text-orange-200">Charge mentale</strong><p class="text-white mt-2">Il fallait comprendre plusieurs versions de la structure en parallèle.</p></div>
+                        </div>
+                    </div>
+                </section>
+
+        <!-- ===== Itération 2 ===== -->
+                <!-- ==============================
+                     SECTION MAUVE (Membre 4)
+                =============================== -->
+
+                <!-- Page 10 : Mauve -->
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
+                        <div class="text-purple-300 font-semibold tracking-widest uppercase mb-4">
+                            Membre 4
+                        </div>
+                        <span class="mb-5 inline-block rounded-full border border-purple-300/30 bg-purple-400/15 px-5 py-2 font-semibold text-purple-100">
+                            16 avril — 11 mai 2026
+                        </span>
+                        <h1 class="text-6xl font-bold text-white mb-6">
+                            Nicolas Michaud
+                        </h1>
+                        <div class="w-24 h-1 bg-purple-400 mx-auto rounded-full mb-8"></div>
+                        <h2 class="text-4xl font-bold text-white mb-8">
+                            Optimisation de la base du projet
+                        </h2>
+                        <p class="text-2xl text-gray-200 leading-relaxed max-w-4xl mx-auto">
+                            La seconde itération a commencé par une réorganisation du projet.
+                            Nous avons corrigé plusieurs problèmes mineurs, renommé certaines
+                            parties du code et amélioré sa structure afin de faciliter son
+                            évolution pour les prochaines étapes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Burndown de l'itération 2 -->
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="mb-6 flex items-center justify-between gap-6">
+                            <h2 class="text-4xl font-bold text-white">📉 Burndown de l’itération 2</h2>
+                            <span class="rounded-full border border-purple-300/30 bg-purple-400/15 px-5 py-2 font-semibold text-purple-100 whitespace-nowrap">
+                                16 avril — 11 mai 2026
+                            </span>
+                        </div>
+                        <div class="rounded-2xl bg-white p-5 shadow-2xl">
+                            <img src="assets/Burndown2.png"
+                                 alt="Graphique burndown de l’itération 2"
+                                 class="mx-auto max-h-[520px] w-full cursor-pointer rounded-xl object-contain"
+                                 onclick="openModal(this.src)">
+                        </div>
+                        <p class="mt-5 text-center text-lg text-purple-100">
+                            Après une augmentation du travail au début de l’itération, le travail restant diminue progressivement jusqu’à atteindre zéro.
+                        </p>
+                    </div>
+                </div>
+
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+
+                        <h2 class="text-4xl font-bold text-white mb-10 text-center">
+                            📈 Amélioration de notre méthode de travail
+                        </h2>
+
+                        <p class="text-xl text-gray-200 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                            Au-delà des fonctionnalités développées, nous avons revu notre façon de collaborer afin
+                            d'améliorer la qualité du développement et la rapidité d'exécution pour les prochains sprints.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-8">
+
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/10">
+                                <div class="text-4xl mb-4 text-center">📝</div>
+                                <h3 class="text-2xl font-semibold text-white text-center mb-4">
+                                    User Stories
+                                </h3>
+                                <div class="space-y-3 text-lg text-gray-200">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Rédaction avant le développement</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Critères d'acceptation définis</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/10">
+                                <div class="text-4xl mb-4 text-center">🔀</div>
+                                <h3 class="text-2xl font-semibold text-white text-center mb-4">
+                                    Pull Requests
+                                </h3>
+                                <div class="space-y-3 text-lg text-gray-200">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Développement sur des branches dédiées</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Fusion après approbation</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white/10 rounded-2xl p-6 border border-white/10">
+                                <div class="text-4xl mb-4 text-center">👥</div>
+                                <h3 class="text-2xl font-semibold text-white text-center mb-4">
+                                    Répartition des tâches
+                                </h3>
+                                <div class="space-y-3 text-lg text-gray-200">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Meilleure distribution des responsabilités</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-green-400">✔</span>
+                                        <span>Suivi plus efficace de l'avancement</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <p class="text-center text-xl text-gray-300 mt-10 italic">
+                            Ces changements permettront une meilleure qualité du code et une collaboration plus efficace
+                            pour les prochaines itérations.
+                        </p>
+
+                    </div>
+                </div>
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold text-white mb-10 text-center">
+                            🚀 Pipeline Azure DevOps
+                        </h2>
+                        <div class="grid grid-cols-2 gap-10 items-center">
+                            <div>
+                                <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+                                    Nous avons également mis en place un pipeline d'intégration continue sur Azure DevOps.
+                                    Celui-ci compile automatiquement le projet et exécute les tests à chaque modification.
+                                </p>
+                                <div class="space-y-4 text-xl">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Compilation automatique</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Exécution des tests</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Détection des erreurs</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 gap-6">
+
+                                <img src="assets/n1.png"
+                                    class="rounded-2xl shadow-2xl border border-white/20 hover:scale-[1.02] transition">
+
+                                <img src="assets/n2.png"
+                                    class="rounded-2xl shadow-2xl border border-white/20 hover:scale-[1.02] transition">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold text-white mb-8 text-center">
+                            🎨 Développement du Frontend
+                        </h2>
+                        <p class="text-xl text-gray-200 text-center max-w-4xl mx-auto mb-8 leading-relaxed">
+                            Nous avons développé la structure principale de l'application afin d'offrir une
+                            interface moderne et cohérente.
+                        </p>
+                        <div class="grid grid-cols-2 gap-y-5 gap-x-10 text-xl mb-10">
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400 text-2xl">✔</span>
+                                <span>Création du Layout principal</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400 text-2xl">✔</span>
+                                <span>Développement du Header</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400 text-2xl">✔</span>
+                                <span>Mise en place du Dashboard</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-green-400 text-2xl">✔</span>
+                                <span>Structure réutilisable pour les futures pages</span>
+                            </div>
+                        </div>
+                        <img src="assets/n6.png" class="w-full rounded-2xl shadow-2xl border border-white/20">
+                    </div>
+                </div>
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold text-white mb-10 text-center">
+                            ⚡ Expérience utilisateur
+                        </h2>
+                        <div class="grid grid-cols-2 gap-12 items-center">
+                            <div>
+                                <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+                                    Afin d'améliorer l'expérience utilisateur, un indicateur de
+                                    chargement (<em>spinner</em>) a été ajouté lors des appels
+                                    asynchrones.
+                                </p>
+                                <div class="space-y-5 text-xl">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Affichage pendant le chargement</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Retour visuel à l'utilisateur</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Navigation plus fluide</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="assets/n3.gif" class="rounded-2xl shadow-2xl border border-white/20 w-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold text-white mb-10 text-center">
+                            📦 Gestion des items
+                        </h2>
+                        <div class="grid grid-cols-2 gap-12 items-center">
+                            <div>
+                                <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+                                    Nous avons développé le module de gestion des items, autant du côté
+                                    backend que frontend, afin de permettre leur administration complète.
+                                </p>
+                                <div class="space-y-5 text-xl">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Création d'items</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Modification</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Suppression</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Consultation de la liste</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">🔒</span>
+                                        <span>Fonctionnalités réservées aux administrateurs</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="assets/n4.png" class="rounded-2xl shadow-2xl border border-white/20 w-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold text-white mb-10 text-center">
+                            👥 Gestion des utilisateurs
+                        </h2>
+                        <div class="grid grid-cols-2 gap-12 items-center">
+                            <div>
+                                <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+                                    Nous avons développé les premières fonctionnalités du module
+                                    Ressources humaines avec la gestion complète des utilisateurs.
+                                </p>
+                                <div class="space-y-5 text-xl">
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Liste des utilisateurs</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Profil utilisateur</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Création</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Modification</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-green-400 text-2xl">✔</span>
+                                        <span>Suppression</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="assets/n5.png" class="rounded-2xl shadow-2xl border border-white/20 w-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-section="Itération 2" class="slide bg-gradient-to-br from-purple-600 to-indigo-900 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
+                        <div class="text-6xl mb-6">🎯</div>
+                        <h2 class="text-5xl font-bold text-white mb-8">
+                            Conclusion
+                        </h2>
+                        <p class="text-2xl text-gray-200 leading-relaxed mb-10">
+                            Cette deuxième itération a marqué une étape importante dans le développement
+                            de notre ERP. Nous avons réussi à connecter le backend et le frontend,
+                            tout en développant les premières fonctionnalités essentielles de l'application.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 text-xl">
+                            <div class="bg-white/10 rounded-xl p-5">
+                                ✅ Backend connecté au Frontend
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-5">
+                                ✅ Interface utilisateur fonctionnelle
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-5">
+                                ✅ Gestion des items et des utilisateurs
+                            </div>
+                            <div class="bg-white/10 rounded-xl p-5">
+                                ✅ Base solide pour les prochaines itérations
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        <!-- ===== Itération 3 ===== -->
+        <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <div class="flex items-center justify-between gap-6 mb-2">
+                            <div class="text-emerald-200 font-semibold tracking-wider uppercase">Itération 3</div>
+                            <div
+                                class="bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-2 text-emerald-50 font-semibold">
+                                11 mai — 27 mai 2026
+                            </div>
+                        </div>
+                        <h1 class="text-6xl font-bold mb-10 text-white">William Peck</h1>
+                        <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-300">
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Focus principal :</h3>
+                            <p class="text-xl text-emerald-50 leading-relaxed">
+                                Avancer le projet pour attraper le retard.
                             </p>
                         </div>
-                    </li>
-                    <li class="bg-black/10 p-6 rounded-xl border border-white/10 flex items-start gap-4">
-                        <div class="text-blue-400 mt-1">✓</div>
-                        <div>
-                            <strong class="text-white">Planification</strong>
-                            <p class="text-blue-100 mt-2">
-                                Visualisation des quarts de travail et intégration avec les profils employés.
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+                    </div>
+                </section>
 
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🧩</span>
-                    Parcours fonctionnels
-                </h2>
-
-                <div class="grid grid-cols-3 gap-6">
-                    <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold text-white mb-4">Planification</h3>
-                        <ul class="space-y-3 text-blue-100 text-lg">
-                            <li>• Consultation des horaires</li>
-                            <li>• Quarts associés aux employés</li>
-                            <li>• Base pour le portail employé</li>
+                <!-- Rencontre avec client-->
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span
+                                class="bg-red-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg text-white">⚠️</span>
+                            Rencontre avec le client
+                        </h2>
+                        <ul class="space-y-6 text-xl">
+                            <!-- Chaque élément garde son style rouge pour contraster -->
+                            <li class="bg-red-950/40 p-6 rounded-xl border border-red-500/30 flex items-start gap-4">
+                                <span class="text-red-400 font-bold">!</span>
+                                <div>
+                                    <strong class="text-white">Progrès insatisfaisant</strong>
+                                    <p class="text-red-100 mt-2">Le client était très mécontent de notre manque apparent de
+                                        progrès.</p>
+                                </div>
+                            </li>
+                            <li class="bg-red-950/40 p-6 rounded-xl border border-red-500/30 flex items-start gap-4">
+                                <span class="text-red-400 font-bold">!</span>
+                                <div>
+                                    <strong class="text-white">Absence de fonctionnalités demandées</strong>
+                                    <p class="text-red-100 mt-2">Des fonctionnalités, notamment la gestion de l'inventaire et
+                                        les RH, était incomplètes ou n'avaient pas encore été implémentées.</p>
+                                </div>
+                            </li>
+                            <li class="bg-red-950/40 p-6 rounded-xl border border-red-500/30 flex items-start gap-4">
+                                <span class="text-red-400 font-bold">!</span>
+                                <div>
+                                    <strong class="text-white">UI insatisfaisant</strong>
+                                    <p class="text-red-100 mt-2">Le client était mécontent du visuel encore « placeholder ».</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                    <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold text-white mb-4">Feuilles de temps</h3>
-                        <ul class="space-y-3 text-blue-100 text-lg">
-                            <li>• Liste consultable par les rôles autorisés</li>
-                            <li>• Statuts visibles pour le suivi</li>
-                            <li>• Lien avec les heures travaillées</li>
-                        </ul>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                        <h3 class="text-2xl font-semibold text-white mb-4">Fiches de paie</h3>
-                        <ul class="space-y-3 text-blue-100 text-lg">
-                            <li>• Affichage des montants RH</li>
-                            <li>• Accès limité selon les permissions</li>
-                            <li>• Cohérence avec les données employé</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </section>
 
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🕒</span>
-                    Feuilles de temps
-                </h2>
-                <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                    <img src="assets/FeuillesDeTemps.png"
-                        class="rounded-xl shadow-lg mx-auto w-full max-h-[560px] object-contain cursor-pointer"
-                        onclick="openModal(this.src)"
-                        alt="Liste des feuilles de temps">
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🕒</span>
-                    Détail d'une feuille de temps
-                </h2>
-                <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                    <img src="assets/DétailsFeuilleTemps.png"
-                        class="rounded-xl shadow-lg mx-auto w-full max-h-[560px] object-contain cursor-pointer"
-                        onclick="openModal(this.src)"
-                        alt="Détail d'une feuille de temps">
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">💵</span>
-                    Fiches de paie
-                </h2>
-                <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                    <img src="assets/Paie.png"
-                        class="rounded-xl shadow-lg mx-auto w-full max-h-[560px] object-contain cursor-pointer"
-                        onclick="openModal(this.src)"
-                        alt="Écran des fiches de paie">
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📅</span>
-                    Planification
-                </h2>
-                <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
-                    <img src="assets/Planification.png"
-                        class="rounded-xl shadow-lg mx-auto w-full max-h-[560px] object-contain cursor-pointer"
-                        onclick="openModal(this.src)"
-                        alt="Écran de planification">
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-blue flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-blue-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🚀</span>
-                    Défis
-                </h2>
-                <div class="grid grid-cols-2 gap-8">
-                    <div class="challenge-box p-8 rounded-2xl border">
-                        <h3 class="text-2xl font-semibold mb-4">Défis rencontrés</h3>
-                        <ul class="space-y-3 text-lg text-slate-300">
-                            <li>• Comprendre le lien entre planning, heures et paie</li>
-                            <li>• Garder les écrans cohérents avec les contrats backend</li>
-                            <li>• Gérer les accès selon les rôles RH</li>
-                            <li>• Éviter les incohérences entre données employé et données gestionnaire</li>
-                        </ul>
-                    </div>
-                    <div class="solution-box p-8 rounded-2xl border">
-                        <h3 class="text-2xl font-semibold mb-4">Solutions appliquées</h3>
-                        <ul class="space-y-3 text-lg text-slate-300">
-                            <li>• Vérification des endpoints RH utilisés par les écrans</li>
-                            <li>• Tests manuels des parcours feuilles de temps, paie et planning</li>
-                            <li>• Ajustements progressifs des composants frontend</li>
-                            <li>• Utilisation de l'IA pour clarifier les liens métier</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==============================
-             BILLY (billy.html)
-        =============================== -->
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-orange-200 font-semibold tracking-wider uppercase mb-2">Membre 2 · Full-Stack · Lead technique</div>
-                <h1 class="text-5xl font-bold mb-8 text-white">Billy Hallé</h1>
-                <h3 class="text-xl font-semibold mb-3 text-white">Focus itération 4</h3>
-                <p class="text-orange-50 mb-4">Du prototype mocké vers une application unifiée et sécurisée.</p>
-                <ul class="text-lg text-orange-50 space-y-2 list-disc list-inside">
-                    <li>Alignement API (.NET)</li>
-                    <li>Permissions dynamiques</li>
-                    <li>Scoping employé</li>
-                    <li>Pointage</li>
-                    <li>Rôles unifiés (<code>DynamicRoleId</code>)</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-6">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto">
-                <h2 class="text-2xl font-bold mb-2 text-white">Alignement API (.NET)</h2>
-                <p class="text-orange-100 mb-4 text-sm">Une seule source de vérité — fin de json-server et des données simulées.</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — mock</p>
-                        <pre><code><span class="text-gray-400">// apiBaseUrl.ts</span>
-export const USE_MOCK_API = <span class="tag-before">true</span>;
-
-<span class="text-gray-400">// service</span>
-if (USE_MOCK_API) {
-  return fetch(<span class="tag-before">"http://localhost:3001/items"</span>);
-}</code></pre>
-                    </div>
-                    <div>
-                        <p class="tag-after text-xs font-bold mb-1 uppercase">Après — API Crystal</p>
-                        <pre><code><span class="text-gray-400">// apiBaseUrl.ts</span>
-export const USE_MOCK_API = <span class="tag-after">false</span>;
-export const API_URL = `${AUTH_URL}/api`;
-
-<span class="text-gray-400">// service</span>
-return apiClient.get(<span class="tag-after">`${API_ITEMS_URL}`</span>);</code></pre>
-                    </div>
-                </div>
-                <p class="text-orange-100 text-sm mb-2">Swagger — test des routes en direct :</p>
-                <img src="assets/swagger_gif.gif" alt="Démo Swagger"
-                     class="rounded-xl max-h-[32vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                     onclick="openModal(this.src)">
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-6">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
-                <h2 class="text-2xl font-bold mb-2 text-white">Permissions dynamiques</h2>
-                <p class="text-orange-100 mb-4 text-sm">Même modèle côté API et UI — configurable en base de données.</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    <div>
-                        <p class="tag-before text-xs font-bold mb-1 uppercase">Avant — hybride</p>
-                        <pre><code><span class="text-gray-400">// Rôle Identity + presets locaux</span>
-if (user.role === <span class="tag-before">"Admin"</span>) {
-  showMenu(<span class="tag-before">"rh"</span>);
-}
-<span class="text-gray-400">// json-server pour les rôles custom</span></code></pre>
-                    </div>
-                    <div>
-                        <p class="tag-after text-xs font-bold mb-1 uppercase">Après — unifié</p>
-                        <pre><code><span class="text-gray-400">// Backend</span>
-[<span class="tag-after">RequirePermission("read", "employee_profile")</span>]
-
-<span class="text-gray-400">// Frontend (CASL)</span>
-GET <span class="tag-after">/api/users/me/permissions</span>
-→ defineAbilityFor(user, permissions)</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                <h2 class="text-2xl font-bold mb-4 text-white">Scoping employé</h2>
-                <p class="text-orange-50 text-lg mb-4">Chaque employé ne voit que <strong>ses</strong> données RH.</p>
-                <ul class="text-orange-50 space-y-2 list-disc list-inside">
-                    <li><code>EmployeeScopeService</code> — filtre backend centralisé</li>
-                    <li>Congés, quarts, pointages, feuilles de temps scopés</li>
-                    <li>Portail <code>/mon-espace</code> pour l'employé</li>
-                    <li>Inventaire limité à la succursale de l'utilisateur</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                <h2 class="text-2xl font-bold mb-4 text-white">Pointage</h2>
-                <ul class="text-orange-50 space-y-2 list-disc list-inside mb-6">
-                    <li>Widget punch-in / punch-out sur le dashboard</li>
-                    <li><code>PunchEligibilityService</code> — validation du quart lié</li>
-                    <li><code>BusinessClock</code> — règles métier (fuseau Toronto)</li>
-                </ul>
-                <img src="assets/pointage0.png" alt="Capture pointage"
-                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer mb-4"
-                     onclick="openModal(this.src)">
-                <img src="assets/pointage1.png" alt="Capture pointage"
-                     class="rounded-xl max-h-[42vh] w-auto border border-white/10 shadow-lg cursor-pointer"
-                     onclick="openModal(this.src)">
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
-                <h2 class="text-2xl font-bold mb-4 text-white">Rôles unifiés — <code>DynamicRoleId</code></h2>
-                <ul class="text-orange-50 space-y-2 list-disc list-inside">
-                    <li>Un seul champ sur l'utilisateur : <code>DynamicRoleId</code></li>
-                    <li>4 presets (Admin, Gérant, Assistant, Employé) + rôles custom</li>
-                    <li>Suppression du code Identity legacy redondant</li>
-                    <li>Admin peut créer et assigner un rôle depuis l'UI</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-6">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
-                <h2 class="text-2xl font-bold mb-2 text-white">Architecture de développement</h2>
-                <p class="text-orange-100 text-sm mb-4">Docker Compose local — <code>localhost:3000</code> / <code>:8080</code></p>
-                <img src="assets/diagramme_dev.svg" alt="Diagramme architecture développement"
-                     class="rounded-xl max-h-[62vh] w-full object-contain diagram-frame p-4 cursor-pointer"
-                     onclick="openModal(this.src)">
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-6">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 text-center">
-                <h2 class="text-2xl font-bold mb-2 text-white">Architecture de production</h2>
-                <p class="text-orange-100 text-sm mb-4">
-                    Serveur <code>crystal-server</code> · Cloudflare Tunnel ·
-                    <a href="https://dev.librairiecrystal.com/" class="underline hover:text-white" target="_blank" rel="noopener">dev.librairiecrystal.com</a>
-                </p>
-                <img src="assets/diagramme_prod.svg" alt="Diagramme architecture production"
-                     class="rounded-xl max-h-[62vh] w-full object-contain diagram-frame p-4 cursor-pointer"
-                     onclick="openModal(this.src)">
-            </div>
-        </div>
-
-        <div class="slide slide-theme-orange flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
-                <h2 class="text-3xl font-bold mb-6 text-white">Bilan</h2>
-                <p class="text-xl text-orange-50 mb-2">ERP fonctionnel, déployé et accessible en ligne.</p>
-                <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener"
-                   class="inline-block text-2xl font-semibold text-white hover:text-orange-200 underline decoration-orange-300 underline-offset-4 mb-8 transition-colors">
-                    dev.librairiecrystal.com
-                </a>
-                <p class="text-lg text-orange-50/90 font-light">
-                    « Une API, une vérité sur les permissions — du login au bouton masqué. »
-                </p>
-            </div>
-        </div>
-
-        <!-- ==============================
-             WILLIAM (will.html)
-        =============================== -->
-
-        <div class="slide slide-theme-green flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-emerald-200 font-semibold tracking-wider uppercase mb-2">Membre 3</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">William Peck</h1>
-                <h2 class="text-3xl font-light mb-10 text-emerald-100">Rôle : Frontend</h2>
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-emerald-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Mes responsabilités :</h3>
-                    <p class="text-xl text-emerald-50">Développement frontend / application web</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-green flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                    Travail accompli
-                </h2>
-                <div class="flex flex-col gap-4">
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Mise en place d'un système initial de permissions dynamiques</h3>
+                <!-- fondations techniques -->
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span
+                                class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">⚙️</span>
+                            Fondations techniques
+                        </h2>
+                        <div class="grid grid-cols-3 gap-6">
+                            <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                                <div class="text-4xl mb-5">🏗️</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">Composants réutilisables</h3>
+                                <p class="text-emerald-50 text-lg leading-relaxed">Nous avons investi massivement dans des
+                                    composants React réutilisables comme « building blocks » pour les futures pages et
+                                    fonctionnalités, ce qui nous a grandement aidés.</p>
+                            </article>
+                            <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                                <div class="text-4xl mb-5">🗄️</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">Système de permissions dynamiques</h3>
+                                <p class="text-emerald-50 text-lg leading-relaxed">Nous avons commencé à mettre en place un
+                                    système centralisé de gestion des
+                                    permissions : single source of truth.</p>
+                            </article>
+                            <article class="bg-black/20 p-7 rounded-2xl border border-emerald-400/20">
+                                <div class="text-4xl mb-5">🔌</div>
+                                <h3 class="text-2xl font-semibold text-white mb-4">Mock API</h3>
+                                <p class="text-emerald-50 text-lg leading-relaxed">Nous avons utilisé json-server pour simuler
+                                    une
+                                    API et permettre au frontend d'avancer immédiatement, facilitant ainsi une transition
+                                    simple vers le serveur réel dès qu'il fut prêt.</p>
+                            </article>
                         </div>
                     </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Divers ajustements, améliorations et corrections de bugs</h3>
+                </section>
+
+                <div data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-6">
+                    <div
+                        class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto text-emerald-50">
+
+                        <h2 class="text-2xl font-bold mb-2 text-white">Exemple d'un composant réutilisable :
+                            GenericPageLayout
+                        </h2>
+                        <p class="text-emerald-100 mb-4 text-sm">Une seule source de vérité — Standardisation de la structure
+                            des pages.</p>
+
+                        <div class="mb-6">
+                            <p class="text-emerald-200 text-xs font-bold mb-1 uppercase tracking-wider">Implémentation du
+                                Wrapper</p>
+                            <pre class="bg-black/30 p-4 rounded-xl text-sm font-mono text-emerald-50 overflow-x-auto"><code>&lt;GenericPageLayout
+          title={title}
+          subtitle={subtitle}
+          onEditClick={canEdit ? () =&gt; onEditClick() : undefined}
+          onDeleteClick={canDelete ? () =&gt; onDeleteClick() : undefined}
+        &gt;
+          &lt;!-- Page content --&gt;
+        &lt;/GenericPageLayout&gt;</code></pre>
                         </div>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl flex items-center gap-6">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">Refactoring et cleanup du projet</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="slide slide-theme-green flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-emerald-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">🎯</span>
-                    Objectifs pour le futur
-                </h2>
-                <div class="flex flex-col gap-4">
-                    <div class="bg-black/20 p-6 rounded-xl">
-                        <h3 class="text-2xl font-bold text-white">Continuer à travailler le visuel et l'utilisabilité (UI/UX)</h3>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl">
-                        <h3 class="text-2xl font-bold text-white">Retravailler le positionnement des boutons dans le sidebar</h3>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl">
-                        <h3 class="text-2xl font-bold text-white">Continuer à assurer la maintenabilité de l'application</h3>
-                    </div>
-                    <div class="bg-black/20 p-6 rounded-xl">
-                        <h3 class="text-2xl font-bold text-white">Écrire des tests unitaires</h3>
+                        <img src="assets/will/GenericPageLayout.png" alt="Démo GenericPageLayout"
+                            class="rounded-xl max-h-[28vh] w-auto border border-white/10 shadow-lg cursor-pointer"
+                            onclick="openModal(this.src)">
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- ==============================
-             NICOLAS (nico.html)
-        =============================== -->
-
-        <div class="slide slide-theme-purple flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <div class="text-purple-300 font-semibold tracking-wider uppercase mb-2">Membre 4</div>
-                <h1 class="text-6xl font-bold mb-4 text-white">Nicolas Michaud</h1>
-                <h2 class="text-3xl font-light mb-10 text-purple-200">Rôle : Frontend du site Web</h2>
-                <div class="bg-black/20 p-8 rounded-2xl border-l-4 border-purple-400">
-                    <h3 class="text-2xl font-semibold mb-4 text-white">Mon mandat :</h3>
-                    <p class="text-xl text-purple-100">
-                        Durant cette itération, je me suis principalement occupé des auteurs du site Web.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-purple flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                    Tâches et Validations
-                </h2>
-                <ul class="space-y-6 text-xl">
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <strong class="text-purple-300">La page principale</strong>
-                        <p class="text-gray-200 mt-2">Pour commencer, voici la page principale des auteurs.</p>
-                    </li>
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <img src="assets/n1.png" alt="Page principale des auteurs" class="cursor-pointer" onclick="openModal(this.src)">
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-purple flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                    Tâches et Validations
-                </h2>
-                <ul class="space-y-6 text-xl">
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <strong class="text-purple-300">Affichage</strong>
-                        <p class="text-gray-200 mt-2">Tel que mentionné à ma précédente présentation de ce que j'allais faire, nous pouvons maintenant voir la liste des produits propre à une catégorie ou un auteur.</p>
-                    </li>
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <img src="assets/n2.png" alt="Liste des produits par auteur" class="cursor-pointer" onclick="openModal(this.src)">
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-purple flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">✅</span>
-                    Tâches et Validations
-                </h2>
-                <ul class="space-y-6 text-xl">
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <strong class="text-purple-300">Le logo</strong>
-                        <p class="text-gray-200 mt-2">J'ai également retravaillé le logo du site.</p>
-                    </li>
-                    <li class="bg-white/5 p-6 rounded-xl border border-purple-400/30">
-                        <img src="assets/n3.png" alt="Nouveau logo" class="cursor-pointer" onclick="openModal(this.src)">
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="slide slide-theme-purple flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
-                <h2 class="text-4xl font-bold mb-8 text-white flex items-center gap-4">
-                    <span class="bg-purple-500 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📊</span>
-                    Ma conclusion sur ce que j'ai accompli
-                </h2>
-                <div class="flex flex-col md:flex-row gap-8">
-                    <div class="flex-1 bg-black/20 p-8 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-white mb-4">État de santé (Sprint 4)</h3>
-                        <p class="text-purple-100 text-lg mb-4">J'ai terminé tout ce qui m'a été assigné au sein de mon équipe.</p>
-                        <div class="w-full bg-black/40 rounded-full h-4 mt-6">
-                            <div class="bg-purple-500 h-4 rounded-full" style="width: 100%"></div>
-                        </div>
-                        <p class="text-right text-sm text-purple-300 mt-1">Couverture : 100%</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==============================
-             CONCLUSION (anto.html)
-        =============================== -->
-
-        <div class="slide slide-theme-conclusion flex items-center justify-center p-8">
-            <div class="slide-content w-full max-w-5xl backdrop-blur-lg rounded-3xl border shadow-2xl p-12 text-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-slate-500 via-slate-400 to-stone-400 rounded-full mx-auto mb-8 flex items-center justify-center text-white text-4xl shadow-lg">
-                    💎
-                </div>
-                <h1 class="text-5xl font-bold mb-6 text-white">Bilan de l'Itération 4</h1>
-                <p class="text-2xl text-blue-100 mb-10 max-w-3xl mx-auto">
-                    Une itération centrée sur la stabilisation du module RH : feuilles de temps, paie et planification
-                    mieux intégrées au frontend, à l'API et aux permissions.
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 text-left">
-                    <div class="bg-black/20 p-8 rounded-2xl border border-white/10">
-                        <h3 class="text-xl font-bold text-white mb-4 border-b border-white/20 pb-2">Ce qui s'est bien passé</h3>
-                        <ul class="list-disc list-inside space-y-2 text-blue-100">
-                            <li>Implémentation des fonctionnalités RH</li>
-                            <li>Écrans plus alignés avec les données réelles</li>
-                            <li>Parcours feuilles de temps, paie et planning clarifiés</li>
-                            <li>Utilisation plus efficace de l'IA comme outil d'analyse</li>
+                <!-- Slide Style : Réalisations -->
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <h2 class="text-4xl font-bold mb-6 text-white flex items-center gap-4">
+                            <span
+                                class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📋</span>
+                            Réalisations principales
+                        </h2>
+                        <ul class="grid grid-cols-3 gap-4 text-lg">
+                            <!-- Style appliqué : bg-black/20 pour le fond sombre -->
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des succursales</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion de l'inventaire des succursales</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des employés</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des contrats de travail</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des congés</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des horaires</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des pointages</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des feuilles de temps</strong>
+                                </div>
+                            </li>
+                            <li class="bg-black/20 p-4 rounded-xl border border-emerald-400/20 flex items-center gap-3">
+                                <span class="text-emerald-300 font-bold">✓</span>
+                                <div>
+                                    <strong class="text-white">Gestion des feuilles de paie</strong>
+                                </div>
+                            </li>
                         </ul>
                     </div>
-                    <div class="bg-black/20 p-8 rounded-2xl border border-white/10">
-                        <h3 class="text-xl font-bold text-white mb-4 border-b border-white/20 pb-2">À améliorer</h3>
-                        <ul class="list-disc list-inside space-y-2 text-blue-100">
-                            <li>Documenter plus vite les règles métier RH</li>
-                            <li>Synchroniser encore plus tôt les contrats API</li>
-                            <li>Ajouter davantage de tests automatisés sur les parcours RH</li>
-                            <li>Continuer à garder les récits utilisateurs comme priorités</li>
+                </section>
+
+                <!-- Burndown -->
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between gap-6 mb-6">
+                            <h2 class="text-4xl font-bold text-white flex items-center gap-4">
+                                <span
+                                    class="bg-emerald-400 w-12 h-12 flex items-center justify-center rounded-full text-2xl shadow-lg">📉</span>
+                                Burndown de l’itération 3
+                            </h2>
+                            <span
+                                class="bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-2 text-emerald-50 font-semibold whitespace-nowrap">
+                                11 mai — 27 mai 2026
+                            </span>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-2xl">
+                            <img src="assets/burndown3.png" alt="Graphique burndown de l’itération 3"
+                                class="w-full max-h-[540px] object-contain rounded-xl">
+                        </div>
+                        <p class="text-emerald-50 text-lg mt-5 text-center">
+                            On constate que beaucoup de progrès a été réalisé en comparativement peu de temps.
+                        </p>
+                    </div>
+                </section>
+
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-6xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12">
+                        <h2 class="text-4xl font-bold mb-8 text-white">Conséquences sur l’itération</h2>
+                        <div class="grid grid-cols-2 gap-6 text-xl">
+                            <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                                <strong class="text-emerald-300">Motivation</strong>
+                                <p class="text-emerald-50 mt-2">Les retours négatifs du client nous ont motivés à redoubler
+                                    d'efforts pour lui prouver qu'il avait tort.</p>
+                            </div>
+                            <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                                <strong class="text-emerald-300">Efficacité</strong>
+                                <p class="text-emerald-50 mt-2">Notre meilleure compréhension du projet nous a permis d'être
+                                    plus efficaces.</p>
+                            </div>
+                            <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                                <strong class="text-emerald-300">Travail d'équipe</strong>
+                                <p class="text-emerald-50 mt-2">Une meilleure connaissance mutuelle nous a permis de travailler
+                                    en équipe avec moins de friction.</p>
+                            </div>
+                            <div class="bg-black/20 p-6 rounded-xl border border-emerald-400/30">
+                                <strong class="text-emerald-300">Gain d'expérience</strong>
+                                <p class="text-emerald-50 mt-2">Nos erreurs antérieures nous ont permis de nous améliorer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section data-section="Itération 3" class="slide bg-gradient-to-br from-emerald-500 to-teal-800 flex items-center justify-center p-8">
+                    <div
+                        class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center text-white">
+                        <div class="text-5xl mb-6">💎</div>
+                        <h1 class="text-4xl font-bold mb-3">Bilan de l’itération 3</h1>
+                        <span
+                            class="inline-block bg-emerald-700/40 border border-emerald-400/30 rounded-full px-5 py-1 mb-6 font-semibold">11
+                            mai – 27 mai 2026</span>
+
+                        <p class="text-xl mb-8 mt-6 max-w-2xl mx-auto text-emerald-50">
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
+                            <!-- Ce qui s'est bien passé -->
+                            <div class="bg-black/20 p-6 rounded-2xl border border-emerald-400/20">
+                                <h3 class="text-lg font-bold text-white mb-3 border-b border-emerald-400/20 pb-2">Ce qui s’est
+                                    bien passé</h3>
+                                <ul class="list-disc list-inside space-y-2 text-sm text-emerald-50">
+                                    <li>Excellent progrès</li>
+                                    <li>Retard rattrapé : objectif accompli</li>
+                                </ul>
+                            </div>
+
+                            <!-- À retenir / améliorer -->
+                            <div class="bg-black/20 p-6 rounded-2xl border border-emerald-400/20">
+                                <h3 class="text-lg font-bold text-white mb-3 border-b border-emerald-400/20 pb-2">À retenir /
+                                    améliorer</h3>
+                                <ul class="list-disc list-inside space-y-2 text-sm text-emerald-50">
+                                    <li>Avec du recul, la majorité de ce que nous avons réalisé cette itération aurait dû être
+                                        fait pendant la
+                                        première.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+        <!-- ===== Itération 4 ===== -->
+        <!-- ========== INTRO ========== -->
+
+                <!-- 1. Titre -->
+                <div data-section="Itération 4" class="slide slide-theme-intro flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-3xl rounded-3xl border shadow-2xl p-12 text-center">
+                        <div class="text-5xl mb-6">💎</div>
+                        <h1 class="text-5xl font-bold mb-3">ERP Crystal</h1>
+                        <p class="text-xl mb-2">Itération 4 — Sprint finale</p>
+                        <span class="date-chip mb-8">28 mai – 25 juin 2026</span>
+                        <p class="text-lg mt-8">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
+                        <p class="text-sm opacity-70 mt-4">Présentation — Billy Hallé</p>
+                    </div>
+                </div>
+
+                <!-- 2. Objectifs intro -->
+                <div data-section="Itération 4" class="slide slide-theme-intro flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-3xl rounded-3xl border shadow-2xl p-12">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-3xl font-bold">Objectifs du Sprint 4</h2>
+                            <span class="date-chip">28 mai – 25 juin</span>
+                        </div>
+                        <p class="text-lg mb-6">
+                            Passer d’un prototype encore dépendant de données simulées à un
+                            <strong>ERP utilisable de bout en bout</strong> : une vraie API, des droits clairs par rôle,
+                            et les outils RH / inventaire prêts pour la librairie.
+                        </p>
+                        <ul class="space-y-3 text-lg">
+                            <li><strong>1.</strong> Brancher l’application sur l’API réelle</li>
+                            <li><strong>2.</strong> Clarifier qui peut voir et faire quoi</li>
+                            <li><strong>3.</strong> Compléter les parcours RH (planning, feuilles, paie)</li>
+                            <li><strong>4.</strong> Améliorer l’expérience au quotidien et stabiliser le produit</li>
                         </ul>
                     </div>
                 </div>
-                <h2 class="text-4xl font-bold text-white mb-4">Merci !</h2>
-                <p class="text-xl text-blue-200">Période de questions ?</p>
-            </div>
-        </div>
 
-    </div>
+                <!-- 3. Burndown -->
+                <div data-section="Itération 4" class="slide slide-theme-intro flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl rounded-3xl border shadow-2xl p-8 custom-scroll max-h-[92vh] overflow-y-auto">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-3xl font-bold">Burndown — Itération 4</h2>
+                            <span class="date-chip">28 mai – 25 juin 2026</span>
+                        </div>
+                        <div class="flex flex-col lg:flex-row gap-6 items-start">
+                            <div class="w-full lg:w-3/5">
+                                <img src="assets/burndown4.png" alt="Burndown itération 4"
+                                     class="rounded-lg w-full cursor-pointer border img-frame"
+                                     onclick="openModal(this.src)">
+                            </div>
+                            <div class="w-full lg:w-2/5 space-y-3 text-sm">
+                                <p>
+                                    Le graphique montre le travail restant pendant le sprint.
+                                    On voit une charge élevée au départ, puis une <strong>baisse progressive</strong>
+                                    à mesure que les fonctionnalités RH, le catalogue et les droits ont été livrés.
+                                </p>
+                                <p>
+                                    La courbe n’est pas parfaitement « idéale » : il y a eu des pics liés aux
+                                    ajustements (permissions, paie, refactor), ce qui est normal en fin de projet
+                                    quand on relie tout ensemble.
+                                </p>
+                                <ul class="space-y-2 list-disc list-inside">
+                                    <li>Sprint dense, livraisons continues</li>
+                                    <li>Beaucoup de travail d’intégration (API + écrans)</li>
+                                    <li>Objectif atteint : produit utilisable et déployé</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="fixed bottom-6 left-0 right-0 flex justify-between px-10 z-50 pointer-events-none">
-        <button onclick="prevSlide()" id="btnPrev" class="nav-btn pointer-events-auto hover:bg-white/15 text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
-            <span>&larr;</span> Précédent
-        </button>
-        <div class="nav-counter backdrop-blur-md px-6 py-3 rounded-full text-slate-200 font-mono shadow-lg border flex items-center gap-2">
+                <!-- ========== CORPS — CE QUE L'ÉQUIPE A LIVRÉ ========== -->
+
+                <!-- 4. Vue d'ensemble -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-3xl font-bold text-white">Ce que l’équipe a livré</h2>
+                            <span class="date-chip">Sprint 4</span>
+                        </div>
+                        <p class="text-orange-50 text-lg mb-6">
+                            Voici les grands blocs fonctionnels complétés collectivement pendant l’itération.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Ressources humaines</h3>
+                                <p class="text-orange-50 text-sm">Planification, feuilles de temps, paie, contrats, pointage.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Catalogue</h3>
+                                <p class="text-orange-50 text-sm">Auteurs, livres filtrés par auteur ou catégorie.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Accès &amp; sécurité</h3>
+                                <p class="text-orange-50 text-sm">Rôles (admin, gérant, assistant, employé) et menus adaptés.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Expérience utilisateur</h3>
+                                <p class="text-orange-50 text-sm">Sidebar, thèmes, navigation plus sûre, interface nettoyée.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Planification -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-2xl font-bold text-white">Planification</h2>
+                            <span class="date-chip">Fin mai – mi-juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <ul class="text-orange-50 space-y-3 text-lg">
+                                <li>• Calendrier des quarts de travail</li>
+                                <li>• Vues <strong>jour</strong> et <strong>semaine</strong></li>
+                                <li>• Glisser-déposer pour déplacer un quart</li>
+                                <li>• Affichage des <strong>employés disponibles</strong> lors de la planification</li>
+                                <li>• Lien avec la succursale et le poste</li>
+                            </ul>
+                            <img src="assets/Planification.png" alt="Écran de planification"
+                                 class="rounded-xl max-h-[48vh] w-full object-contain border border-white/10 shadow-lg cursor-pointer"
+                                 onclick="openModal(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Feuilles de temps -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-2xl font-bold text-white">Feuilles de temps</h2>
+                            <span class="date-chip">Mi-juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <ul class="text-orange-50 space-y-3 text-lg">
+                                <li>• Génération des feuilles (souvent à la semaine)</li>
+                                <li>• Validation et <strong>approbation</strong> par les rôles autorisés</li>
+                                <li>• Gestion <strong>par succursale</strong></li>
+                                <li>• Suivi des heures et des statuts</li>
+                                <li>• Les employés peuvent consulter leurs propres feuilles</li>
+                            </ul>
+                            <img src="assets/FeuillesDeTemps.png" alt="Feuilles de temps"
+                                 class="rounded-xl max-h-[48vh] w-full object-contain border border-white/10 shadow-lg cursor-pointer"
+                                 onclick="openModal(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Paie et contrats -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-2xl font-bold text-white">Paie et contrats</h2>
+                            <span class="date-chip">Mi-juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <ul class="text-orange-50 space-y-3 text-lg">
+                                <li>• Génération des fiches de paie par période / succursale</li>
+                                <li>• <strong>Publication</strong> pour que l’employé puisse les voir</li>
+                                <li>• Consultation des <strong>contrats de travail</strong> (côté employé et gestionnaire)</li>
+                                <li>• Types de rémunération clarifiés (taux horaire, montant fixe)</li>
+                                <li>• Accès limité selon le rôle</li>
+                            </ul>
+                            <img src="assets/Paie.png" alt="Fiches de paie"
+                                 class="rounded-xl max-h-[48vh] w-full object-contain border border-white/10 shadow-lg cursor-pointer"
+                                 onclick="openModal(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Catalogue -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-2xl font-bold text-white">Catalogue — auteurs &amp; livres</h2>
+                            <span class="date-chip">Fin mai – juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <ul class="text-orange-50 space-y-3 text-lg">
+                                <li>• Gestion des <strong>auteurs</strong> (liste, détail, ajout, modification, suppression)</li>
+                                <li>• Affichage des livres <strong>par auteur</strong></li>
+                                <li>• Affichage des livres <strong>par catégorie</strong></li>
+                                <li>• Formulaire d’ajout de livre plus cohérent (lien auteur)</li>
+                                <li>• Catalogue branché sur l’API réelle</li>
+                            </ul>
+                            <img src="assets/n1.png" alt="Page auteurs"
+                                 class="rounded-xl max-h-[48vh] w-full object-contain border border-white/10 shadow-lg cursor-pointer"
+                                 onclick="openModal(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. UX -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-3xl font-bold text-white">Expérience utilisateur</h2>
+                            <span class="date-chip">Tout le sprint</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Menu latéral</h3>
+                                <p class="text-orange-50 text-sm">Reste ouvert ou fermé comme voulu, même après un rafraîchissement ; se réinitialise à la déconnexion.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Protection des pages</h3>
+                                <p class="text-orange-50 text-sm">Si un utilisateur n’a pas le droit d’accéder à une page (ex. RH), il est redirigé automatiquement.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Thèmes &amp; interface</h3>
+                                <p class="text-orange-50 text-sm">Couleurs adaptées (ex. calendrier), boutons cohérents, petit ménage visuel.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Refactor du frontend</h3>
+                                <p class="text-orange-50 text-sm">Réorganisation des pages, nettoyage du code et suppressions d’éléments inutiles — travail d’équipe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. Qui voit quoi -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-3xl font-bold text-white">Qui voit quoi ?</h2>
+                            <span class="date-chip">Juin 2026</span>
+                        </div>
+                        <p class="text-orange-50 mb-6">
+                            Chaque compte a un rôle. Le menu, les boutons et les données s’adaptent automatiquement.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Administrateur</h3>
+                                <p class="text-orange-50">Accès complet : utilisateurs, rôles, inventaire, RH.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Gérant</h3>
+                                <p class="text-orange-50">Pilotage du quotidien : équipe, congés, métriques, stock.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Assistant</h3>
+                                <p class="text-orange-50">Consultation RH et catalogue ; actions limitées.</p>
+                            </div>
+                            <div class="bg-black/20 p-5 rounded-xl border border-white/10">
+                                <h3 class="font-bold text-white mb-2">Employé</h3>
+                                <p class="text-orange-50">Son espace personnel : horaire, congés, pointage, paie publiée.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 11. Portail employé + pointage -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-6">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-2xl font-bold text-white">Espace employé &amp; pointage</h2>
+                            <span class="date-chip">Mi – fin juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                            <ul class="text-orange-50 space-y-3 text-lg">
+                                <li>• Page <strong>Mon espace</strong> : horaire, congés, fiche, pointages, feuille</li>
+                                <li>• L’employé ne voit <strong>que ses données</strong></li>
+                                <li>• Pointage arrivée / départ depuis le tableau de bord</li>
+                                <li>• Contrôles métier (quart lié, retard, fuseau horaire)</li>
+                            </ul>
+                            <div class="grid grid-cols-2 gap-3">
+                                <img src="assets/pointage0.png" alt="Pointage"
+                                     class="rounded-xl max-h-[36vh] w-full object-contain border border-white/10 cursor-pointer"
+                                     onclick="openModal(this.src)">
+                                <img src="assets/pointage1.png" alt="Pointage détail"
+                                     class="rounded-xl max-h-[36vh] w-full object-contain border border-white/10 cursor-pointer"
+                                     onclick="openModal(this.src)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 12. Défis -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-5xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-3xl font-bold text-white">Défis du sprint</h2>
+                            <span class="date-chip">28 mai – 25 juin</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="challenge-box p-6 rounded-2xl border">
+                                <h3 class="text-xl font-semibold mb-4">Difficultés</h3>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li>• Relier les écrans aux vraies données de l’API</li>
+                                    <li>• Faire coexister planning, heures et paie sans incohérence</li>
+                                    <li>• Respecter les droits selon chaque rôle</li>
+                                    <li>• Finaliser plusieurs modules en parallèle</li>
+                                </ul>
+                            </div>
+                            <div class="solution-box p-6 rounded-2xl border">
+                                <h3 class="text-xl font-semibold mb-4">Ce qui a aidé</h3>
+                                <ul class="space-y-2 text-slate-300">
+                                    <li>• Travail partagé par domaine (RH, catalogue, UI)</li>
+                                    <li>• Tests manuels des parcours importants</li>
+                                    <li>• Refactor collectif pour simplifier le frontend</li>
+                                    <li>• Mise en ligne pour valider le produit réel</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 13. Mise en ligne -->
+                <div data-section="Itération 4" class="slide slide-theme-orange flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-3xl bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl p-12 text-center">
+                        <div class="flex items-center justify-center gap-3 mb-6">
+                            <h2 class="text-3xl font-bold text-white">Produit en ligne</h2>
+                        </div>
+                        <span class="date-chip mb-6">Fin juin 2026</span>
+                        <p class="text-xl text-orange-50 mb-6 mt-6">
+                            L’ERP est déployé et accessible pour démonstration.
+                        </p>
+                        <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener"
+                           class="inline-block text-2xl font-semibold text-white hover:text-orange-200 underline decoration-orange-300 underline-offset-4 mb-6 transition-colors">
+                            dev.librairiecrystal.com
+                        </a>
+                        <p class="text-orange-50 text-sm">
+                            Développement en local via Docker · Production via serveur + tunnel sécurisé
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ========== CONCLUSION ========== -->
+
+                <!-- 14. Conclusion -->
+                <div data-section="Itération 4" class="slide slide-theme-conclusion flex items-center justify-center p-8">
+                    <div class="slide-content w-full max-w-4xl rounded-3xl border shadow-2xl p-12 text-center">
+                        <div class="text-5xl mb-6">💎</div>
+                        <h1 class="text-4xl font-bold mb-3">Bilan de l’Itération 4</h1>
+                        <span class="date-chip mb-6">28 mai – 25 juin 2026</span>
+                        <p class="text-xl mb-8 mt-6 max-w-2xl mx-auto">
+                            Sprint de clôture : Crystal ERP est passé d’un prototype à une application
+                            <strong>fonctionnelle, sécurisée par rôles et déployée</strong>.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left mb-10">
+                            <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
+                                <h3 class="text-lg font-bold text-white mb-3 border-b border-white/20 pb-2">Ce qui s’est bien passé</h3>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li>Livraisons RH, catalogue et droits abouties</li>
+                                    <li>Parcours employé et gestionnaire plus clairs</li>
+                                    <li>Travail d’équipe réparti par modules</li>
+                                    <li>Produit accessible en ligne</li>
+                                </ul>
+                            </div>
+                            <div class="bg-black/20 p-6 rounded-2xl border border-white/10">
+                                <h3 class="text-lg font-bold text-white mb-3 border-b border-white/20 pb-2">À retenir / améliorer</h3>
+                                <ul class="list-disc list-inside space-y-2 text-sm">
+                                    <li>Documenter plus tôt les règles métier</li>
+                                    <li>Aligner plus vite les écrans avec l’API</li>
+                                    <li>Continuer les tests automatiques sur les parcours clés</li>
+                                    <li>Garder les besoins client comme priorité</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-2">Merci !</h2>
+                        <p class="text-lg opacity-80">Période de questions ?</p>
+                    </div>
+                </div>
+
+        <!-- ===== Démonstration ===== -->
+        <section data-section="Démonstration" class="slide soft-blue flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-5xl rounded-3xl p-12 text-center">
+                        <div class="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-3xl bg-blue-400/15 text-4xl">🎬</div>
+                        <p class="eyebrow mb-3">Résultat final</p>
+                        <h1 class="mb-5 text-5xl font-bold text-white">Démonstration de Crystal ERP</h1>
+                        <p class="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-slate-300">Deux parcours complémentaires pour montrer la gestion quotidienne d’une succursale et l’espace personnel d’un employé.</p>
+                        <a href="https://dev.librairiecrystal.com/" target="_blank" rel="noopener" class="inline-block rounded-full border border-blue-300/30 bg-blue-400/15 px-7 py-3 font-semibold text-blue-100 transition hover:bg-blue-400/25">Ouvrir l’application ↗</a>
+                    </div>
+                </section>
+
+        <!-- ===== Conclusion ===== -->
+                <section data-section="Conclusion" class="slide soft-blue flex items-center justify-center p-8">
+                    <div class="slide-content panel w-full max-w-4xl rounded-3xl p-12 text-center">
+                        <div class="mx-auto mb-7 flex h-24 w-24 items-center justify-center rounded-full bg-blue-400/15 text-5xl">💎</div>
+                        <h1 class="mb-5 text-6xl font-bold text-white">Merci !</h1>
+                        <p class="mb-8 text-2xl text-blue-100">Questions et échanges</p>
+                        <div class="mx-auto mb-8 h-px max-w-xl bg-white/15"></div>
+                        <p class="text-lg text-slate-300">Antony Burlet · Billy Hallé · William Peck · Nicolas Michaud</p>
+                        <p class="mt-3 text-sm text-slate-400">Crystal ERP · 2026</p>
+                    </div>
+                </section>
+    </main>
+
+    <div id="sectionIndicator"></div>
+
+    <nav class="pointer-events-none fixed bottom-6 left-0 right-0 z-50 flex justify-between px-10" aria-label="Navigation de la présentation">
+        <button id="btnPrev" type="button" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">← Précédent</button>
+        <div class="nav-counter rounded-full px-6 py-3 font-mono text-white">
             <span id="slideIndicator">1</span> / <span id="totalIndicator"></span>
         </div>
-        <button onclick="nextSlide()" id="btnNext" class="nav-btn pointer-events-auto hover:bg-white/15 text-slate-200 backdrop-blur-md px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-lg border">
-            Suivant <span>&rarr;</span>
-        </button>
-    </div>
+        <button id="btnNext" type="button" class="nav-btn pointer-events-auto rounded-full px-6 py-3 text-white">Suivant →</button>
+    </nav>
 
-    <div id="imageModal" class="fixed inset-0 bg-slate-950/85 hidden items-center justify-center z-50">
-        <img id="modalImg" class="max-w-[90%] max-h-[90%] rounded-xl shadow-2xl" alt="Agrandissement">
+    <div id="imageModal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-black/90 p-6">
+        <img id="modalImg" class="max-h-[92vh] max-w-[94vw] rounded-xl shadow-2xl" alt="Agrandissement">
     </div>
 
     <script>
         let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        const indicator = document.getElementById('slideIndicator');
-        const totalIndicator = document.getElementById('totalIndicator');
-        const btnPrev = document.getElementById('btnPrev');
-        const btnNext = document.getElementById('btnNext');
-
-        if (totalIndicator) {
-            totalIndicator.textContent = totalSlides;
-        }
+        const slides = Array.from(document.querySelectorAll(".slide"));
+        const slideIndicator = document.getElementById("slideIndicator");
+        const totalIndicator = document.getElementById("totalIndicator");
+        const sectionIndicator = document.getElementById("sectionIndicator");
+        const btnPrev = document.getElementById("btnPrev");
+        const btnNext = document.getElementById("btnNext");
 
         function updateSlides() {
             slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev', 'next');
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else if (index < currentSlide) {
-                    slide.classList.add('prev');
-                } else {
-                    slide.classList.add('next');
-                }
+                slide.classList.remove("active", "prev", "next");
+                slide.classList.add(index === currentSlide ? "active" : index < currentSlide ? "prev" : "next");
             });
 
-            indicator.textContent = currentSlide + 1;
-
-            if (currentSlide === 0) {
-                btnPrev.style.opacity = '0.3';
-                btnPrev.style.cursor = 'not-allowed';
-            } else {
-                btnPrev.style.opacity = '1';
-                btnPrev.style.cursor = 'pointer';
-            }
-
-            if (currentSlide === totalSlides - 1) {
-                btnNext.style.opacity = '0.3';
-                btnNext.style.cursor = 'not-allowed';
-            } else {
-                btnNext.style.opacity = '1';
-                btnNext.style.cursor = 'pointer';
-            }
+            slideIndicator.textContent = currentSlide + 1;
+            totalIndicator.textContent = slides.length;
+            sectionIndicator.textContent = slides[currentSlide].dataset.section;
+            btnPrev.disabled = currentSlide === 0;
+            btnNext.disabled = currentSlide === slides.length - 1;
         }
 
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
+            if (currentSlide < slides.length - 1) {
+                currentSlide += 1;
                 updateSlides();
             }
         }
 
         function prevSlide() {
             if (currentSlide > 0) {
-                currentSlide--;
+                currentSlide -= 1;
                 updateSlides();
             }
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'Enter') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
-            }
+        btnPrev.addEventListener("click", prevSlide);
+        btnNext.addEventListener("click", nextSlide);
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight" || event.key === " " || event.key === "Enter") nextSlide();
+            if (event.key === "ArrowLeft") prevSlide();
+            if (event.key === "Home") { currentSlide = 0; updateSlides(); }
+            if (event.key === "End") { currentSlide = slides.length - 1; updateSlides(); }
         });
 
         function openModal(src) {
-            const modal = document.getElementById('imageModal');
-            document.getElementById('modalImg').src = src;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+            const modal = document.getElementById("imageModal");
+            document.getElementById("modalImg").src = src;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
         }
 
-        document.getElementById('imageModal').addEventListener('click', () => {
-            const modal = document.getElementById('imageModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+        document.getElementById("imageModal").addEventListener("click", () => {
+            const modal = document.getElementById("imageModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
         });
 
         updateSlides();
